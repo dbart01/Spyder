@@ -39,18 +39,21 @@ struct Arguments {
         if all.count > 1 {
             let args = Array(all[1...all.count - 1])
             
-            if args.count % 2 != 0 {
-                error("Error. Invalid number of arguments.")
-            }
-            
             var container = [String : String]()
             for var i = 0; i < args.count; i += 2 {
-                container[args[i]] = args[i + 1]
+                container[args[i]] = (i + 1 < args.count) ? args[i + 1] : ""
             }
             return container
         }
         return [:]
     }()
+    
+    var help: Bool {
+        if let _ = self.args["--help"] {
+            return true
+        }
+        return false
+    }
     
     var token: String? {
         if let token = self.args["-t"] ?? self.args["--token"] {

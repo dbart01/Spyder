@@ -33,6 +33,14 @@ import Foundation
 
 let args = Arguments()
 
+/* -----------------------------------------
+** Present the help ignoring everything else
+*/
+guard args.help == false else {
+    print(HelpContents)
+    exit(0)
+}
+
 let passphrase  = args.passphrase  ?? ""
 let port        = args.port        ?? "443"
 let environment = args.environment ?? .Development
