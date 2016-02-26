@@ -95,4 +95,16 @@ struct Arguments {
         }
         return nil
     }
+    
+    var payload: NSData? {
+        if let payload = self.args["-L"] ?? self.args["--payload"] {
+            
+            if payload.containsString("{") {
+                return payload.dataUsingEncoding(NSUTF8StringEncoding)
+            } else {
+                return NSData(contentsOfFile: (payload as NSString).stringByExpandingTildeInPath)
+            }
+        }
+        return nil
+    }
 }

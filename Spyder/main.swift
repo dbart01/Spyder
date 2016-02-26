@@ -41,6 +41,7 @@ let passphrase  = args.passphrase  ?? ""
 let port        = args.port        ?? "443"
 let environment = args.environment ?? .Development
 let topic       = args.topic
+let payload     = args.payload
 
 guard let certPath = args.certificatePath else {
     error("Failed to send push. No certificate path provided.")
@@ -67,6 +68,7 @@ if topic != nil {
 let session               = Session(certificate: certificate)
 let request               = Request(URL: endpoint.url)
 request.method            = "POST"
+request.payload           = payload
 request.additionalHeaders = headers
 
 if let response = session.executeJsonRequest(request) {

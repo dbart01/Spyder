@@ -33,13 +33,13 @@ import Foundation
 
 class Request: NSMutableURLRequest {
     
+    var payload:           NSData?
     var method:            String               = "GET"
     var additionalHeaders: [String : String]    = [:]
-    var jsonBody:          [String : AnyObject] = [:]
     
     private func build() {
         self.HTTPMethod = self.method
-        self.HTTPBody   = try? NSJSONSerialization.dataWithJSONObject(jsonBody, options: [])
+        self.HTTPBody   = self.payload
         
         for (header, value) in self.additionalHeaders {
             self.setValue(value, forHTTPHeaderField: header)
