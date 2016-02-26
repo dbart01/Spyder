@@ -33,16 +33,31 @@ import Foundation
 
 let args = Arguments()
 
-/* ----------------------------------------
-** Ensure that we have all the prerequisite
-** parameters to execute the push.
-*/
 let passphrase  = args.passphrase  ?? ""
 let port        = args.port        ?? "443"
 let environment = args.environment ?? .Development
 let topic       = args.topic
-let payload     = args.payload
+let message     = args.message
+var payload     = args.payload
 
+/* ----------------------------------------
+** Setup the convenience payload if the
+** message was provided and payload wasn't.
+*/
+if let message = message where payload == nil {
+    let dictionary = [
+        "aps" : [
+            "sound" : "default",
+            "alert" : message,
+        ]
+    ]
+    payload = try? NSJSONSerialization.dataWithJSONObject(dictionary, options: [])
+}
+
+/* ----------------------------------------
+** Ensure that we have all the prerequisite
+** parameters to execute the push.
+*/
 guard let certPath = args.certificatePath else {
     error("Failed to send push. No certificate path provided.")
 }

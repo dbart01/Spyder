@@ -89,6 +89,13 @@ struct Arguments {
         return nil
     }
     
+    var message: String? {
+        if let message = self.args["-m"] ?? self.args["--message"] {
+            return message
+        }
+        return nil
+    }
+    
     var topic: String? {
         if let topic = self.args["-T"] ?? self.args["--topic"] {
             return topic
