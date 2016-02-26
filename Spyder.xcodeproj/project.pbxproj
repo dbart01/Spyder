@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		9A9738B21C7FBC2D00657553 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B11C7FBC2D00657553 /* main.swift */; };
+		9A9738B91C7FBD6A00657553 /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B81C7FBD6A00657553 /* Arguments.swift */; };
+		9A9738BB1C7FC31400657553 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BA1C7FC31400657553 /* Session.swift */; };
+		9A9738BD1C7FC39700657553 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BC1C7FC39700657553 /* Response.swift */; };
+		9A9738BF1C80A47400657553 /* Out.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BE1C80A47400657553 /* Out.swift */; };
+		9A9738C11C80C34200657553 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C01C80C34200657553 /* Endpoint.swift */; };
+		9A9738C41C80CC3800657553 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C31C80CC3800657553 /* Certificate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +31,13 @@
 /* Begin PBXFileReference section */
 		9A9738AE1C7FBC2D00657553 /* Spyder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Spyder; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A9738B11C7FBC2D00657553 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		9A9738B81C7FBD6A00657553 /* Arguments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
+		9A9738BA1C7FC31400657553 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		9A9738BC1C7FC39700657553 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		9A9738BE1C80A47400657553 /* Out.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Out.swift; sourceTree = "<group>"; };
+		9A9738C01C80C34200657553 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		9A9738C21C80CB4E00657553 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		9A9738C31C80CC3800657553 /* Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +54,7 @@
 		9A9738A51C7FBC2D00657553 = {
 			isa = PBXGroup;
 			children = (
+				9A9738C21C80CB4E00657553 /* LICENSE */,
 				9A9738B01C7FBC2D00657553 /* Spyder */,
 				9A9738AF1C7FBC2D00657553 /* Products */,
 			);
@@ -57,6 +71,12 @@
 		9A9738B01C7FBC2D00657553 /* Spyder */ = {
 			isa = PBXGroup;
 			children = (
+				9A9738B81C7FBD6A00657553 /* Arguments.swift */,
+				9A9738BA1C7FC31400657553 /* Session.swift */,
+				9A9738C31C80CC3800657553 /* Certificate.swift */,
+				9A9738BC1C7FC39700657553 /* Response.swift */,
+				9A9738C01C80C34200657553 /* Endpoint.swift */,
+				9A9738BE1C80A47400657553 /* Out.swift */,
 				9A9738B11C7FBC2D00657553 /* main.swift */,
 			);
 			path = Spyder;
@@ -119,6 +139,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A9738BD1C7FC39700657553 /* Response.swift in Sources */,
+				9A9738C41C80CC3800657553 /* Certificate.swift in Sources */,
+				9A9738B91C7FBD6A00657553 /* Arguments.swift in Sources */,
+				9A9738BB1C7FC31400657553 /* Session.swift in Sources */,
+				9A9738BF1C80A47400657553 /* Out.swift in Sources */,
+				9A9738C11C80C34200657553 /* Endpoint.swift in Sources */,
 				9A9738B21C7FBC2D00657553 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
