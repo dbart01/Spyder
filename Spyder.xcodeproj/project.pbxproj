@@ -30,7 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9A9738AE1C7FBC2D00657553 /* Spyder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Spyder; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A9738AE1C7FBC2D00657553 /* spyder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = spyder; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A9738B11C7FBC2D00657553 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9A9738B81C7FBD6A00657553 /* Arguments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
 		9A9738BA1C7FC31400657553 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -65,12 +65,21 @@
 		9A9738AF1C7FBC2D00657553 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9A9738AE1C7FBC2D00657553 /* Spyder */,
+				9A9738AE1C7FBC2D00657553 /* spyder */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 		9A9738B01C7FBC2D00657553 /* Spyder */ = {
+			isa = PBXGroup;
+			children = (
+				9A9738C71C81107A00657553 /* Classes */,
+				9A9738B11C7FBC2D00657553 /* main.swift */,
+			);
+			path = Spyder;
+			sourceTree = "<group>";
+		};
+		9A9738C71C81107A00657553 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				9A9738B81C7FBD6A00657553 /* Arguments.swift */,
@@ -80,9 +89,8 @@
 				9A9738C01C80C34200657553 /* Endpoint.swift */,
 				9A9738BE1C80A47400657553 /* Out.swift */,
 				9A9738C51C810C2100657553 /* Help.swift */,
-				9A9738B11C7FBC2D00657553 /* main.swift */,
 			);
-			path = Spyder;
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,7 +110,7 @@
 			);
 			name = Spyder;
 			productName = Spyder;
-			productReference = 9A9738AE1C7FBC2D00657553 /* Spyder */;
+			productReference = 9A9738AE1C7FBC2D00657553 /* spyder */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -239,14 +247,14 @@
 		9A9738B61C7FBC2D00657553 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = spyder;
 			};
 			name = Debug;
 		};
 		9A9738B71C7FBC2D00657553 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = spyder;
 			};
 			name = Release;
 		};
