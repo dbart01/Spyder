@@ -39,9 +39,10 @@ let HelpContents = [
     " spyder --identities",
     "",
     " Sending a push:",
-    " spyder --token #token# --cert #cert-path# --topic #bundle-id# --message \"Hello World!\"",
+    " spyder --token #token# --cert #cert-path-or-index# --topic #bundle-id# --message \"Hello World!\"",
     "",
     "Options, [x] is required, [-] is alternate, [ ] is optional:",
+    "",
     " [ ] -i, --identities  Lists all available identities in the keychain. All other options will be ignored",
     " [x] -t, --token       Hex value of a device token",
     " [ ] -P, --port        Port to use for the endpoint: 443 or 2197, defaults to 443",
@@ -51,5 +52,6 @@ let HelpContents = [
     " [-] -m, --message     Convenience for creating a payload with a message. Ignored if payload is provided",
     " [-] -L, --payload     A JSON string representing the payload, or path to file with JSON payload",
     " [x] -T, --topic       Topic for which to send push. Often a bundle id in the form of 'com.company.app.voip'",
+    "",
     
 ].joinWithSeparator("\n")

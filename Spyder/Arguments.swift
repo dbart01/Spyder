@@ -48,6 +48,10 @@ struct Arguments {
         return [:]
     }()
     
+    var count: Int {
+        return self.args.count
+    }
+    
     var help: Bool {
         if let _ = self.args["--help"] {
             return true

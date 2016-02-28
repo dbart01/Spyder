@@ -36,6 +36,10 @@ let args = Arguments()
 /* -----------------------------------------
 ** Present the help ignoring everything else
 */
+guard args.count > 0 else {
+    error("Invalid arguments. Use --help option for usage examples.")
+}
+
 guard args.help == false else {
     success(HelpContents)
 }
