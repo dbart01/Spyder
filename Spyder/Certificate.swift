@@ -31,10 +31,109 @@
 
 import Foundation
 
+// ----------------------------------
+//  MARK: - IdentityCollection -
+//
+struct IdentityCollection: CustomDebugStringConvertible {
+    
+    var count: Int {
+        return identities.count
+    }
+    
+    private let identities: [Identity]
+    
+    // ----------------------------------
+    //  MARK: - Init -
+    //
+    private init(identities: [Identity]) {
+        self.identities = identities
+    }
+    
+    // ----------------------------------
+    //  MARK: - Identities -
+    //
+    func identityAt(index: Int) -> Identity {
+        return self.identities[index - 1]
+    }
+    
+    private func validIdentityAt(index: Int) -> Bool {
+        if index > 0 && index < self.count + 1 {
+            return true
+        }
+        return false
+    }
+    
+    // ----------------------------------
+    //  MARK: - Debug -
+    //
+    var debugDescription: String {
+        let collection = Certificate.identityCollection
+        
+        var string = ""
+        for (i, identity) in collection.identities.enumerate() {
+            let padding = self.paddingForIndex(i + 1, count: collection.count)
+            string += "\(i + 1).\(padding) \(identity.label)\n"
+        }
+        return string
+    }
+    
+    private func paddingForIndex(index: Int, count: Int) -> String {
+        var padding = ""
+        for _ in 0..<(count / 10) - (index / 10) {
+            padding += " "
+        }
+        return padding
+    }
+}
+
+// ----------------------------------
+//  MARK: - Identity -
+//
+struct Identity {
+    
+    let label: String
+    let reference: SecIdentity
+    
+    private let attributes: [String : AnyObject]
+    
+    // ----------------------------------
+    //  MARK: - Init -
+    //
+    private init(attributes: [String : AnyObject]) {
+        self.attributes = attributes
+        self.reference  = attributes[kSecValueRef  as String] as! SecIdentity
+        self.label      = attributes[kSecAttrLabel as String] as! String
+    }
+}
+
+// ----------------------------------
+//  MARK: - Certificate -
+//
 class Certificate {
     
     private(set) var certificate: SecCertificate!
     private(set) var identity: SecIdentity!
+    
+    static var identityCollection: IdentityCollection = {
+        let query: [String : AnyObject] = [
+            kSecMatchLimit       as String : kSecMatchLimitAll,
+            kSecClass            as String : kSecClassIdentity,
+            kSecAttrAccess       as String : kSecAttrAccessibleWhenUnlocked,
+            kSecReturnRef        as String : true,
+            kSecReturnAttributes as String : true,
+        ]
+        
+        var items: AnyObject?
+        let result = SecItemCopyMatching(query, &items)
+        if result == errSecSuccess && items != nil {
+            let identityAttributes = items as! [Dictionary<String,AnyObject>]
+            let identities         = identityAttributes.map { Identity(attributes: $0) } .sort { $0.label < $1.label }
+            
+            return IdentityCollection(identities: identities)
+        }
+        
+        return IdentityCollection(identities: [])
+    }()
     
     // ----------------------------------
     //  MARK: - Init -
@@ -62,15 +161,37 @@ class Certificate {
                 return nil
             }
             
-            self.identity = identityDictionary[kSecImportItemIdentity as String]!
-            
-            var cert: SecCertificate?
-            SecIdentityCopyCertificate(identity, &cert)
-            
-            self.certificate = cert!
+            self.identity    = identityDictionary[kSecImportItemIdentity as String]!
+            self.certificate = self.certificateFor(self.identity)
             
         } else {
             return nil
         }
+    }
+    
+    init(identityIndex: Int) {
+        
+        let collection = Certificate.identityCollection
+        
+        guard collection.validIdentityAt(identityIndex) else {
+            error("Invalid identity index provided.")
+        }
+        
+        self.identity    = collection.identityAt(identityIndex).reference
+        self.certificate = self.certificateFor(self.identity)
+    }
+    
+    // ----------------------------------
+    //  MARK: - Private -
+    //
+    private func certificateFor(identity: SecIdentity) -> SecCertificate {
+        var cert: SecCertificate?
+        SecIdentityCopyCertificate(identity, &cert)
+        
+        guard let certificate = cert else {
+            error("Failed to obtain certificate for identity.")
+        }
+        
+        return certificate
     }
 }

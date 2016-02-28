@@ -55,6 +55,13 @@ struct Arguments {
         return false
     }
     
+    var listIdentities: Bool {
+        if let _ = self.args["-i"] ?? self.args["--identities"] {
+            return true
+        }
+        return false
+    }
+    
     var token: String? {
         if let token = self.args["-t"] ?? self.args["--token"] {
             return token
@@ -79,6 +86,14 @@ struct Arguments {
     var certificatePath: String? {
         if let cert = self.args["-c"] ?? self.args["--cert"] {
             return cert
+        }
+        return nil
+    }
+    
+    var certificateIndex: Int? {
+        if let string = self.args["-c"] ?? self.args["--cert"],
+            let index = Int(string) {
+            return index
         }
         return nil
     }

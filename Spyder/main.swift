@@ -37,10 +37,16 @@ let args = Arguments()
 ** Present the help ignoring everything else
 */
 guard args.help == false else {
-    print(HelpContents)
-    exit(0)
+    success(HelpContents)
 }
 
+guard args.listIdentities == false else {
+    success(Certificate.identityCollection)
+}
+
+/* ----------------------------------------
+** Required / options arguments
+*/
 let passphrase  = args.passphrase  ?? ""
 let port        = args.port        ?? "443"
 let environment = args.environment ?? .Development
@@ -63,17 +69,26 @@ if let message = message where payload == nil {
 }
 
 /* ----------------------------------------
+** Load the certificate for authentication
+*/
+let certificate: Certificate
+
+if let certIndex = args.certificateIndex {
+    certificate = Certificate(identityIndex: certIndex)
+} else if let certPath = args.certificatePath {
+    if let cert = Certificate(path: certPath, passphrase: passphrase) {
+        certificate = cert
+    } else {
+        error("Failed to send push. Could not load the certificate at path: \(certPath)")
+    }
+} else {
+    error("Failed to send push. No certificate provided.")
+}
+
+/* ----------------------------------------
 ** Ensure that we have all the prerequisite
 ** parameters to execute the push.
 */
-guard let certPath = args.certificatePath else {
-    error("Failed to send push. No certificate path provided.")
-}
-
-guard let certificate = Certificate(path: certPath, passphrase: passphrase) else {
-    error("Failed to send push. Error importing certificate. Please ensure the certificate is in .p12 format and is accompanied by a passphrase if needed.")
-}
-
 guard let token = args.token else {
     error("Failed to send push. No device token provided.")
 }
@@ -95,5 +110,5 @@ request.payload           = payload
 request.additionalHeaders = headers
 
 if let response = session.executeJsonRequest(request) {
-    print(response)
+    success(response)
 }

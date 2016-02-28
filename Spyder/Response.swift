@@ -50,7 +50,7 @@ extension ResponseType {
     var debugDescription: String {
         var description = "Status:\n"
         
-        description += "\t- Code:  "
+        description += " - Code:  "
         if let res = self.response {
             description += "\(res.statusCode)"
         } else {
@@ -58,7 +58,7 @@ extension ResponseType {
         }
         description += "\n"
         
-        description += "\t- Data:  "
+        description += " - Data:  "
         if let data = self.data {
             description += "\(data)"
         } else {
@@ -66,7 +66,7 @@ extension ResponseType {
         }
         description += "\n"
         
-        description += "\t- Error: "
+        description += " - Error: "
         if let error = self.error {
             description += "\(error.localizedDescription)"
         } else {
