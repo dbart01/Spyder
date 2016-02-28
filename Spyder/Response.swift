@@ -40,6 +40,7 @@ protocol ResponseType: CustomDebugStringConvertible {
     var response: NSHTTPURLResponse? { get }
     var data: DataType? { get }
     var error: NSError? { get }
+    var successful: Bool { get }
     
     init?(response: NSHTTPURLResponse?, data: NSData?, error: NSError?)
     
@@ -47,32 +48,49 @@ protocol ResponseType: CustomDebugStringConvertible {
 }
 
 extension ResponseType {
+    
+    var successful: Bool {
+        if let response = self.response {
+            return response.statusCode == 200
+        }
+        return false
+    }
+    
     var debugDescription: String {
-        var description = "Status:\n"
+        var description = ""
         
-        description += " - Code:  "
-        if let res = self.response {
-            description += "\(res.statusCode)"
+        if self.successful {
+            description += "Status: Success."
+            
         } else {
-            description += "n/a"
+            description += "Error:\n"
+            
+            description += " - Code:  "
+            if let res = self.response {
+                description += "\(res.statusCode)"
+            } else {
+                description += "n/a"
+            }
+            description += "\n"
+            
+            description += " - Data:  "
+            if let data = self.data {
+                description += "\(data)"
+            } else {
+                description += "n/a"
+            }
+            description += "\n"
+            
+            description += " - Error: "
+            if let error = self.error {
+                description += "\(error.localizedDescription)"
+            } else {
+                description += "n/a"
+            }
+            description += "\n"
+            
+            return description
         }
-        description += "\n"
-        
-        description += " - Data:  "
-        if let data = self.data {
-            description += "\(data)"
-        } else {
-            description += "n/a"
-        }
-        description += "\n"
-        
-        description += " - Error: "
-        if let error = self.error {
-            description += "\(error.localizedDescription)"
-        } else {
-            description += "n/a"
-        }
-        description += "\n"
         
         return description
     }
