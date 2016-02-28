@@ -31,6 +31,9 @@
 
 import Foundation
 
+// ----------------------------------
+//  MARK: - Request -
+//
 class Request: NSMutableURLRequest {
     
     var payload:           NSData?
@@ -47,6 +50,9 @@ class Request: NSMutableURLRequest {
     }
 }
 
+// ----------------------------------
+//  MARK: - Session -
+//
 class Session: NSObject {
     
     let certificate: Certificate

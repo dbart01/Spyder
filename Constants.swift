@@ -1,5 +1,6 @@
 //
-//  Help.swift
+//  Constants.swift
+//  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
 //  All rights reserved.
@@ -29,6 +30,10 @@
 //  either expressed or implied, of the FreeBSD Project.
 
 import Foundation
+
+let EndpointDevelopment = "https://api.development.push.apple.com"
+let EndpointProduction  = "https://api.push.apple.com"
+let EndpointPathPrefix  = "/3/device/"
 
 let HelpContents = [
     

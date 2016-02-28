@@ -48,11 +48,11 @@ struct Endpoint {
         
         switch environment {
         case .Production:
-            endpoint = "https://api.push.apple.com:\(port)/3/device/\(token)"
+            endpoint = "\(EndpointProduction):\(port)\(EndpointPathPrefix)\(token)"
             
         case .Development: fallthrough
         default:
-            endpoint = "https://api.development.push.apple.com:\(port)/3/device/\(token)"
+            endpoint = "\(EndpointDevelopment):\(port)\(EndpointPathPrefix)\(token)"
         }
         
         self.url = NSURL(string: endpoint)!
