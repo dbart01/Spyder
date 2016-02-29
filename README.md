@@ -15,6 +15,8 @@ spyder \
     --T com.company.app \
     --m Hey
 ```
+### Installation
+Clone / download the repo. Build the Xcode project. Doing so will automatically install the `spyder` binary to `/usr/local/bin`.
 ### Help
 Spyder features a comprehensive summary of available options and their usage. Just type:
 ```
