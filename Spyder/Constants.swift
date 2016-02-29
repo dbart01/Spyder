@@ -31,6 +31,8 @@
 
 import Foundation
 
+let PayloadMaxSize      = 4096
+
 let EndpointDevelopment = "https://api.development.push.apple.com"
 let EndpointProduction  = "https://api.push.apple.com"
 let EndpointPathPrefix  = "/3/device/"

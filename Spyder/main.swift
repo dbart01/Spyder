@@ -69,6 +69,16 @@ if let message = message where payload == nil {
 }
 
 /* ----------------------------------------
+** Validate payload size
+*/
+if let payload = payload {
+    let sizeInKB = payload.length / 1024
+    if sizeInKB > PayloadMaxSize {
+        error("Failed to send push. Payload size exceeds maximum. Expected: \(PayloadMaxSize) Actual: \(sizeInKB)")
+    }
+}
+
+/* ----------------------------------------
 ** Load the certificate for authentication
 */
 let certificate: Certificate
