@@ -15,17 +15,19 @@
 		9A9738C11C80C34200657553 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C01C80C34200657553 /* Endpoint.swift */; };
 		9A9738C41C80CC3800657553 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C31C80CC3800657553 /* Certificate.swift */; };
 		9A9738C61C810C2100657553 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C51C810C2100657553 /* Constants.swift */; };
+		9AFF345B1C84B5D300BFD7F4 /* spyder in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A9738AE1C7FBC2D00657553 /* spyder */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		9A9738AC1C7FBC2D00657553 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
+			buildActionMask = 12;
+			dstPath = /usr/local/bin;
 			dstSubfolderSpec = 0;
 			files = (
+				9AFF345B1C84B5D300BFD7F4 /* spyder in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
