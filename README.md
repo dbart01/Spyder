@@ -7,6 +7,14 @@ spyder \
     --topic com.company.app \
     --message Hey
 ```
+another equivalent:
+```
+spyder \
+    --t ed1906d6c03875a6f827ed9ea7222f7c4c1946d902271058c9b22a681b756537 \
+    --c 1 \
+    --T com.company.app \
+    --m Hey
+```
 ### Help
 Spyder features a comprehensive summary of available options and their usage. Just type:
 ```
