@@ -143,6 +143,13 @@ struct Arguments {
         return nil
     }
     
+    var expiryTimestamp: Int? {
+        if let expiry = self.argi("-x", "--expiry") {
+            return expiry
+        }
+        return nil
+    }
+    
     // ----------------------------------
     //  MARK: - Arguments -
     //

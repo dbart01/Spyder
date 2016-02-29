@@ -53,6 +53,7 @@ let environment = args.environment ?? .Development
 let topic       = args.topic
 let message     = args.message
 let priority    = args.priority
+let expiry      = args.expiryTimestamp
 var payload     = args.payload
 
 /* ----------------------------------------
@@ -115,6 +116,10 @@ if topic != nil {
 
 if priority != nil {
     headers["apns-priority"] = String(priority)
+}
+
+if expiry != nil {
+    headers["apns-expiration"] = String(expiry)
 }
 
 /* ----------------------------------------
