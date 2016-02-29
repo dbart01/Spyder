@@ -150,6 +150,13 @@ struct Arguments {
         return nil
     }
     
+    var id: String? {
+        if let id = self.args("-I", "--id") {
+            return id
+        }
+        return nil
+    }
+    
     // ----------------------------------
     //  MARK: - Arguments -
     //

@@ -61,6 +61,7 @@ let HelpContents = [
     " [x] -T, --topic       Topic for which to send push. Often a bundle id in the form of 'com.company.app.voip'",
     " [ ]     --priority    Notification priority is either 10 or 5. Defaults to 10 if not provided",
     " [ ] -x, --expiry      Unix timestamp indicating when the notification expires",
+    " [ ] -I, --id          A cononical UUID that idenitifies the notification. Ex: 123e4567-e89b-12d3-a456-42665544000",
     "",
     
 ].joinWithSeparator("\n")

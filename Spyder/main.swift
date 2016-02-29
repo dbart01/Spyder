@@ -54,6 +54,7 @@ let topic       = args.topic
 let message     = args.message
 let priority    = args.priority
 let expiry      = args.expiryTimestamp
+let id          = args.id
 var payload     = args.payload
 
 /* ----------------------------------------
@@ -110,17 +111,10 @@ guard let token = args.token else {
 */
 var headers  = [String : String]()
 
-if topic != nil {
-    headers["apns-topic"] = topic
-}
-
-if priority != nil {
-    headers["apns-priority"] = String(priority)
-}
-
-if expiry != nil {
-    headers["apns-expiration"] = String(expiry)
-}
+if topic    != nil { headers["apns-topic"]      = topic            }
+if priority != nil { headers["apns-priority"]   = String(priority) }
+if expiry   != nil { headers["apns-expiration"] = String(expiry)   }
+if id       != nil { headers["apns-id"]         = id               }
 
 /* ----------------------------------------
 ** Build and execute the request via HTTP/2
