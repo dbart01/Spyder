@@ -34,19 +34,17 @@ import Foundation
 // ----------------------------------
 //  MARK: - ResponseType -
 //
-protocol ResponseType: CustomDebugStringConvertible {
+protocol ResponseType {
     typealias DataType
     
-    var response: NSHTTPURLResponse? { get }
-    var data: DataType? { get }
-    var error: NSError? { get }
-    var successful: Bool { get }
+    var response:   NSHTTPURLResponse? { get }
+    var data:       DataType?          { get }
+    var error:      NSError?           { get }
+    var successful: Bool               { get }
     
     init?(response: NSHTTPURLResponse?, data: NSData?, error: NSError?)
     
     func stringForHeader(key: String) -> String?
-    
-    var debugDescription: String { get }
 }
 
 extension ResponseType {
@@ -64,37 +62,6 @@ extension ResponseType {
                 return value
         }
         return nil
-    }
-    
-    var debugDescription: String {
-        var description = ""
-        
-        if self.successful {
-            description += "Success"
-            
-            if let notificationID = self.stringForHeader("apns-id") {
-                description += "\n - Notification ID: \(notificationID)"
-                description += ""
-            }
-            
-        } else {
-            description += "Error"
-            
-            if let res = self.response {
-                description += "\n - Code:  \(res.statusCode)"
-            }
-            
-            if let data = self.data {
-                description += "\n - Data:  \(data)"
-            }
-            
-            if let error = self.error {
-                description += "\n - Error: \(error.localizedDescription)"
-            }
-        }
-        
-        description += "\n"
-        return description
     }
 }
 
@@ -126,7 +93,7 @@ struct Response: ResponseType {
 // ----------------------------------
 //  MARK: - JsonResponse -
 //
-struct JsonResponse: ResponseType {
+struct JsonResponse: ResponseType, CustomDebugStringConvertible {
     
     typealias DataType = [String : AnyObject]
     
@@ -150,5 +117,49 @@ struct JsonResponse: ResponseType {
         } else {
             self.data = nil
         }
+    }
+    
+    // ----------------------------------------
+    //  MARK: - CustomDebugStringConvertible -
+    //
+    var debugDescription: String {
+        var description = ""
+        
+        if self.successful {
+            description += "Success"
+            
+            if let notificationID = self.stringForHeader("apns-id") {
+                description += "\n - Notification ID: \(notificationID)"
+                description += ""
+            }
+            
+        } else {
+            description += "Error"
+            
+            if let res = self.response {
+                if let status = StatusDescriptions[res.statusCode] {
+                    description += "\n - Status: \(status)"
+                }
+                description += "\n - Code:   \(res.statusCode)"
+            }
+            
+            if let data = self.data where data.count > 0 {
+                
+                if let reason = data["reason"] as? String,
+                    let summary = ReasonDescriptions[reason] {
+                    description += "\n - Short:  \(reason)"
+                    description += "\n - Reason: \(summary)"
+                } else {
+                    description += "\n - Data:   \(data)"
+                }
+            }
+            
+            if let error = self.error {
+                description += "\n - Error:  \(error.localizedDescription)"
+            }
+        }
+        
+        description += "\n"
+        return description
     }
 }
