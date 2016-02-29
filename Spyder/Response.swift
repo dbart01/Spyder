@@ -44,6 +44,8 @@ protocol ResponseType: CustomDebugStringConvertible {
     
     init?(response: NSHTTPURLResponse?, data: NSData?, error: NSError?)
     
+    func stringForHeader(key: String) -> String?
+    
     var debugDescription: String { get }
 }
 
@@ -56,42 +58,42 @@ extension ResponseType {
         return false
     }
     
+    func stringForHeader(key: String) -> String? {
+        if let response = self.response,
+            let value = response.allHeaderFields[key] as? String {
+                return value
+        }
+        return nil
+    }
+    
     var debugDescription: String {
         var description = ""
         
         if self.successful {
-            description += "Status: Success."
+            description += "Success"
+            
+            if let notificationID = self.stringForHeader("apns-id") {
+                description += "\n - Notification ID: \(notificationID)"
+                description += ""
+            }
             
         } else {
-            description += "Error:\n"
+            description += "Error"
             
-            description += " - Code:  "
             if let res = self.response {
-                description += "\(res.statusCode)"
-            } else {
-                description += "n/a"
+                description += "\n - Code:  \(res.statusCode)"
             }
-            description += "\n"
             
-            description += " - Data:  "
             if let data = self.data {
-                description += "\(data)"
-            } else {
-                description += "n/a"
+                description += "\n - Data:  \(data)"
             }
-            description += "\n"
             
-            description += " - Error: "
             if let error = self.error {
-                description += "\(error.localizedDescription)"
-            } else {
-                description += "n/a"
+                description += "\n - Error: \(error.localizedDescription)"
             }
-            description += "\n"
-            
-            return description
         }
         
+        description += "\n"
         return description
     }
 }
