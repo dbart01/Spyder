@@ -59,6 +59,7 @@ let HelpContents = [
     " [-] -m, --message     Convenience for creating a payload with a message. Ignored if payload is provided",
     " [-] -L, --payload     A JSON string representing the payload, or path to file with JSON payload",
     " [x] -T, --topic       Topic for which to send push. Often a bundle id in the form of 'com.company.app.voip'",
+    " [ ]     --priority    Notification priority is either 10 or 5. Defaults to 10 if not provided",
     "",
     
 ].joinWithSeparator("\n")

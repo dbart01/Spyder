@@ -33,7 +33,7 @@ import Foundation
 
 struct Arguments {
     
-    private let args: [String : String] = {
+    private let arguments: [String : String] = {
         
         let all = NSProcessInfo.processInfo().arguments
         if all.count > 1 {
@@ -49,61 +49,60 @@ struct Arguments {
     }()
     
     var count: Int {
-        return self.args.count
+        return self.arguments.count
     }
     
     var help: Bool {
-        if let _ = self.args["--help"] {
+        if let _ = self.args("--help") {
             return true
         }
         return false
     }
     
     var listIdentities: Bool {
-        if let _ = self.args["-i"] ?? self.args["--identities"] {
+        if let _ = self.args("-i", "--identities") {
             return true
         }
         return false
     }
     
     var token: String? {
-        if let token = self.args["-t"] ?? self.args["--token"] {
+        if let token = self.args("-t", "--token") {
             return token
         }
         return nil
     }
     
     var port: String? {
-        if let port = self.args["-P"] ?? self.args["--port"] {
+        if let port = self.args("-P", "--port") {
             return port
         }
         return nil
     }
     
     var passphrase: String? {
-        if let pass = self.args["-p"] ?? self.args["--passphrase"] {
+        if let pass = self.args("-p", "--passphrase") {
             return pass
         }
         return nil
     }
     
     var certificatePath: String? {
-        if let cert = self.args["-c"] ?? self.args["--cert"] {
-            return cert
+        if let path = self.args("-c", "--cert") {
+            return path
         }
         return nil
     }
     
     var certificateIndex: Int? {
-        if let string = self.args["-c"] ?? self.args["--cert"],
-            let index = Int(string) {
+        if let index = self.argi("-c", "--cert") {
             return index
         }
         return nil
     }
     
     var environment: Environment? {
-        if let abbreviation = self.args["-e"] ?? self.args["--env"],
+        if let abbreviation = self.args("-e", "--env"),
             let env = Environment(rawValue: abbreviation) {
             
                 return env
@@ -112,27 +111,57 @@ struct Arguments {
     }
     
     var message: String? {
-        if let message = self.args["-m"] ?? self.args["--message"] {
+        if let message = self.args("-m", "--message") {
             return message
         }
         return nil
     }
     
     var topic: String? {
-        if let topic = self.args["-T"] ?? self.args["--topic"] {
+        if let topic = self.args("-T", "--topic") {
             return topic
         }
         return nil
     }
     
     var payload: NSData? {
-        if let payload = self.args["-L"] ?? self.args["--payload"] {
+        if let payload = self.args("-L", "--payload") {
             
             if payload.containsString("{") {
                 return payload.dataUsingEncoding(NSUTF8StringEncoding)
             } else {
                 return NSData(contentsOfFile: (payload as NSString).stringByExpandingTildeInPath)
             }
+        }
+        return nil
+    }
+    
+    var priority: Int? {
+        if let priority = self.argi("--priority") {
+            return priority
+        }
+        return nil
+    }
+    
+    // ----------------------------------
+    //  MARK: - Arguments -
+    //
+    private func arg(keys: [String]) -> String? {
+        var value: String?
+        for key in keys where value == nil {
+            value = self.arguments[key]
+        }
+        return value
+    }
+    
+    private func args(keys: String ...) -> String? {
+        return self.arg(keys)
+    }
+    
+    private func argi(keys: String ...) -> Int? {
+        if let arg = self.arg(keys),
+            let int = Int(arg) {
+                return int
         }
         return nil
     }

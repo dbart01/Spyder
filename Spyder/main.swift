@@ -52,6 +52,7 @@ let port        = args.port        ?? "443"
 let environment = args.environment ?? .Development
 let topic       = args.topic
 let message     = args.message
+let priority    = args.priority
 var payload     = args.payload
 
 /* ----------------------------------------
@@ -103,16 +104,23 @@ guard let token = args.token else {
     error("Failed to send push. No device token provided.")
 }
 
-let endpoint = Endpoint(token: token, environment: environment, port: port)
+/* ----------------------------------------
+** Set all provided headers for the request
+*/
 var headers  = [String : String]()
 
 if topic != nil {
     headers["apns-topic"] = topic
 }
 
+if priority != nil {
+    headers["apns-priority"] = String(priority)
+}
+
 /* ----------------------------------------
 ** Build and execute the request via HTTP/2
 */
+let endpoint              = Endpoint(token: token, environment: environment, port: port)
 let session               = Session(certificate: certificate)
 let request               = Request(URL: endpoint.url)
 request.method            = "POST"
