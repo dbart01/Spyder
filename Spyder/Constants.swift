@@ -64,7 +64,7 @@ let HelpContents = [
     " [ ] -I, --id          A cononical UUID that idenitifies the notification. Ex: 123e4567-e89b-12d3-a456-42665544000",
     "",
     
-].joinWithSeparator("\n")
+].joined(separator: "\n")
 
 let ReasonDescriptions = [
     "PayloadEmpty"              : "The message payload was empty.",
