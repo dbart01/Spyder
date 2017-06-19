@@ -37,12 +37,10 @@ struct Arguments {
         
         let all = ProcessInfo.processInfo.arguments
         if all.count > 1 {
-            let subargs   = all.suffix(from: 1)
             var container = [String : String]()
-            
-            var i = 0
-            while i < subargs.count {
-                container[subargs[i]] = (i + 1 < subargs.count) ? subargs[i + 1] : ""
+            var i = 1
+            while i < all.count {
+                container[all[i]] = (i + 1 < all.count) ? all[i + 1] : ""
                 i += 2
             }
             return container
