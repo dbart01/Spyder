@@ -31,12 +31,12 @@
 
 import Foundation
 
-@noreturn func error(message: Any) {
+func error(_ message: Any) -> Never  {
     print(message)
     exit(1)
 }
 
-@noreturn func success(message: Any) {
+func success(_ message: Any) -> Never  {
     print(message)
     exit(0)
 }

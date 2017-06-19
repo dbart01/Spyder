@@ -61,21 +61,21 @@ var payload     = args.payload
 ** Setup the convenience payload if the
 ** message was provided and payload wasn't.
 */
-if let message = message where payload == nil {
+if let message = message, payload == nil {
     let dictionary = [
         "aps" : [
             "sound" : "default",
             "alert" : message,
         ]
     ]
-    payload = try? NSJSONSerialization.dataWithJSONObject(dictionary, options: [])
+    payload = try? JSONSerialization.data(withJSONObject: dictionary, options: [])
 }
 
 /* ----------------------------------------
 ** Validate payload size
 */
 if let payload = payload {
-    let sizeInKB = payload.length / 1024
+    let sizeInKB = payload.count / 1024
     if sizeInKB > PayloadMaxSize {
         error("Failed to send push. Payload size exceeds maximum. Expected: \(PayloadMaxSize) Actual: \(sizeInKB)")
     }
@@ -112,20 +112,19 @@ guard let token = args.token else {
 var headers  = [String : String]()
 
 if topic    != nil { headers["apns-topic"]      = topic            }
-if priority != nil { headers["apns-priority"]   = String(priority) }
-if expiry   != nil { headers["apns-expiration"] = String(expiry)   }
+if priority != nil { headers["apns-priority"]   = String(describing: priority) }
+if expiry   != nil { headers["apns-expiration"] = String(describing: expiry)   }
 if id       != nil { headers["apns-id"]         = id               }
 
 /* ----------------------------------------
 ** Build and execute the request via HTTP/2
 */
-let endpoint              = Endpoint(token: token, environment: environment, port: port)
-let session               = Session(certificate: certificate)
-let request               = Request(URL: endpoint.url)
-request.method            = "POST"
-request.payload           = payload
-request.additionalHeaders = headers
+let endpoint    = Endpoint(token: token, environment: environment, port: port)
+let session     = Session(certificate: certificate)
+let request     = RequestDescription(url: endpoint.url, method: "POST")
+request.payload = payload
+request.headers = headers
 
-if let response = session.executeJsonRequest(request) {
+if let response = session.execute(jsonRequest: request) {
     success(response)
 }

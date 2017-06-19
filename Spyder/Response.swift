@@ -35,16 +35,16 @@ import Foundation
 //  MARK: - ResponseType -
 //
 protocol ResponseType {
-    typealias DataType
+    associatedtype DataType
     
-    var response:   NSHTTPURLResponse? { get }
-    var data:       DataType?          { get }
-    var error:      NSError?           { get }
-    var successful: Bool               { get }
+    var response:   HTTPURLResponse? { get }
+    var data:       DataType?        { get }
+    var error:      Error?           { get }
+    var successful: Bool             { get }
     
-    init?(response: NSHTTPURLResponse?, data: NSData?, error: NSError?)
+    init?(response: HTTPURLResponse?, data: Data?, error: Error?)
     
-    func stringForHeader(key: String) -> String?
+    func stringForHeader(_ key: String) -> String?
 }
 
 extension ResponseType {
@@ -56,7 +56,7 @@ extension ResponseType {
         return false
     }
     
-    func stringForHeader(key: String) -> String? {
+    func stringForHeader(_ key: String) -> String? {
         if let response = self.response,
             let value = response.allHeaderFields[key] as? String {
                 return value
@@ -70,16 +70,16 @@ extension ResponseType {
 //
 struct Response: ResponseType {
     
-    typealias DataType = NSData
+    typealias DataType = Data
     
-    let response: NSHTTPURLResponse?
-    let data: DataType?
-    let error: NSError?
+    let response: HTTPURLResponse?
+    let data:     DataType?
+    let error:    Error?
     
     // ----------------------------------
     //  MARK: - Init -
     //
-    init?(response: NSHTTPURLResponse?, data: NSData?, error: NSError?) {
+    init?(response: HTTPURLResponse?, data: Data?, error: Error?) {
         if response == nil && data == nil && error == nil {
             return nil
         }
@@ -97,14 +97,14 @@ struct JsonResponse: ResponseType, CustomDebugStringConvertible {
     
     typealias DataType = [String : AnyObject]
     
-    let response: NSHTTPURLResponse?
-    let data: DataType?
-    let error: NSError?
+    let response: HTTPURLResponse?
+    let data:     DataType?
+    let error:    Error?
     
     // ----------------------------------
     //  MARK: - Init -
     //
-    init?(response: NSHTTPURLResponse?, data: NSData?, error: NSError?) {
+    init?(response: HTTPURLResponse?, data: Data?, error: Error?) {
         if response == nil && data == nil && error == nil {
             return nil
         }
@@ -113,7 +113,7 @@ struct JsonResponse: ResponseType, CustomDebugStringConvertible {
         self.error    = error
         
         if let data = data {
-            self.data = try? NSJSONSerialization.JSONObjectWithData(data, options: []) as! [String : AnyObject]
+            self.data = try? JSONSerialization.jsonObject(with: data, options: []) as! [String : AnyObject]
         } else {
             self.data = nil
         }
@@ -143,7 +143,7 @@ struct JsonResponse: ResponseType, CustomDebugStringConvertible {
                 description += "\n - Code:   \(res.statusCode)"
             }
             
-            if let data = self.data where data.count > 0 {
+            if let data = self.data, data.count > 0 {
                 
                 if let reason = data["reason"] as? String,
                     let summary = ReasonDescriptions[reason] {

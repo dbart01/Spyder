@@ -38,7 +38,7 @@ enum Environment: String {
 
 struct Endpoint {
     
-    let url: NSURL
+    let url: URL
     
     // ----------------------------------
     //  MARK: - Init -
@@ -55,6 +55,6 @@ struct Endpoint {
             endpoint = "\(EndpointDevelopment):\(port)\(EndpointPathPrefix)\(token)"
         }
         
-        self.url = NSURL(string: endpoint)!
+        self.url = URL(string: endpoint)!
     }
 }

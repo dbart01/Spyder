@@ -35,13 +35,13 @@ struct Arguments {
     
     private let arguments: [String : String] = {
         
-        let all = NSProcessInfo.processInfo().arguments
+        let all = ProcessInfo.processInfo.arguments
         if all.count > 1 {
-            let args = Array(all[1...all.count - 1])
-            
             var container = [String : String]()
-            for var i = 0; i < args.count; i += 2 {
-                container[args[i]] = (i + 1 < args.count) ? args[i + 1] : ""
+            var i = 1
+            while i < all.count {
+                container[all[i]] = (i + 1 < all.count) ? all[i + 1] : ""
+                i += 2
             }
             return container
         }
@@ -124,13 +124,13 @@ struct Arguments {
         return nil
     }
     
-    var payload: NSData? {
+    var payload: Data? {
         if let payload = self.args("-L", "--payload") {
             
-            if payload.containsString("{") {
-                return payload.dataUsingEncoding(NSUTF8StringEncoding)
+            if payload.contains("{") {
+                return payload.data(using: String.Encoding.utf8)
             } else {
-                return NSData(contentsOfFile: (payload as NSString).stringByExpandingTildeInPath)
+                return (try? Data(contentsOf: URL(fileURLWithPath: (payload as NSString).expandingTildeInPath)))
             }
         }
         return nil
@@ -160,7 +160,7 @@ struct Arguments {
     // ----------------------------------
     //  MARK: - Arguments -
     //
-    private func arg(keys: [String]) -> String? {
+    private func arg(_ keys: [String]) -> String? {
         var value: String?
         for key in keys where value == nil {
             value = self.arguments[key]
@@ -168,11 +168,11 @@ struct Arguments {
         return value
     }
     
-    private func args(keys: String ...) -> String? {
+    private func args(_ keys: String ...) -> String? {
         return self.arg(keys)
     }
     
-    private func argi(keys: String ...) -> Int? {
+    private func argi(_ keys: String ...) -> Int? {
         if let arg = self.arg(keys),
             let int = Int(arg) {
                 return int

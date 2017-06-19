@@ -34,74 +34,108 @@ import Foundation
 // ----------------------------------
 //  MARK: - Request -
 //
-class Request: NSMutableURLRequest {
+class RequestDescription {
     
-    var payload:           NSData?
-    var method:            String               = "GET"
-    var additionalHeaders: [String : String]    = [:]
+    let url:     URL
+    let method:  String
     
-    private func build() {
-        self.HTTPMethod = self.method
-        self.HTTPBody   = self.payload
+    var payload: Data?
+    var headers: [String : String] = [:]
+    
+    // ----------------------------------
+    //  MARK: - Init -
+    //
+    init(url: URL, method: String = "GET", headers: [String : String] = [:], payload: Data? = nil) {
+        self.url     = url
+        self.method  = method
+        self.headers = headers
+        self.payload = payload
+    }
+    
+    // ----------------------------------
+    //  MARK: - Build -
+    //
+    func build() -> URLRequest {
+        var request        = URLRequest(url: self.url)
+        request.httpMethod = self.method
+        request.httpBody   = self.payload
         
-        for (header, value) in self.additionalHeaders {
-            self.setValue(value, forHTTPHeaderField: header)
+        for (header, value) in self.headers {
+            request.setValue(value, forHTTPHeaderField: header)
         }
+        
+        return request
     }
 }
 
 // ----------------------------------
 //  MARK: - Session -
 //
-class Session: NSObject {
+class Session {
     
     let certificate: Certificate
     
-    var session: NSURLSession!
+    private let session:  URLSession
+    private let delegate: SessionDelegate
     
     // ----------------------------------
     //  MARK: - Init -
     //
     init(certificate: Certificate) {
+        let delegate    = SessionDelegate(certificate: certificate)
+        let session     = URLSession(
+            configuration: URLSessionConfiguration.ephemeral,
+            delegate:      delegate,
+            delegateQueue: nil
+        )
+        
         self.certificate = certificate
-        
-        super.init()
-        
-        self.session = NSURLSession(configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration(), delegate: self, delegateQueue: nil)
+        self.session     = session
+        self.delegate    = delegate
     }
     
     // ----------------------------------
     //  MARK: - Request Execution -
     //
-    func executeRequest(request: Request) -> Response? {
-        
-        request.build()
-        
+    func execute(dataRequest: RequestDescription) -> Response? {
         var response: Response?
         
-        let semaphore = dispatch_semaphore_create(0)
-        let dataTask = self.session.dataTaskWithRequest(request) { (data, urlResponse, error) in
-            response = Response(response: urlResponse as? NSHTTPURLResponse, data: data, error: error)
-            dispatch_semaphore_signal(semaphore)
+        let semaphore = DispatchSemaphore(value: 0)
+        let dataTask = self.session.dataTask(with: dataRequest.build()) { data, urlResponse, error in
+            response = Response(response: urlResponse as? HTTPURLResponse, data: data, error: error)
+            semaphore.signal()
         }
         dataTask.resume()
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        semaphore.wait()
         
         return response
     }
     
-    func executeJsonRequest(request: Request) -> JsonResponse? {
-        if let response = self.executeRequest(request) {
+    func execute(jsonRequest: RequestDescription) -> JsonResponse? {
+        if let response = self.execute(dataRequest: jsonRequest) {
             return JsonResponse(response: response.response, data: response.data, error: response.error)
         }
         return nil
     }
 }
 
-extension Session: NSURLSessionDelegate {
-    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+private class SessionDelegate: NSObject, URLSessionDelegate {
+    
+    let certificate: Certificate
+    
+    // ----------------------------------
+    //  MARK: - Init -
+    //
+    init(certificate: Certificate) {
+        self.certificate = certificate
+    }
+    
+    // ----------------------------------
+    //  MARK: - URLSessionDelegate -
+    //
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
 
-        let credentials = NSURLCredential(identity: self.certificate.identity, certificates: [self.certificate.certificate], persistence: .ForSession)
-        completionHandler(.UseCredential, credentials)
+        let credentials = URLCredential(identity: self.certificate.identity, certificates: [self.certificate.certificate], persistence: .forSession)
+        completionHandler(.useCredential, credentials)
     }
 }
