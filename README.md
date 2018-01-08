@@ -1,4 +1,8 @@
 # Spyder
+
+[![HTTP 2.0](https://img.shields.io/badge/apns-HTTP/2-orange.svg)](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/CommunicatingwithAPNs.html#//apple_ref/doc/uid/TP40008194-CH11-SW11)
+[![GitHub release](https://img.shields.io/github/release/dbart01/spyder.svg)](https://github.com/dbart01/Spyder/releases/latest)
+
 Spyder simplifies the push notification testing & debugging process for Apple's new APNs Provider API based on the `HTTP/2` protocol so you can focus on building amazing software instead of wasting time on boiler-plate setup code. It doesn't require any certificate conversions, remote servers or complex procedures. Using the certificates in your keychain, it lets you send a push notification with a single command:
 ```
 spyder \
