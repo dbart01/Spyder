@@ -37,6 +37,8 @@ let EndpointDevelopment = "https://api.development.push.apple.com"
 let EndpointProduction  = "https://api.push.apple.com"
 let EndpointPathPrefix  = "/3/device/"
 
+let Version = "Spyder v0.7.1"
+
 let HelpContents = [
     
     "",

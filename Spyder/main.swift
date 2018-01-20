@@ -33,11 +33,14 @@ import Foundation
 
 let args = Arguments()
 
-/* -----------------------------------------
-** Present the help ignoring everything else
-*/
+// Prints the help
 guard args.help == false && args.count > 0 else {
     success(HelpContents)
+}
+
+// Prints the version
+guard args.version == false else {
+    success(Version)
 }
 
 guard args.listIdentities == false else {
