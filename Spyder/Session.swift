@@ -28,49 +28,10 @@
 //  The views and conclusions contained in the software and documentation are those
 //  of the authors and should not be interpreted as representing official policies,
 //  either expressed or implied, of the FreeBSD Project.
+//
 
 import Foundation
 
-// ----------------------------------
-//  MARK: - Request -
-//
-class RequestDescription {
-    
-    let url:     URL
-    let method:  String
-    
-    var payload: Data?
-    var headers: [String : String] = [:]
-    
-    // ----------------------------------
-    //  MARK: - Init -
-    //
-    init(url: URL, method: String = "GET", headers: [String : String] = [:], payload: Data? = nil) {
-        self.url     = url
-        self.method  = method
-        self.headers = headers
-        self.payload = payload
-    }
-    
-    // ----------------------------------
-    //  MARK: - Build -
-    //
-    func build() -> URLRequest {
-        var request        = URLRequest(url: self.url)
-        request.httpMethod = self.method
-        request.httpBody   = self.payload
-        
-        for (header, value) in self.headers {
-            request.setValue(value, forHTTPHeaderField: header)
-        }
-        
-        return request
-    }
-}
-
-// ----------------------------------
-//  MARK: - Session -
-//
 class Session {
     
     let certificate: Certificate
