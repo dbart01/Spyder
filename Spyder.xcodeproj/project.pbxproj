@@ -15,6 +15,23 @@
 		9A9738C11C80C34200657553 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C01C80C34200657553 /* Endpoint.swift */; };
 		9A9738C41C80CC3800657553 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C31C80CC3800657553 /* Certificate.swift */; };
 		9A9738C61C810C2100657553 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C51C810C2100657553 /* Constants.swift */; };
+		9AC203CE2013AEA400057858 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203CD2013AEA400057858 /* Operation.swift */; };
+		9AC203D02013B28600057858 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203CF2013B28600057858 /* Payload.swift */; };
+		9AC203D22014E2DB00057858 /* Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203D12014E2DB00057858 /* Headers.swift */; };
+		9AC203DB2014E41B00057858 /* HeadersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203DA2014E41B00057858 /* HeadersTests.swift */; };
+		9AC203E02014E54E00057858 /* Out.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BE1C80A47400657553 /* Out.swift */; };
+		9AC203E12014E54E00057858 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C51C810C2100657553 /* Constants.swift */; };
+		9AC203E22014E54E00057858 /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B81C7FBD6A00657553 /* Arguments.swift */; };
+		9AC203E32014E54E00057858 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BA1C7FC31400657553 /* Session.swift */; };
+		9AC203E42014E54E00057858 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C31C80CC3800657553 /* Certificate.swift */; };
+		9AC203E52014E54E00057858 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BC1C7FC39700657553 /* Response.swift */; };
+		9AC203E62014E54E00057858 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C01C80C34200657553 /* Endpoint.swift */; };
+		9AC203E72014E54E00057858 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203CD2013AEA400057858 /* Operation.swift */; };
+		9AC203E82014E54E00057858 /* Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203D12014E2DB00057858 /* Headers.swift */; };
+		9AC203E92014E54E00057858 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203CF2013B28600057858 /* Payload.swift */; };
+		9AC203EB2014E88600057858 /* RequestDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203EA2014E88600057858 /* RequestDescription.swift */; };
+		9AC203EC2014E9B900057858 /* RequestDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203EA2014E88600057858 /* RequestDescription.swift */; };
+		9AC203EE2014F84800057858 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203ED2014F84800057858 /* Identity.swift */; };
 		9AFF345B1C84B5D300BFD7F4 /* spyder in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A9738AE1C7FBC2D00657553 /* spyder */; };
 /* End PBXBuildFile section */
 
@@ -42,10 +59,25 @@
 		9A9738C21C80CB4E00657553 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		9A9738C31C80CC3800657553 /* Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
 		9A9738C51C810C2100657553 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9AC203CD2013AEA400057858 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		9AC203CF2013B28600057858 /* Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
+		9AC203D12014E2DB00057858 /* Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headers.swift; sourceTree = "<group>"; };
+		9AC203D82014E41B00057858 /* Spyder Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Spyder Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AC203DA2014E41B00057858 /* HeadersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersTests.swift; sourceTree = "<group>"; };
+		9AC203DC2014E41B00057858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AC203EA2014E88600057858 /* RequestDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDescription.swift; sourceTree = "<group>"; };
+		9AC203ED2014F84800057858 /* Identity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9A9738AB1C7FBC2D00657553 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AC203D52014E41B00057858 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -60,6 +92,7 @@
 			children = (
 				9A9738C21C80CB4E00657553 /* LICENSE */,
 				9A9738B01C7FBC2D00657553 /* Spyder */,
+				9AC203D92014E41B00057858 /* Spyder Tests */,
 				9A9738AF1C7FBC2D00657553 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				9A9738AE1C7FBC2D00657553 /* spyder */,
+				9AC203D82014E41B00057858 /* Spyder Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,6 +111,9 @@
 			children = (
 				9A9738C81C83542E00657553 /* Resources */,
 				9A9738C71C81107A00657553 /* Classes */,
+				9AC203CD2013AEA400057858 /* Operation.swift */,
+				9AC203D12014E2DB00057858 /* Headers.swift */,
+				9AC203CF2013B28600057858 /* Payload.swift */,
 				9A9738B11C7FBC2D00657553 /* main.swift */,
 			);
 			path = Spyder;
@@ -86,7 +123,9 @@
 			isa = PBXGroup;
 			children = (
 				9A9738B81C7FBD6A00657553 /* Arguments.swift */,
+				9AC203EA2014E88600057858 /* RequestDescription.swift */,
 				9A9738BA1C7FC31400657553 /* Session.swift */,
+				9AC203ED2014F84800057858 /* Identity.swift */,
 				9A9738C31C80CC3800657553 /* Certificate.swift */,
 				9A9738BC1C7FC39700657553 /* Response.swift */,
 				9A9738C01C80C34200657553 /* Endpoint.swift */,
@@ -101,6 +140,15 @@
 				9A9738C51C810C2100657553 /* Constants.swift */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		9AC203D92014E41B00057858 /* Spyder Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9AC203DA2014E41B00057858 /* HeadersTests.swift */,
+				9AC203DC2014E41B00057858 /* Info.plist */,
+			);
+			path = "Spyder Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,19 +171,41 @@
 			productReference = 9A9738AE1C7FBC2D00657553 /* spyder */;
 			productType = "com.apple.product-type.tool";
 		};
+		9AC203D72014E41B00057858 /* Spyder Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AC203DD2014E41B00057858 /* Build configuration list for PBXNativeTarget "Spyder Tests" */;
+			buildPhases = (
+				9AC203D42014E41B00057858 /* Sources */,
+				9AC203D52014E41B00057858 /* Frameworks */,
+				9AC203D62014E41B00057858 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Spyder Tests";
+			productName = "Spyder Tests";
+			productReference = 9AC203D82014E41B00057858 /* Spyder Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		9A9738A61C7FBC2D00657553 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Dima Bart";
 				TargetAttributes = {
 					9A9738AD1C7FBC2D00657553 = {
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0920;
+					};
+					9AC203D72014E41B00057858 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = MK88G5Q6ZN;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -152,23 +222,58 @@
 			projectRoot = "";
 			targets = (
 				9A9738AD1C7FBC2D00657553 /* Spyder */,
+				9AC203D72014E41B00057858 /* Spyder Tests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9AC203D62014E41B00057858 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9A9738AA1C7FBC2D00657553 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AC203EB2014E88600057858 /* RequestDescription.swift in Sources */,
 				9A9738BD1C7FC39700657553 /* Response.swift in Sources */,
 				9A9738C41C80CC3800657553 /* Certificate.swift in Sources */,
 				9A9738B91C7FBD6A00657553 /* Arguments.swift in Sources */,
 				9A9738BB1C7FC31400657553 /* Session.swift in Sources */,
 				9A9738BF1C80A47400657553 /* Out.swift in Sources */,
+				9AC203EE2014F84800057858 /* Identity.swift in Sources */,
+				9AC203CE2013AEA400057858 /* Operation.swift in Sources */,
 				9A9738C11C80C34200657553 /* Endpoint.swift in Sources */,
 				9A9738C61C810C2100657553 /* Constants.swift in Sources */,
+				9AC203D02013B28600057858 /* Payload.swift in Sources */,
 				9A9738B21C7FBC2D00657553 /* main.swift in Sources */,
+				9AC203D22014E2DB00057858 /* Headers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AC203D42014E41B00057858 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AC203EC2014E9B900057858 /* RequestDescription.swift in Sources */,
+				9AC203E82014E54E00057858 /* Headers.swift in Sources */,
+				9AC203E32014E54E00057858 /* Session.swift in Sources */,
+				9AC203E22014E54E00057858 /* Arguments.swift in Sources */,
+				9AC203E62014E54E00057858 /* Endpoint.swift in Sources */,
+				9AC203E02014E54E00057858 /* Out.swift in Sources */,
+				9AC203E42014E54E00057858 /* Certificate.swift in Sources */,
+				9AC203E72014E54E00057858 /* Operation.swift in Sources */,
+				9AC203E92014E54E00057858 /* Payload.swift in Sources */,
+				9AC203DB2014E41B00057858 /* HeadersTests.swift in Sources */,
+				9AC203E12014E54E00057858 /* Constants.swift in Sources */,
+				9AC203E52014E54E00057858 /* Response.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +393,52 @@
 			};
 			name = Release;
 		};
+		9AC203DE2014E41B00057858 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = MK88G5Q6ZN;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Spyder Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dimabart.Spyder-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		9AC203DF2014E41B00057858 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = MK88G5Q6ZN;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Spyder Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dimabart.Spyder-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -305,6 +456,15 @@
 			buildConfigurations = (
 				9A9738B61C7FBC2D00657553 /* Debug */,
 				9A9738B71C7FBC2D00657553 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9AC203DD2014E41B00057858 /* Build configuration list for PBXNativeTarget "Spyder Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AC203DE2014E41B00057858 /* Debug */,
+				9AC203DF2014E41B00057858 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
