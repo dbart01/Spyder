@@ -1,0 +1,3 @@
+[submodule "Dependencies/Bloom"]
+	path = Dependencies/Bloom
+	url = git@github.com:dbart01/Bloom.git

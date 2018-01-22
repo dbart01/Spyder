@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A27FF6820167EB000A5DF6E /* Bloom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A27FF6220167E9F00A5DF6E /* Bloom.framework */; };
 		9A9738B21C7FBC2D00657553 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B11C7FBC2D00657553 /* main.swift */; };
 		9A9738B91C7FBD6A00657553 /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B81C7FBD6A00657553 /* Arguments.swift */; };
 		9A9738BB1C7FC31400657553 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BA1C7FC31400657553 /* Session.swift */; };
@@ -37,6 +38,37 @@
 		9AFF345B1C84B5D300BFD7F4 /* spyder in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A9738AE1C7FBC2D00657553 /* spyder */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9A27FF5F20167E9F00A5DF6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A27FF5920167E9F00A5DF6E /* Bloom.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A3827741F5D9DCF0085363F;
+			remoteInfo = "Bloom iOS";
+		};
+		9A27FF6120167E9F00A5DF6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A27FF5920167E9F00A5DF6E /* Bloom.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A65F9CE1F5E444E00380FA1;
+			remoteInfo = "Bloom macOS";
+		};
+		9A27FF6320167E9F00A5DF6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A27FF5920167E9F00A5DF6E /* Bloom.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A38277D1F5D9DCF0085363F;
+			remoteInfo = BloomTests;
+		};
+		9A27FF6520167EAB00A5DF6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A27FF5920167E9F00A5DF6E /* Bloom.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A65F9BB1F5E444E00380FA1;
+			remoteInfo = "Bloom macOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		9A9738AC1C7FBC2D00657553 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -51,6 +83,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9A27FF5920167E9F00A5DF6E /* Bloom.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Bloom.xcodeproj; path = Dependencies/Bloom/Bloom.xcodeproj; sourceTree = SOURCE_ROOT; };
 		9A9738AE1C7FBC2D00657553 /* spyder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = spyder; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A9738B11C7FBC2D00657553 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9A9738B81C7FBD6A00657553 /* Arguments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
@@ -79,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A27FF6820167EB000A5DF6E /* Bloom.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,13 +126,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A27FF5820167E6E00A5DF6E /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				9A27FF5920167E9F00A5DF6E /* Bloom.xcodeproj */,
+			);
+			name = Dependencies;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		9A27FF5A20167E9F00A5DF6E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A27FF6020167E9F00A5DF6E /* Bloom.framework */,
+				9A27FF6220167E9F00A5DF6E /* Bloom.framework */,
+				9A27FF6420167E9F00A5DF6E /* BloomTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9A27FF6720167EB000A5DF6E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9A9738A51C7FBC2D00657553 = {
 			isa = PBXGroup;
 			children = (
 				9A9738C21C80CB4E00657553 /* LICENSE */,
+				9A27FF5820167E6E00A5DF6E /* Dependencies */,
 				9A9738B01C7FBC2D00657553 /* Spyder */,
 				9AC203D92014E41B00057858 /* Spyder Tests */,
 				9A9738AF1C7FBC2D00657553 /* Products */,
+				9A27FF6720167EB000A5DF6E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,6 +243,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9A27FF6620167EAB00A5DF6E /* PBXTargetDependency */,
 			);
 			name = Spyder;
 			productName = Spyder;
@@ -235,6 +298,12 @@
 			mainGroup = 9A9738A51C7FBC2D00657553;
 			productRefGroup = 9A9738AF1C7FBC2D00657553 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9A27FF5A20167E9F00A5DF6E /* Products */;
+					ProjectRef = 9A27FF5920167E9F00A5DF6E /* Bloom.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9A9738AD1C7FBC2D00657553 /* Spyder */,
@@ -242,6 +311,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9A27FF6020167E9F00A5DF6E /* Bloom.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Bloom.framework;
+			remoteRef = 9A27FF5F20167E9F00A5DF6E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9A27FF6220167E9F00A5DF6E /* Bloom.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Bloom.framework;
+			remoteRef = 9A27FF6120167E9F00A5DF6E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9A27FF6420167E9F00A5DF6E /* BloomTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BloomTests.xctest;
+			remoteRef = 9A27FF6320167E9F00A5DF6E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9AC203D62014E41B00057858 /* Resources */ = {
@@ -296,6 +389,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9A27FF6620167EAB00A5DF6E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Bloom macOS";
+			targetProxy = 9A27FF6520167EAB00A5DF6E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9A9738B31C7FBC2D00657553 /* Debug */ = {
