@@ -159,7 +159,7 @@ struct Arguments {
     }
     
     var version: Bool {
-        if let version = self.args("-v", "--version") {
+        if let _ = self.args("-v", "--version") {
             return true
         }
         return false

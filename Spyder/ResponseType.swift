@@ -1,5 +1,5 @@
 //
-//  Endpoint.swift
+//  ResponseType.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,25 +32,33 @@
 
 import Foundation
 
-struct Endpoint {
+protocol ResponseType {
+    associatedtype DataType
     
-    let url: URL
+    var response:   HTTPURLResponse? { get }
+    var data:       DataType?        { get }
+    var error:      Error?           { get }
+    var successful: Bool             { get }
     
-    // ----------------------------------
-    //  MARK: - Init -
-    //
-    init(token: String, environment: Environment, port: String) {
-        let endpoint: String
-        
-        switch environment {
-        case .production:
-            endpoint = "\(EndpointProduction):\(port)\(EndpointPathPrefix)\(token)"
-            
-        case .development: fallthrough
-        default:
-            endpoint = "\(EndpointDevelopment):\(port)\(EndpointPathPrefix)\(token)"
+    init?(response: HTTPURLResponse?, data: Data?, error: Error?)
+    
+    func stringForHeader(_ key: String) -> String?
+}
+
+extension ResponseType {
+    
+    var successful: Bool {
+        if let response = self.response {
+            return response.statusCode == 200
         }
-        
-        self.url = URL(string: endpoint)!
+        return false
+    }
+    
+    func stringForHeader(_ key: String) -> String? {
+        if let response = self.response,
+            let value = response.allHeaderFields[key] as? String {
+            return value
+        }
+        return nil
     }
 }

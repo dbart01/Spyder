@@ -58,7 +58,7 @@ class Operation {
         self.token            = self.args.token       ?? ""
         self.certificatePass  = self.args.passphrase  ?? ""
         self.port             = self.args.port        ?? "443"
-        self.environment      = self.args.environment ?? .Development
+        self.environment      = self.args.environment ?? .development
         self.message          = self.args.message
         self.payload          = self.args.payload
         
@@ -114,7 +114,7 @@ class Operation {
             request.payload = self.payload
             request.headers = self.headers
             
-            if let response = session.execute(jsonRequest: request) {
+            if let response = session.execute(request: request) {
                 success(response)
             }
         }

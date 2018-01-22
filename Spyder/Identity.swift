@@ -79,7 +79,7 @@ extension Array where Element == Identity {
         var string = ""
         for (i, identity) in collection.enumerated() {
             let padding = self.paddingForIndex(i + 1, count: collection.count)
-            string += "\(i + 1).\(padding) \(identity.label)\n"
+            string += "\(i).\(padding) \(identity.label)\n"
         }
         return string
     }

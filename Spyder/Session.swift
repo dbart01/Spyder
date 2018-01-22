@@ -58,23 +58,32 @@ class Session {
     // ----------------------------------
     //  MARK: - Request Execution -
     //
-    func execute(dataRequest: RequestDescription) -> Response? {
+    private func execute(request: RequestDescription) -> Response? {
         var response: Response?
         
         let semaphore = DispatchSemaphore(value: 0)
-        let dataTask = self.session.dataTask(with: dataRequest.build()) { data, urlResponse, error in
-            response = Response(response: urlResponse as? HTTPURLResponse, data: data, error: error)
+        let dataTask = self.session.dataTask(with: request.build()) { data, urlResponse, error in
+            response = Response(
+                response: urlResponse as? HTTPURLResponse,
+                data:     data,
+                error:    error
+            )
             semaphore.signal()
         }
+        
         dataTask.resume()
         semaphore.wait()
         
         return response
     }
     
-    func execute(jsonRequest: RequestDescription) -> JsonResponse? {
-        if let response = self.execute(dataRequest: jsonRequest) {
-            return JsonResponse(response: response.response, data: response.data, error: response.error)
+    func execute(request: RequestDescription) -> JsonResponse? {
+        if let response: Response = self.execute(request: request) {
+            return JsonResponse(
+                response: response.response,
+                data:     response.data,
+                error:    response.error
+            )
         }
         return nil
     }
