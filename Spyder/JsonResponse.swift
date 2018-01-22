@@ -1,5 +1,5 @@
 //
-//  Response.swift
+//  JsonResponse.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,9 +32,9 @@
 
 import Foundation
 
-struct Response: ResponseType {
+struct JsonResponse: ResponseType, CustomDebugStringConvertible {
     
-    typealias DataType = Data
+    typealias DataType = [String : AnyObject]
     
     let response: HTTPURLResponse?
     let data:     DataType?
@@ -50,6 +50,55 @@ struct Response: ResponseType {
         
         self.response = response
         self.error    = error
-        self.data     = data
+        
+        if let data = data {
+            self.data = try? JSONSerialization.jsonObject(with: data, options: []) as! [String : AnyObject]
+        } else {
+            self.data = nil
+        }
+    }
+    
+    // ----------------------------------------
+    //  MARK: - CustomDebugStringConvertible -
+    //
+    var debugDescription: String {
+        var description = ""
+        
+        if self.successful {
+            description += "Success"
+            
+            if let notificationID = self.stringForHeader("apns-id") {
+                description += "\n - Notification ID: \(notificationID)"
+                description += ""
+            }
+            
+        } else {
+            description += "Error"
+            
+            if let res = self.response {
+                if let status = StatusDescriptions[res.statusCode] {
+                    description += "\n - Status: \(status)"
+                }
+                description += "\n - Code:   \(res.statusCode)"
+            }
+            
+            if let data = self.data, data.count > 0 {
+                
+                if let reason = data["reason"] as? String,
+                    let summary = ReasonDescriptions[reason] {
+                    description += "\n - Short:  \(reason)"
+                    description += "\n - Reason: \(summary)"
+                } else {
+                    description += "\n - Data:   \(data)"
+                }
+            }
+            
+            if let error = self.error {
+                description += "\n - Error:  \(error.localizedDescription)"
+            }
+        }
+        
+        description += "\n"
+        return description
     }
 }

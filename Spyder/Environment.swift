@@ -1,5 +1,5 @@
 //
-//  Endpoint.swift
+//  Environment.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,25 +32,7 @@
 
 import Foundation
 
-struct Endpoint {
-    
-    let url: URL
-    
-    // ----------------------------------
-    //  MARK: - Init -
-    //
-    init(token: String, environment: Environment, port: String) {
-        let endpoint: String
-        
-        switch environment {
-        case .production:
-            endpoint = "\(EndpointProduction):\(port)\(EndpointPathPrefix)\(token)"
-            
-        case .development: fallthrough
-        default:
-            endpoint = "\(EndpointDevelopment):\(port)\(EndpointPathPrefix)\(token)"
-        }
-        
-        self.url = URL(string: endpoint)!
-    }
+enum Environment: String {
+    case development = "dev"
+    case production  = "prod"
 }
