@@ -63,6 +63,12 @@
             ReferencedContainer = "container:Spyder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "--token 8189663D44B176EFF25EDD01D7D9072211C7798914CDFD90CE1195D776034EE5 --cert 3 --topic com.dimabart.pusher --message &quot;What&apos;s up?&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

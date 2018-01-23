@@ -31,6 +31,7 @@
 //
 
 import Foundation
+import Bloom
 
 struct JsonResponse: ResponseType, CustomDebugStringConvertible {
     
@@ -62,10 +63,10 @@ struct JsonResponse: ResponseType, CustomDebugStringConvertible {
     //  MARK: - CustomDebugStringConvertible -
     //
     var debugDescription: String {
-        var description = ""
+        var description = Fragment("")
         
         if self.successful {
-            description += "Success"
+            description += "✓ Success".greenText.bold
             
             if let notificationID = self.stringForHeader("apns-id") {
                 description += "\n - Notification ID: \(notificationID)"
@@ -73,7 +74,7 @@ struct JsonResponse: ResponseType, CustomDebugStringConvertible {
             }
             
         } else {
-            description += "Error"
+            description += "✗ Error".redText.bold
             
             if let res = self.response {
                 if let status = StatusDescriptions[res.statusCode] {
@@ -87,7 +88,7 @@ struct JsonResponse: ResponseType, CustomDebugStringConvertible {
                 if let reason = data["reason"] as? String,
                     let summary = ReasonDescriptions[reason] {
                     description += "\n - Short:  \(reason)"
-                    description += "\n - Reason: \(summary)"
+                    description += "\n - Reason: \(summary.yellowText)"
                 } else {
                     description += "\n - Data:   \(data)"
                 }
@@ -99,6 +100,6 @@ struct JsonResponse: ResponseType, CustomDebugStringConvertible {
         }
         
         description += "\n"
-        return description
+        return description.description
     }
 }
