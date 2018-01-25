@@ -55,11 +55,23 @@ struct Headers {
     var dictionary: [String : String] {
         var container: [String : String] = [:]
         
-        if let value = self.id       { container["apns-id"]       = value }
-        if let value = self.topic    { container["apns-topic"]    = value }
-        if let value = self.priority { container["apns-priority"] = String(describing: value) }
-        if let value = self.expiry   { container["apns-expiry"]   = String(describing: value) }
+        if let value = self.id       { container[Key.id]       = value }
+        if let value = self.topic    { container[Key.topic]    = value }
+        if let value = self.priority { container[Key.priority] = String(describing: value) }
+        if let value = self.expiry   { container[Key.expiry]   = String(describing: value) }
         
         return container
+    }
+}
+
+// ----------------------------------
+//  MARK: - Keys -
+//
+extension Headers {
+    enum Key {
+        static let id       = "apns-id"
+        static let topic    = "apns-topic"
+        static let priority = "apns-priority"
+        static let expiry   = "apns-expiry"
     }
 }

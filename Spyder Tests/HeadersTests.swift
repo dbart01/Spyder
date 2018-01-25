@@ -21,10 +21,10 @@ class HeadersTests: XCTestCase {
         let dictionary = headers.dictionary
         
         XCTAssertEqual(dictionary.count, 4)
-        XCTAssertEqual(dictionary["apns-id"],       "abc123")
-        XCTAssertEqual(dictionary["apns-topic"],    "test-notification")
-        XCTAssertEqual(dictionary["apns-priority"], "5")
-        XCTAssertEqual(dictionary["apns-expiry"],   "100")
+        XCTAssertEqual(dictionary[Headers.Key.id],       "abc123")
+        XCTAssertEqual(dictionary[Headers.Key.topic],    "test-notification")
+        XCTAssertEqual(dictionary[Headers.Key.priority], "5")
+        XCTAssertEqual(dictionary[Headers.Key.expiry],   "100")
     }
     
     func testEncodableEmpty() {

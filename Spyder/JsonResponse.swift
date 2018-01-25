@@ -76,7 +76,7 @@ struct JsonResponse: ResponseType, CustomDebugStringConvertible {
             ])
             renderer += ASCII.Separator()
             
-            if let notificationID = self.stringForHeader("apns-id") {
+            if let notificationID = self.value(forHeader: Headers.Key.id) {
                 renderer += ASCII.Row(ASCII.Cell(convertible: "Notification Identifier".yellowText))
                 renderer += ASCII.Row(ASCII.Cell(convertible: notificationID))
                 renderer += ASCII.Separator()
