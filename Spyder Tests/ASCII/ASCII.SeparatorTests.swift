@@ -15,9 +15,9 @@ class ASCIISeparatorTests: XCTestCase {
     //
     func testLength() {
         let context = ASCII.RenderContext(
-            edgePadding:       2,
-            charactersPerLine: 0,
-            fillingLength:     100
+            edgePadding:   2,
+            maxCellWidth:  0,
+            fillingLength: 100
         )
         
         let separator = ASCII.Separator()
@@ -31,9 +31,9 @@ class ASCIISeparatorTests: XCTestCase {
     //
     func testRender() {
         let context = ASCII.RenderContext(
-            edgePadding:       1,
-            charactersPerLine: 0,
-            fillingLength:     10
+            edgePadding:   1,
+            maxCellWidth:  0,
+            fillingLength: 10
         )
         
         let separator = ASCII.Separator()

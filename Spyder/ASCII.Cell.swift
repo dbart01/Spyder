@@ -33,10 +33,11 @@
 import Foundation
 
 extension ASCII {
-    struct Cell: RenderType, ExpressibleByStringLiteral {
+    struct Cell: WrappingType, ContentType, ExpressibleByStringLiteral {
         
-        let content: String
-        let flex:    Bool
+        let flex: Bool
+        
+        private(set) var content: String
         
         // ----------------------------------
         //  MARK: - Init -
@@ -48,6 +49,42 @@ extension ASCII {
         
         init(stringLiteral value: String) {
             self.init(content: value)
+        }
+        
+        // ----------------------------------
+        //  MARK: - WrappingType -
+        //
+        func wrap(in context: ASCII.RenderContext) -> [RenderType] {
+            let length = self.length(in: context)
+            let limit  = context.maxCellWidth - (context.edgePadding * 2)
+            if length > limit {
+                
+                let separator = " " as Character
+                let tokens    = self.content.split(separator: separator)
+                if tokens.count > 0 {
+                    
+                    var cells: [Cell] = []
+                    
+                    var cell = Cell(content: "")
+                    for token in tokens {
+                        if cell.length(in: context) + token.count + 1 < limit { // + 1 for separator
+                            if cell.content.count > 0 {
+                                cell.content = "\(cell.content)\(separator)\(token)"
+                            } else {
+                                cell.content = "\(token)"
+                            }
+                        } else {
+                            cells.append(cell)
+                            cell = Cell(content: "\(token)")
+                        }
+                    }
+                    
+                    cells.append(cell)
+                    
+                    return cells
+                }
+            }
+            return [self]
         }
         
         // ----------------------------------

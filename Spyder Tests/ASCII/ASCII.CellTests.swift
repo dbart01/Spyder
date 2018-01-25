@@ -23,9 +23,9 @@ class ASCIICellTests: XCTestCase {
     //
     func testLength() {
         let context = ASCII.RenderContext(
-            edgePadding:       2,
-            charactersPerLine: 0,
-            fillingLength:     0
+            edgePadding:   2,
+            maxCellWidth:  0,
+            fillingLength: 0
         )
         
         let cell   = ASCII.Cell(content: "Something")
@@ -35,13 +35,56 @@ class ASCIICellTests: XCTestCase {
     }
     
     // ----------------------------------
+    //  MARK: - Wrapping -
+    //
+    func testWrapMultiLine() {
+        let context = ASCII.RenderContext(
+            edgePadding:   1,
+            maxCellWidth:  30,
+            fillingLength: 0
+        )
+        
+        let cell    = ASCII.Cell(content: "Lorem ipsum dolor sit amet, consecteturadipiscing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua.")
+        let cells   = cell.wrap(in: context)
+        let results = cells.map {
+            $0.render(in: context)
+        }
+        
+        XCTAssertEqual(results, [
+            " Lorem ipsum dolor sit amet, ",
+            " consecteturadipiscing elit, ",
+            " sed do eiusmod tempor ",
+            " incididunt labore et dolore ",
+            " magna aliqua. ",
+        ])
+    }
+    
+    func testWrapSingleLine() {
+        let context = ASCII.RenderContext(
+            edgePadding:   1,
+            maxCellWidth:  30,
+            fillingLength: 0
+        )
+        
+        let cell    = ASCII.Cell(content: "Lorem ipsum dolor")
+        let cells   = cell.wrap(in: context)
+        let results = cells.map {
+            $0.render(in: context)
+        }
+        
+        XCTAssertEqual(results, [
+            " Lorem ipsum dolor ",
+        ])
+    }
+    
+    // ----------------------------------
     //  MARK: - Rendering -
     //
     func testRender() {
         let context = ASCII.RenderContext(
-            edgePadding:       1,
-            charactersPerLine: 0,
-            fillingLength:     0
+            edgePadding:   1,
+            maxCellWidth:  0,
+            fillingLength: 0
         )
         
         let cell   = "Success" as ASCII.Cell

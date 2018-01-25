@@ -35,8 +35,9 @@ import Foundation
 extension ASCII {
     class Renderer {
         
-        var edgePadding:       Int = 2
-        var charactersPerLine: Int = 80
+        var edgePadding:  Int = 2
+        var maxCellWidth: Int = 80
+        var minRowWidth:  Int = 0
         
         private var renderables: [RenderType] = []
         
@@ -52,29 +53,53 @@ extension ASCII {
         }
         
         // ----------------------------------
+        //  MARK: - Wrapping -
+        //
+        func wrap(in context: ASCII.RenderContext) -> [RenderType] {
+            var renderables: [RenderType] = []
+            
+            for renderable in self.renderables {
+                if let wrappable = renderable as? WrappingType {
+                    renderables.append(contentsOf: wrappable.wrap(in: context))
+                } else {
+                    renderables.append(renderable)
+                }
+            }
+            
+            return renderables
+        }
+        
+        // ----------------------------------
         //  MARK: - Render -
         //
         func render() -> String {
             var context = ASCII.RenderContext(
-                edgePadding:       self.edgePadding,
-                charactersPerLine: self.charactersPerLine,
-                fillingLength:     0,
-                spaceToFill:       0
+                edgePadding:   self.edgePadding,
+                maxCellWidth:  self.maxCellWidth,
+                minRowWidth:   self.minRowWidth,
+                fillingLength: 0,
+                spaceToFill:   0
             )
             
+            let wrappedRenderables = self.wrap(in: context)
+            let largestLength      = self.longest(of: wrappedRenderables, in: context)
+            
+            context.fillingLength = max(largestLength, minRowWidth)
+            
+            return wrappedRenderables.map {
+                $0.render(in: context)
+            }.joined(separator: context.lineSeparator)
+        }
+        
+        func longest(of renderables: [RenderType], in context: ASCII.RenderContext) -> Int {
             var largestLength = 0
-            self.renderables.forEach {
+            renderables.forEach {
                 let length = $0.length(in: context)
                 if length > largestLength {
                     largestLength = length
                 }
             }
-            
-            context.fillingLength = largestLength
-            
-            return self.renderables.map {
-                $0.render(in: context)
-            }.joined(separator: context.lineSeparator)
+            return largestLength
         }
     }
 }
@@ -83,43 +108,4 @@ extension ASCII.Renderer {
     static func +=(lhs: inout ASCII.Renderer, rhs: RenderType) {
         lhs.renderables.append(rhs)
     }
-}
-
-extension ASCII {
-    struct RenderContext {
-        let paddingString        = " "
-        let rowEdgeString        = "|"
-        let cellSeparatorString  = "|"
-        let separatorEdgeString  = "+"
-        let separatorString      = "-"
-        let lineSeparator        = "\n"
-        
-        var edgePadding:       Int
-        var charactersPerLine: Int
-        var fillingLength:     Int
-        var spaceToFill:       Int
-        
-        // ----------------------------------
-        //  MARK: - Init -
-        //
-        init(edgePadding: Int = 2, charactersPerLine: Int = 80, fillingLength: Int = 0, spaceToFill: Int = 0) {
-            self.edgePadding       = edgePadding
-            self.charactersPerLine = charactersPerLine
-            self.fillingLength     = fillingLength
-            self.spaceToFill       = spaceToFill
-        }
-        
-        // ----------------------------------
-        //  MARK: - Padding -
-        //
-        func applyPadding(to input: String) -> String {
-            let padding = self.paddingString.multiply(by: self.edgePadding)
-            return "\(padding)\(input)\(padding)"
-        }
-    }
-}
-
-protocol RenderType {
-    func length(in context: ASCII.RenderContext) -> Int
-    func render(in context: ASCII.RenderContext) -> String
 }
