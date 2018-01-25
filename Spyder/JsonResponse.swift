@@ -63,43 +63,66 @@ struct JsonResponse: ResponseType, CustomDebugStringConvertible {
     //  MARK: - CustomDebugStringConvertible -
     //
     var debugDescription: String {
-        var description = Fragment("")
+        var renderer          = ASCII.Renderer()
+        renderer.edgePadding  = 1
+        renderer.minRowWidth  = 50
+        renderer.maxCellWidth = 50
         
         if self.successful {
-            description += "✓ Success".greenText.bold
+            renderer += ASCII.Separator()
+            renderer += ASCII.Row([
+                ASCII.Cell(convertible: "✓".greenText.bold),
+                ASCII.Cell(convertible: "Success".greenText.bold, flex: true),
+            ])
+            renderer += ASCII.Separator()
             
             if let notificationID = self.stringForHeader("apns-id") {
-                description += "\n - Notification ID: \(notificationID)"
-                description += ""
+                renderer += ASCII.Row(ASCII.Cell(convertible: "Notification Identifier".yellowText))
+                renderer += ASCII.Row(ASCII.Cell(convertible: notificationID))
+                renderer += ASCII.Separator()
             }
             
         } else {
-            description += "✗ Error".redText.bold
             
-            if let res = self.response {
-                if let status = StatusDescriptions[res.statusCode] {
-                    description += "\n - Status: \(status)"
-                }
-                description += "\n - Code:   \(res.statusCode)"
+            let code:   String
+            let status: String
+            
+            if let response = self.response, let message = StatusDescriptions[response.statusCode] {
+                code   = "\(response.statusCode)"
+                status = message
+            } else {
+                code   = "-1"
+                status = "Error"
             }
             
+            renderer += ASCII.Separator()
+            renderer += ASCII.Row([
+                ASCII.Cell(convertible: "✗".redText.bold),
+                ASCII.Cell(convertible: status.redText.bold, flex: true),
+                ASCII.Cell(convertible: code.redText.bold),
+            ])
+            renderer += ASCII.Separator()
+
             if let data = self.data, data.count > 0 {
                 
                 if let reason = data["reason"] as? String,
                     let summary = ReasonDescriptions[reason] {
-                    description += "\n - Short:  \(reason)"
-                    description += "\n - Reason: \(summary.yellowText)"
+                
+                    renderer += ASCII.Row(ASCII.Cell(convertible: reason.yellowText))
+                    renderer += ASCII.Row(ASCII.Cell(convertible: summary))
+                    
                 } else {
-                    description += "\n - Data:   \(data)"
+                    renderer += ASCII.Row(ASCII.Cell(convertible: data))
                 }
+                renderer += ASCII.Separator()
             }
-            
+
             if let error = self.error {
-                description += "\n - Error:  \(error.localizedDescription)"
+                renderer += ASCII.Row(ASCII.Cell(convertible: error.localizedDescription))
+                renderer += ASCII.Separator()
             }
         }
         
-        description += "\n"
-        return description.description
+        return "\n" + renderer.render() + "\n"
     }
 }
