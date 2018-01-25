@@ -47,6 +47,10 @@ extension ASCII {
             self.flex    = flex
         }
         
+        init(convertible: CustomStringConvertible, flex: Bool = false) {
+            self.init(content: convertible.description, flex: flex)
+        }
+        
         init(stringLiteral value: String) {
             self.init(content: value)
         }
@@ -91,7 +95,7 @@ extension ASCII {
         //  MARK: - RenderType -
         //
         func length(in context: ASCII.RenderContext) -> Int {
-            return context.edgePadding * 2 + self.content.count
+            return context.edgePadding * 2 + self.content.removedColors().count
         }
         
         func render(in context: ASCII.RenderContext) -> String {
