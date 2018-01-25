@@ -42,7 +42,7 @@ protocol ResponseType {
     
     init?(response: HTTPURLResponse?, data: Data?, error: Error?)
     
-    func stringForHeader(_ key: String) -> String?
+    func value(forHeader key: String) -> String?
 }
 
 extension ResponseType {
@@ -54,7 +54,7 @@ extension ResponseType {
         return false
     }
     
-    func stringForHeader(_ key: String) -> String? {
+    func value(forHeader key: String) -> String? {
         if let response = self.response,
             let value = response.allHeaderFields[key] as? String {
             return value
