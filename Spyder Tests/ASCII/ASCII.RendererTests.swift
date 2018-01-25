@@ -13,8 +13,21 @@ class ASCIIRendererTests: XCTestCase {
     // ----------------------------------
     //  MARK: - Init -
     //
-    func testInit() {
-        // TODO: Implement
+    func testInitEmpty() {
+        let renderer = ASCII.Renderer()
+        
+        XCTAssertNotNil(renderer)
+        XCTAssertTrue(renderer.renderables.isEmpty)
+    }
+    
+    func testInitWithRenderables() {
+        let renderer = ASCII.Renderer([
+            ASCII.Separator(),
+            ASCII.Separator(),
+        ])
+        
+        XCTAssertNotNil(renderer)
+        XCTAssertEqual(renderer.renderables.count, 2)
     }
     
     // ----------------------------------

@@ -54,9 +54,23 @@ class ASCIIRowTests: XCTestCase {
         let cell3: ASCII.Cell = "3.4 sec"
         
         let row  = ASCII.Row([cell1, cell2 , cell3])
-        let rows = row.wrap(in: context)
+        let rows = row.wrap(in: context) as! [ASCII.Row]
         
-//        XCTAssertEqual(r, "|  OK  |  Success  |  3.4 sec  |")
+        XCTAssertEqual(rows[0].cells[0].content, "OK")
+        XCTAssertEqual(rows[0].cells[1].content, "Description: An")
+        XCTAssertEqual(rows[0].cells[2].content, "3.4 sec")
+        
+        XCTAssertEqual(rows[1].cells[0].content, "  ")
+        XCTAssertEqual(rows[1].cells[1].content, "async operation")
+        XCTAssertEqual(rows[1].cells[2].content, "       ")
+        
+        XCTAssertEqual(rows[2].cells[0].content, "  ")
+        XCTAssertEqual(rows[2].cells[1].content, "to compile")
+        XCTAssertEqual(rows[2].cells[2].content, "       ")
+        
+        XCTAssertEqual(rows[3].cells[0].content, "  ")
+        XCTAssertEqual(rows[3].cells[1].content, "source files.")
+        XCTAssertEqual(rows[3].cells[2].content, "       ")
     }
     
     // ----------------------------------
