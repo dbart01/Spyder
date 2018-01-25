@@ -1,5 +1,5 @@
 //
-//  String+Render.swift
+//  ASCII.RenderContext.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,13 +32,38 @@
 
 import Foundation
 
-extension String {
-    
-    func multiply(by value: Int) -> String {
-        var container = self
-        for _ in 1..<value {
-            container += self
+extension ASCII {
+    struct RenderContext {
+        let paddingString        = " "
+        let rowEdgeString        = "|"
+        let cellSeparatorString  = "|"
+        let separatorEdgeString  = "+"
+        let separatorString      = "-"
+        let lineSeparator        = "\n"
+        
+        var edgePadding:   Int
+        var maxCellWidth:  Int
+        var minRowWidth:   Int
+        var fillingLength: Int
+        var spaceToFill:   Int
+        
+        // ----------------------------------
+        //  MARK: - Init -
+        //
+        init(edgePadding: Int = 2, maxCellWidth: Int = 80, minRowWidth: Int = 60, fillingLength: Int = 0, spaceToFill: Int = 0) {
+            self.edgePadding   = edgePadding
+            self.maxCellWidth  = maxCellWidth
+            self.minRowWidth   = minRowWidth
+            self.fillingLength = fillingLength
+            self.spaceToFill   = spaceToFill
         }
-        return container
+        
+        // ----------------------------------
+        //  MARK: - Padding -
+        //
+        func applyPadding(to input: String) -> String {
+            let padding = self.paddingString.multiply(by: self.edgePadding)
+            return "\(padding)\(input)\(padding)"
+        }
     }
 }

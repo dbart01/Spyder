@@ -40,13 +40,33 @@ class ASCIIRowTests: XCTestCase {
     }
     
     // ----------------------------------
+    //  MARK: - Wrapping -
+    //
+    func testWrap() {
+        let context = ASCII.RenderContext(
+            edgePadding:   1,
+            maxCellWidth:  20,
+            fillingLength: 0
+        )
+        
+        let cell1: ASCII.Cell = "OK"
+        let cell2: ASCII.Cell = "Description: An async operation to compile source files."
+        let cell3: ASCII.Cell = "3.4 sec"
+        
+        let row  = ASCII.Row([cell1, cell2 , cell3])
+        let rows = row.wrap(in: context)
+        
+//        XCTAssertEqual(r, "|  OK  |  Success  |  3.4 sec  |")
+    }
+    
+    // ----------------------------------
     //  MARK: - Length -
     //
     func testLength() {
         let context = ASCII.RenderContext(
-            edgePadding:       2,
-            charactersPerLine: 0,
-            fillingLength:     0
+            edgePadding:   2,
+            maxCellWidth:  0,
+            fillingLength: 0
         )
         
         let cell1: ASCII.Cell = "OK"
@@ -66,9 +86,9 @@ class ASCIIRowTests: XCTestCase {
     //
     func testRenderWithoutFilling() {
         let context = ASCII.RenderContext(
-            edgePadding:       2,
-            charactersPerLine: 0,
-            fillingLength:     0
+            edgePadding:   2,
+            maxCellWidth:  0,
+            fillingLength: 0
         )
         
         let cell1: ASCII.Cell = "OK"
@@ -83,10 +103,10 @@ class ASCIIRowTests: XCTestCase {
     
     func testRenderByFillingDefault() {
         let context = ASCII.RenderContext(
-            edgePadding:       2,
-            charactersPerLine: 0,
-            fillingLength:     40,
-            spaceToFill:       0
+            edgePadding:   2,
+            maxCellWidth:  0,
+            fillingLength: 40,
+            spaceToFill:   0
         )
         
         let cell1: ASCII.Cell = "OK"
@@ -101,10 +121,10 @@ class ASCIIRowTests: XCTestCase {
     
     func testRenderByFillingSpecific() {
         let context = ASCII.RenderContext(
-            edgePadding:       1,
-            charactersPerLine: 0,
-            fillingLength:     34,
-            spaceToFill:       0
+            edgePadding:   1,
+            maxCellWidth:  0,
+            fillingLength: 34,
+            spaceToFill:   0
         )
         
         let cell1 = ASCII.Cell(content: "OK")

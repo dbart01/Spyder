@@ -33,7 +33,7 @@
 import Foundation
 
 extension ASCII {
-    struct Row: RenderType {
+    struct Row: WrappingType {
         
         var cells: [Cell]
         
@@ -49,11 +49,45 @@ extension ASCII {
         }
         
         // ----------------------------------
+        //  MARK: - WrappingType -
+        //
+        func wrap(in context: ASCII.RenderContext) -> [RenderType] {
+            var columns = self.cells.map {
+                $0.wrap(in: context) as! [Cell]
+            }
+            
+            /* ----------------------------------
+             ** Fill non-wrapped cells with empty
+             ** content so that number of cells
+             ** in each column is the same.
+             */
+            let maxRows = columns.sorted { $0.count > $1.count }.first!.count
+            for i in 0..<columns.count {
+                while columns[i].count < maxRows {
+                    columns[i].append(columns[i].last!.blankCopy())
+                }
+            }
+
+            /* -----------------------------------
+             ** Create a row with a cell from each
+             ** column.
+             */
+            var rows: [Row] = []
+            
+            for i in 0..<maxRows {
+                let cells = columns.flatMap { $0[i] }
+                rows.append(Row(cells))
+            }
+            
+            return rows
+        }
+        
+        // ----------------------------------
         //  MARK: - RenderType -
         //
         func length(in context: ASCII.RenderContext) -> Int {
-            var length = self.cells.reduce(into: 0) { result, cell in
-                result += cell.length(in: context)
+            var length = self.cellLengths(in: context).reduce(into: 0) { result, length in
+                result += length
             }
             
             length += (self.cells.count - 1) * context.cellSeparatorString.count
@@ -62,18 +96,28 @@ extension ASCII {
             return length
         }
         
+        private func cellLengths(in context: ASCII.RenderContext) -> [Int] {
+            return self.cells.map {
+                $0.length(in: context)
+            }
+        }
+        
         func render(in context: ASCII.RenderContext) -> String {
             let length      = self.length(in: context)
-            let spaceToFill = context.fillingLength - length
+            let spaceToFill = max(context.fillingLength - length, 0)
             
-            /* ----------------------------------
-             ** Find a cell that has `isFlexible`
-             ** set to `true`. Otherwise, default
-             ** to using the last cell.
-             */
-            var index = self.cells.index { $0.flex }
-            if index == nil {
-                index = self.cells.count - 1
+            var index: Int?
+            if spaceToFill > 0 {
+                
+                /* ----------------------------------
+                 ** Find a cell that has `isFlexible`
+                 ** set to `true`. Otherwise, default
+                 ** to using the last cell.
+                 */
+                index = self.cells.index { $0.flex }
+                if index == nil {
+                    index = self.cells.count - 1
+                }
             }
             
             let renderedCells = self.cells.enumerated().map { arg -> String in
@@ -85,7 +129,7 @@ extension ASCII {
                  ** above.
                  */
                 var cellContext = context
-                if offset == index {
+                if let index = index, offset == index {
                     cellContext.spaceToFill = spaceToFill
                 }
                 

@@ -1,5 +1,5 @@
 //
-//  String+Render.swift
+//  ContentType.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,13 +32,23 @@
 
 import Foundation
 
-extension String {
+protocol ContentType: RenderType {
+    var flex:    Bool   { get }
+    var content: String { get }
     
-    func multiply(by value: Int) -> String {
-        var container = self
-        for _ in 1..<value {
-            container += self
-        }
-        return container
+    init(content: String, flex: Bool)
+}
+
+// ----------------------------------
+//  MARK: - Copy -
+//
+extension ContentType {
+    func copy() -> Self {
+        return Self(content: self.content, flex: self.flex)
+    }
+    
+    func blankCopy() -> Self {
+        let content = " ".multiply(by: self.content.count)
+        return Self(content: content, flex: self.flex)
     }
 }

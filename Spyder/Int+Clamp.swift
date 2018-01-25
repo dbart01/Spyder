@@ -1,5 +1,5 @@
 //
-//  String+Render.swift
+//  Int+Clamp.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -30,15 +30,20 @@
 //  either expressed or implied, of the FreeBSD Project.
 //
 
+
 import Foundation
 
-extension String {
+extension Int {
     
-    func multiply(by value: Int) -> String {
-        var container = self
-        for _ in 1..<value {
-            container += self
-        }
-        return container
+    func clamp(min: Int, max: Int) -> Int {
+        return minimum(maximum(self, min), max)
     }
+}
+
+private func maximum(_ value1: Int, _ value2: Int) -> Int {
+    return max(value1, value2)
+}
+
+private func minimum(_ value1: Int, _ value2: Int) -> Int {
+    return min(value1, value2)
 }

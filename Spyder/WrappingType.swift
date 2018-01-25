@@ -1,5 +1,5 @@
 //
-//  String+Render.swift
+//  WrappingType.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,13 +32,6 @@
 
 import Foundation
 
-extension String {
-    
-    func multiply(by value: Int) -> String {
-        var container = self
-        for _ in 1..<value {
-            container += self
-        }
-        return container
-    }
+protocol WrappingType: RenderType {
+    func wrap(in context: ASCII.RenderContext) -> [RenderType]
 }
