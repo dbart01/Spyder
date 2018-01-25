@@ -40,7 +40,7 @@ class ASCIICellTests: XCTestCase {
     func testWrapMultiLine() {
         let context = ASCII.RenderContext(
             edgePadding:   1,
-            maxCellWidth:  30,
+            maxCellWidth:  32,
             fillingLength: 0
         )
         
@@ -91,5 +91,18 @@ class ASCIICellTests: XCTestCase {
         let result = cell.render(in: context)
         
         XCTAssertEqual(result, " Success ")
+    }
+    
+    func testRenderWithSpaceFilling() {
+        let context = ASCII.RenderContext(
+            edgePadding:   1,
+            maxCellWidth:  0,
+            spaceToFill:  10
+        )
+        
+        let cell   = "Success" as ASCII.Cell
+        let result = cell.render(in: context)
+        
+        XCTAssertEqual(result, " Success           ")
     }
 }

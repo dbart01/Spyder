@@ -39,7 +39,7 @@ extension ASCII {
         var maxCellWidth: Int = 80
         var minRowWidth:  Int = 0
         
-        private var renderables: [RenderType] = []
+        private(set) var renderables: [RenderType] = []
         
         // ----------------------------------
         //  MARK: - Init -
