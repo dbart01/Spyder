@@ -37,9 +37,7 @@ do {
     
 } catch let status as Operation.Status {
     switch status {
-    case .success:
-        break
-    case .info(let message):
+    case .success(let message):
         print(message)
     case .error(let reason):
         print("Failed to send push notification: \(reason.description)")

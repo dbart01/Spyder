@@ -95,13 +95,13 @@ class Operation {
     func execute() throws {
         switch self.action {
         case .help:
-            throw Status.info(Strings.help)
+            throw Status.success(Strings.help)
             
         case .version:
-            throw Status.info(Strings.version)
+            throw Status.success(Strings.version)
             
         case .identities:
-            throw Status.info(Identity.list().prettyPrinted)
+            throw Status.success(Identity.list().prettyPrinted)
             
         case .push:
             try self.validateToken()
@@ -115,7 +115,7 @@ class Operation {
             request.headers = self.headers
             
             if let response = session.execute(request: request) {
-                success(response)
+                throw Status.success(response.debugDescription)
             }
         }
     }
@@ -200,14 +200,12 @@ extension Operation {
 extension Operation {
     enum Status: Error {
         
-        case success
-        case info(String)
+        case success(String)
         case error(Reason)
         
         var code: Int32 {
             switch self {
             case .success:           return 0
-            case .info:              return 200
             case .error(let reason): return reason.code
             }
         }

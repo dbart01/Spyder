@@ -37,18 +37,16 @@
 		9A9738B21C7FBC2D00657553 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B11C7FBC2D00657553 /* main.swift */; };
 		9A9738B91C7FBD6A00657553 /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B81C7FBD6A00657553 /* Arguments.swift */; };
 		9A9738BB1C7FC31400657553 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BA1C7FC31400657553 /* Session.swift */; };
-		9A9738BF1C80A47400657553 /* Out.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BE1C80A47400657553 /* Out.swift */; };
 		9A9738C11C80C34200657553 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C01C80C34200657553 /* Endpoint.swift */; };
 		9A9738C41C80CC3800657553 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C31C80CC3800657553 /* Certificate.swift */; };
-		9A9738C61C810C2100657553 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C51C810C2100657553 /* Constants.swift */; };
+		9A9738C61C810C2100657553 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C51C810C2100657553 /* Strings.swift */; };
 		9AA51FAF201607B10052AFFB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FAE201607B10052AFFB /* Environment.swift */; };
 		9AA51FB52016082F0052AFFB /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FB42016082F0052AFFB /* Response.swift */; };
 		9AC203CE2013AEA400057858 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203CD2013AEA400057858 /* Operation.swift */; };
 		9AC203D02013B28600057858 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203CF2013B28600057858 /* Payload.swift */; };
 		9AC203D22014E2DB00057858 /* Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203D12014E2DB00057858 /* Headers.swift */; };
 		9AC203DB2014E41B00057858 /* HeadersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203DA2014E41B00057858 /* HeadersTests.swift */; };
-		9AC203E02014E54E00057858 /* Out.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BE1C80A47400657553 /* Out.swift */; };
-		9AC203E12014E54E00057858 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C51C810C2100657553 /* Constants.swift */; };
+		9AC203E12014E54E00057858 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C51C810C2100657553 /* Strings.swift */; };
 		9AC203EB2014E88600057858 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203EA2014E88600057858 /* Request.swift */; };
 		9AC203EE2014F84800057858 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203ED2014F84800057858 /* Identity.swift */; };
 		9AF42E8120192E4A002655F3 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF42E8020192E4A002655F3 /* ContentType.swift */; };
@@ -130,11 +128,10 @@
 		9A9738B11C7FBC2D00657553 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9A9738B81C7FBD6A00657553 /* Arguments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
 		9A9738BA1C7FC31400657553 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		9A9738BE1C80A47400657553 /* Out.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Out.swift; sourceTree = "<group>"; };
 		9A9738C01C80C34200657553 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		9A9738C21C80CB4E00657553 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		9A9738C31C80CC3800657553 /* Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
-		9A9738C51C810C2100657553 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9A9738C51C810C2100657553 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		9AA51FAE201607B10052AFFB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		9AA51FB42016082F0052AFFB /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		9AC203CD2013AEA400057858 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
@@ -277,7 +274,7 @@
 		9A9738B01C7FBC2D00657553 /* Spyder */ = {
 			isa = PBXGroup;
 			children = (
-				9A9738C81C83542E00657553 /* Resources */,
+				9A9738C81C83542E00657553 /* Strings */,
 				9AA51FB0201607D80052AFFB /* Keychain */,
 				9A27FF6B20168D5400A5DF6E /* ASCII */,
 				9A9738C71C81107A00657553 /* API */,
@@ -303,13 +300,12 @@
 			name = API;
 			sourceTree = "<group>";
 		};
-		9A9738C81C83542E00657553 /* Resources */ = {
+		9A9738C81C83542E00657553 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
-				9A9738BE1C80A47400657553 /* Out.swift */,
-				9A9738C51C810C2100657553 /* Constants.swift */,
+				9A9738C51C810C2100657553 /* Strings.swift */,
 			);
-			name = Resources;
+			name = Strings;
 			sourceTree = "<group>";
 		};
 		9AA51FB0201607D80052AFFB /* Keychain */ = {
@@ -476,7 +472,6 @@
 				9A27FF862016D4F700A5DF6E /* ASCII.Row.swift in Sources */,
 				9AA51FB52016082F0052AFFB /* Response.swift in Sources */,
 				9A27FF8D2016DEF300A5DF6E /* ASCII.Separator.swift in Sources */,
-				9A9738BF1C80A47400657553 /* Out.swift in Sources */,
 				9AF42E92201A7701002655F3 /* String+Colors.swift in Sources */,
 				9AC203EE2014F84800057858 /* Identity.swift in Sources */,
 				9AC203CE2013AEA400057858 /* Operation.swift in Sources */,
@@ -485,7 +480,7 @@
 				9A88FC2620175AF1008789CF /* ASCII.RenderContext.swift in Sources */,
 				9A27FF832016D4D800A5DF6E /* ASCII.Cell.swift in Sources */,
 				9A88FC2A20175B42008789CF /* Int+Clamp.swift in Sources */,
-				9A9738C61C810C2100657553 /* Constants.swift in Sources */,
+				9A9738C61C810C2100657553 /* Strings.swift in Sources */,
 				9A88FC2420175ACF008789CF /* RenderType.swift in Sources */,
 				9AC203D02013B28600057858 /* Payload.swift in Sources */,
 				9A9738B21C7FBC2D00657553 /* main.swift in Sources */,
@@ -503,7 +498,6 @@
 				9A27FF902016E0A900A5DF6E /* ASCII.RendererTests.swift in Sources */,
 				9AF42E872019FC44002655F3 /* ASCII.SeparatorTests.swift in Sources */,
 				9AF42E8420192E7F002655F3 /* ContentType.swift in Sources */,
-				9AC203E02014E54E00057858 /* Out.swift in Sources */,
 				9A27FF7C2016946500A5DF6E /* Environment.swift in Sources */,
 				9A27FF7D2016947700A5DF6E /* Headers.swift in Sources */,
 				9A27FF802016D2C100A5DF6E /* ASCII.swift in Sources */,
@@ -518,7 +512,7 @@
 				9A88FC2B20175DC9008789CF /* Int+Clamp.swift in Sources */,
 				9A27FF7B2016944300A5DF6E /* Endpoint.swift in Sources */,
 				9A88FC2720175B0A008789CF /* RenderType.swift in Sources */,
-				9AC203E12014E54E00057858 /* Constants.swift in Sources */,
+				9AC203E12014E54E00057858 /* Strings.swift in Sources */,
 				9A27FF872016D50900A5DF6E /* ASCII.Row.swift in Sources */,
 				9A88FC302017628C008789CF /* WrappingType.swift in Sources */,
 				9A27FF842016D4E000A5DF6E /* ASCII.Cell.swift in Sources */,
