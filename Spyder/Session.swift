@@ -58,7 +58,7 @@ class Session {
     // ----------------------------------
     //  MARK: - Request Execution -
     //
-    private func execute(request: RequestDescription) -> Response? {
+    func execute(request: Request) -> Response? {
         var response: Response?
         
         let semaphore = DispatchSemaphore(value: 0)
@@ -75,17 +75,6 @@ class Session {
         semaphore.wait()
         
         return response
-    }
-    
-    func execute(request: RequestDescription) -> JsonResponse? {
-        if let response: Response = self.execute(request: request) {
-            return JsonResponse(
-                response: response.response,
-                data:     response.data,
-                error:    response.error
-            )
-        }
-        return nil
     }
 }
 

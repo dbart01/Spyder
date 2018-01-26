@@ -1,5 +1,5 @@
 //
-//  ResponseType.swift
+//  Request.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,33 +32,40 @@
 
 import Foundation
 
-protocol ResponseType {
-    associatedtype DataType
+class Request {
     
-    var response:   HTTPURLResponse? { get }
-    var data:       DataType?        { get }
-    var error:      Error?           { get }
-    var successful: Bool             { get }
+    let url:     URL
+    let method:  String
     
-    init?(response: HTTPURLResponse?, data: Data?, error: Error?)
+    var payload: Data?
+    var headers: Headers
     
-    func value(forHeader key: String) -> String?
+    // ----------------------------------
+    //  MARK: - Init -
+    //
+    init(url: URL, method: String = "GET", headers: Headers = Headers(), payload: Data? = nil) {
+        self.url     = url
+        self.method  = method
+        self.headers = headers
+        self.payload = payload
+    }
+    
+    // ----------------------------------
+    //  MARK: - Build -
+    //
+    func build() -> URLRequest {
+        var request        = URLRequest(url: self.url)
+        request.httpMethod = self.method
+        request.httpBody   = self.payload
+        
+        for (header, value) in self.headers.dictionary {
+            request.setValue(value, forHTTPHeaderField: header)
+        }
+        
+        return request
+    }
 }
 
-extension ResponseType {
-    
-    var successful: Bool {
-        if let response = self.response {
-            return response.statusCode == 200
-        }
-        return false
-    }
-    
-    func value(forHeader key: String) -> String? {
-        if let response = self.response,
-            let value = response.allHeaderFields[key] as? String {
-            return value
-        }
-        return nil
-    }
+extension Request {
+    static let maximumPayloadSize: Int = 4096
 }
