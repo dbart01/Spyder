@@ -40,17 +40,43 @@ struct Endpoint {
     //  MARK: - Init -
     //
     init(token: String, environment: Environment, port: String) {
-        let endpoint: String
+        let host     = Endpoint.Host(environment)
+        let endpoint = "\(host):\(port)\(Endpoint.path)\(token)"
+        self.url     = URL(string: endpoint)!
+    }
+}
+
+// ----------------------------------
+//  MARK: - Path -
+//
+extension Endpoint {
+    private static let path = "/3/device/"
+}
+
+// ----------------------------------
+//  MARK: - Host -
+//
+extension Endpoint {
+    private enum Host: String, CustomStringConvertible {
         
-        switch environment {
-        case .production:
-            endpoint = "\(EndpointProduction):\(port)\(EndpointPathPrefix)\(token)"
-            
-        case .development: fallthrough
-        default:
-            endpoint = "\(EndpointDevelopment):\(port)\(EndpointPathPrefix)\(token)"
+        case development = "https://api.development.push.apple.com"
+        case production  = "https://api.push.apple.com"
+        
+        // ----------------------------------
+        //  MARK: - Init -
+        //
+        init(_ environment: Environment) {
+            switch environment {
+            case .development: self = .development
+            case .production:  self = .production
+            }
         }
         
-        self.url = URL(string: endpoint)!
+        // ----------------------------------
+        //  MARK: - CustomStringConvertible -
+        //
+        var description: String {
+            return self.rawValue
+        }
     }
 }

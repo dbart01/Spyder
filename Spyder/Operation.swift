@@ -95,10 +95,10 @@ class Operation {
     func execute() throws {
         switch self.action {
         case .help:
-            throw Status.info(HelpContents)
+            throw Status.info(Strings.help)
             
         case .version:
-            throw Status.info(Version)
+            throw Status.info(Strings.version)
             
         case .identities:
             throw Status.info(Identity.list().prettyPrinted)
@@ -110,7 +110,7 @@ class Operation {
             try self.loadCertificate()
             
             let session     = Session(certificate: self.certificate)
-            let request     = RequestDescription(url: self.endpoint.url, method: "POST")
+            let request     = Request(url: self.endpoint.url, method: "POST")
             request.payload = self.payload
             request.headers = self.headers
             
@@ -160,7 +160,7 @@ class Operation {
         }
         
         let sizeInKB = payload.count / 1024
-        if sizeInKB > PayloadMaxSize {
+        if sizeInKB > Request.maximumPayloadSize {
             throw Status.error(.payloadTooBig(sizeInKB))
         }
     }
@@ -242,7 +242,7 @@ extension Operation {
             switch self {
             case .deviceTokenMissing:            return "Device token missing."
             case .payloadEmpty:                  return "Payload is empty."
-            case .payloadTooBig(let actualSize): return "Payload size exceeds maximum, expected: \(PayloadMaxSize), actual: \(actualSize)."
+            case .payloadTooBig(let actualSize): return "Payload size exceeds maximum, expected: \(Request.maximumPayloadSize), actual: \(actualSize)."
             case .invalidCertificateIndex:       return "Invalid certificate index."
             case .certificateMissing:            return "Certificate not provided."
             case .certificateLoadFailed:         return "Failed to load certificate."

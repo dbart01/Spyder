@@ -1,5 +1,5 @@
 //
-//  RequestDescription.swift
+//  Failure.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,36 +32,29 @@
 
 import Foundation
 
-class RequestDescription {
+struct Failure: Decodable {
     
-    let url:     URL
-    let method:  String
-    
-    var payload: Data?
-    var headers: Headers
+    let reason:    Reason
+    let timestamp: Int?
     
     // ----------------------------------
-    //  MARK: - Init -
+    //  MARK: - Decodable -
     //
-    init(url: URL, method: String = "GET", headers: Headers = Headers(), payload: Data? = nil) {
-        self.url     = url
-        self.method  = method
-        self.headers = headers
-        self.payload = payload
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let error      = try container.decode(String.self, forKey: .reason)
+        self.timestamp = try container.decodeIfPresent(Int.self, forKey: .timestamp)
+        self.reason    = Reason(error: error)
     }
-    
-    // ----------------------------------
-    //  MARK: - Build -
-    //
-    func build() -> URLRequest {
-        var request        = URLRequest(url: self.url)
-        request.httpMethod = self.method
-        request.httpBody   = self.payload
-        
-        for (header, value) in self.headers.dictionary {
-            request.setValue(value, forHTTPHeaderField: header)
-        }
-        
-        return request
+}
+
+// ----------------------------------
+//  MARK: - CodingKeys -
+//
+extension Failure {
+    enum CodingKeys: CodingKey {
+        case reason
+        case timestamp
     }
 }
