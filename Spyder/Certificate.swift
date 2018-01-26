@@ -1,5 +1,5 @@
 //
-//  Credential.swift
+//  Certificate.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
