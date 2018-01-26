@@ -1,5 +1,5 @@
 //
-//  IdentityCollection.swift
+//  Identity.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -49,7 +49,7 @@ struct Identity {
             kSecAttrAccess       as String : kSecAttrAccessibleWhenUnlocked,
             kSecReturnRef        as String : true,
             kSecReturnAttributes as String : true,
-            ]
+        ]
         
         var items: AnyObject?
         let result = SecItemCopyMatching(query as CFDictionary, &items)
