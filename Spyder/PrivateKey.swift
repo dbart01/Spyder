@@ -1,5 +1,5 @@
 //
-//  Key.swift
+//  PrivateKey.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,7 +32,7 @@
 
 import Foundation
 
-class Key {
+class PrivateKey {
     
     let key: SecKey
     
