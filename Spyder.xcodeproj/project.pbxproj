@@ -24,6 +24,7 @@
 		9A27FF8D2016DEF300A5DF6E /* ASCII.Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27FF8C2016DEF300A5DF6E /* ASCII.Separator.swift */; };
 		9A27FF8E2016DF0200A5DF6E /* ASCII.Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27FF8C2016DEF300A5DF6E /* ASCII.Separator.swift */; };
 		9A27FF902016E0A900A5DF6E /* ASCII.RendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27FF8F2016E0A900A5DF6E /* ASCII.RendererTests.swift */; };
+		9A5F7EDF2020A8FF00BFC4F8 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5F7EDE2020A8FF00BFC4F8 /* Key.swift */; };
 		9A88FC212016E6AD008789CF /* Bloom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A88FC1C2016E691008789CF /* Bloom.framework */; };
 		9A88FC2420175ACF008789CF /* RenderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88FC2320175ACF008789CF /* RenderType.swift */; };
 		9A88FC2620175AF1008789CF /* ASCII.RenderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88FC2520175AF1008789CF /* ASCII.RenderContext.swift */; };
@@ -42,6 +43,7 @@
 		9A9738C61C810C2100657553 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C51C810C2100657553 /* Strings.swift */; };
 		9AA51FAF201607B10052AFFB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FAE201607B10052AFFB /* Environment.swift */; };
 		9AA51FB52016082F0052AFFB /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FB42016082F0052AFFB /* Response.swift */; };
+		9AA7D095201E0FF500F3E5E1 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7D094201E0FF500F3E5E1 /* Crypto.swift */; };
 		9AC203CE2013AEA400057858 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203CD2013AEA400057858 /* Operation.swift */; };
 		9AC203D02013B28600057858 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203CF2013B28600057858 /* Payload.swift */; };
 		9AC203D22014E2DB00057858 /* Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203D12014E2DB00057858 /* Headers.swift */; };
@@ -118,6 +120,7 @@
 		9A27FF8A2016DECE00A5DF6E /* ASCII.SeparatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCII.SeparatorTests.swift; sourceTree = "<group>"; };
 		9A27FF8C2016DEF300A5DF6E /* ASCII.Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCII.Separator.swift; sourceTree = "<group>"; };
 		9A27FF8F2016E0A900A5DF6E /* ASCII.RendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCII.RendererTests.swift; sourceTree = "<group>"; };
+		9A5F7EDE2020A8FF00BFC4F8 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		9A88FC132016E691008789CF /* Bloom.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Bloom.xcodeproj; path = Bloom/Bloom.xcodeproj; sourceTree = "<group>"; };
 		9A88FC2320175ACF008789CF /* RenderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderType.swift; sourceTree = "<group>"; };
 		9A88FC2520175AF1008789CF /* ASCII.RenderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCII.RenderContext.swift; sourceTree = "<group>"; };
@@ -134,6 +137,7 @@
 		9A9738C51C810C2100657553 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		9AA51FAE201607B10052AFFB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		9AA51FB42016082F0052AFFB /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		9AA7D094201E0FF500F3E5E1 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		9AC203CD2013AEA400057858 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		9AC203CF2013B28600057858 /* Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
 		9AC203D12014E2DB00057858 /* Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headers.swift; sourceTree = "<group>"; };
@@ -313,6 +317,7 @@
 			children = (
 				9A9738C31C80CC3800657553 /* Certificate.swift */,
 				9AC203ED2014F84800057858 /* Identity.swift */,
+				9A5F7EDE2020A8FF00BFC4F8 /* Key.swift */,
 			);
 			name = Keychain;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 			children = (
 				9A27FF732016937E00A5DF6E /* ASCII */,
 				9AC203DA2014E41B00057858 /* HeadersTests.swift */,
+				9AA7D094201E0FF500F3E5E1 /* Crypto.swift */,
 				9AC203DC2014E41B00057858 /* Info.plist */,
 			);
 			path = "Spyder Tests";
@@ -479,6 +485,7 @@
 				9A27FF6D20168D6200A5DF6E /* ASCII.swift in Sources */,
 				9A88FC2620175AF1008789CF /* ASCII.RenderContext.swift in Sources */,
 				9A27FF832016D4D800A5DF6E /* ASCII.Cell.swift in Sources */,
+				9A5F7EDF2020A8FF00BFC4F8 /* Key.swift in Sources */,
 				9A88FC2A20175B42008789CF /* Int+Clamp.swift in Sources */,
 				9A9738C61C810C2100657553 /* Strings.swift in Sources */,
 				9A88FC2420175ACF008789CF /* RenderType.swift in Sources */,
@@ -499,6 +506,7 @@
 				9AF42E872019FC44002655F3 /* ASCII.SeparatorTests.swift in Sources */,
 				9AF42E8420192E7F002655F3 /* ContentType.swift in Sources */,
 				9A27FF7C2016946500A5DF6E /* Environment.swift in Sources */,
+				9AA7D095201E0FF500F3E5E1 /* Crypto.swift in Sources */,
 				9A27FF7D2016947700A5DF6E /* Headers.swift in Sources */,
 				9A27FF802016D2C100A5DF6E /* ASCII.swift in Sources */,
 				9AF42E94201A7767002655F3 /* String+ColorsTests.swift in Sources */,
@@ -629,7 +637,10 @@
 		9A9738B61C7FBC2D00657553 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = spyder;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -637,6 +648,8 @@
 		9A9738B71C7FBC2D00657553 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = spyder;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
