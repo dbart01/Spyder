@@ -24,7 +24,7 @@
 		9A27FF8D2016DEF300A5DF6E /* ASCII.Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27FF8C2016DEF300A5DF6E /* ASCII.Separator.swift */; };
 		9A27FF8E2016DF0200A5DF6E /* ASCII.Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27FF8C2016DEF300A5DF6E /* ASCII.Separator.swift */; };
 		9A27FF902016E0A900A5DF6E /* ASCII.RendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27FF8F2016E0A900A5DF6E /* ASCII.RendererTests.swift */; };
-		9A5F7EDF2020A8FF00BFC4F8 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5F7EDE2020A8FF00BFC4F8 /* Key.swift */; };
+		9A5F7EDF2020A8FF00BFC4F8 /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5F7EDE2020A8FF00BFC4F8 /* PrivateKey.swift */; };
 		9A88FC212016E6AD008789CF /* Bloom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A88FC1C2016E691008789CF /* Bloom.framework */; };
 		9A88FC2420175ACF008789CF /* RenderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88FC2320175ACF008789CF /* RenderType.swift */; };
 		9A88FC2620175AF1008789CF /* ASCII.RenderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88FC2520175AF1008789CF /* ASCII.RenderContext.swift */; };
@@ -41,6 +41,17 @@
 		9A9738C11C80C34200657553 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C01C80C34200657553 /* Endpoint.swift */; };
 		9A9738C41C80CC3800657553 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C31C80CC3800657553 /* Certificate.swift */; };
 		9A9738C61C810C2100657553 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C51C810C2100657553 /* Strings.swift */; };
+		9A9E5C0120210E5C006B0D0D /* ContainerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C0020210E5C006B0D0D /* ContainerType.swift */; };
+		9A9E5C0620210E80006B0D0D /* JWT.Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C0520210E80006B0D0D /* JWT.Header.swift */; };
+		9A9E5C0820210E90006B0D0D /* JWT.Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C0720210E90006B0D0D /* JWT.Payload.swift */; };
+		9A9E5C0A20210EBF006B0D0D /* JWT.Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C0920210EBF006B0D0D /* JWT.Key.swift */; };
+		9A9E5C0B20210EE0006B0D0D /* JWT.Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C0520210E80006B0D0D /* JWT.Header.swift */; };
+		9A9E5C0C20210EE2006B0D0D /* JWT.Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C0720210E90006B0D0D /* JWT.Payload.swift */; };
+		9A9E5C0D20210EE6006B0D0D /* JWT.Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C0920210EBF006B0D0D /* JWT.Key.swift */; };
+		9A9E5C1220211060006B0D0D /* ContainerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C0020210E5C006B0D0D /* ContainerType.swift */; };
+		9A9E5C1620211076006B0D0D /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C31C80CC3800657553 /* Certificate.swift */; };
+		9A9E5C1720211076006B0D0D /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203ED2014F84800057858 /* Identity.swift */; };
+		9A9E5C1820211076006B0D0D /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5F7EDE2020A8FF00BFC4F8 /* PrivateKey.swift */; };
 		9AA51FAF201607B10052AFFB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FAE201607B10052AFFB /* Environment.swift */; };
 		9AA51FB52016082F0052AFFB /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FB42016082F0052AFFB /* Response.swift */; };
 		9AA7D095201E0FF500F3E5E1 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7D094201E0FF500F3E5E1 /* Crypto.swift */; };
@@ -51,6 +62,10 @@
 		9AC203E12014E54E00057858 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C51C810C2100657553 /* Strings.swift */; };
 		9AC203EB2014E88600057858 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203EA2014E88600057858 /* Request.swift */; };
 		9AC203EE2014F84800057858 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203ED2014F84800057858 /* Identity.swift */; };
+		9AD91D7020210836007E93EC /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD91D6F20210836007E93EC /* JWT.swift */; };
+		9AD91D722021086E007E93EC /* JWT.Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD91D712021086E007E93EC /* JWT.Token.swift */; };
+		9AD91D7320210C88007E93EC /* JWT.Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD91D712021086E007E93EC /* JWT.Token.swift */; };
+		9AD91D7420210C90007E93EC /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD91D6F20210836007E93EC /* JWT.swift */; };
 		9AF42E8120192E4A002655F3 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF42E8020192E4A002655F3 /* ContentType.swift */; };
 		9AF42E8420192E7F002655F3 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF42E8020192E4A002655F3 /* ContentType.swift */; };
 		9AF42E852019FC44002655F3 /* ASCII.CellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A27FF7E2016D2B700A5DF6E /* ASCII.CellTests.swift */; };
@@ -120,7 +135,7 @@
 		9A27FF8A2016DECE00A5DF6E /* ASCII.SeparatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCII.SeparatorTests.swift; sourceTree = "<group>"; };
 		9A27FF8C2016DEF300A5DF6E /* ASCII.Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCII.Separator.swift; sourceTree = "<group>"; };
 		9A27FF8F2016E0A900A5DF6E /* ASCII.RendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCII.RendererTests.swift; sourceTree = "<group>"; };
-		9A5F7EDE2020A8FF00BFC4F8 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		9A5F7EDE2020A8FF00BFC4F8 /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
 		9A88FC132016E691008789CF /* Bloom.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Bloom.xcodeproj; path = Bloom/Bloom.xcodeproj; sourceTree = "<group>"; };
 		9A88FC2320175ACF008789CF /* RenderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderType.swift; sourceTree = "<group>"; };
 		9A88FC2520175AF1008789CF /* ASCII.RenderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCII.RenderContext.swift; sourceTree = "<group>"; };
@@ -135,6 +150,10 @@
 		9A9738C21C80CB4E00657553 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		9A9738C31C80CC3800657553 /* Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
 		9A9738C51C810C2100657553 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		9A9E5C0020210E5C006B0D0D /* ContainerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerType.swift; sourceTree = "<group>"; };
+		9A9E5C0520210E80006B0D0D /* JWT.Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.Header.swift; sourceTree = "<group>"; };
+		9A9E5C0720210E90006B0D0D /* JWT.Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.Payload.swift; sourceTree = "<group>"; };
+		9A9E5C0920210EBF006B0D0D /* JWT.Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.Key.swift; sourceTree = "<group>"; };
 		9AA51FAE201607B10052AFFB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		9AA51FB42016082F0052AFFB /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		9AA7D094201E0FF500F3E5E1 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
@@ -146,6 +165,8 @@
 		9AC203DC2014E41B00057858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AC203EA2014E88600057858 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		9AC203ED2014F84800057858 /* Identity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
+		9AD91D6F20210836007E93EC /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
+		9AD91D712021086E007E93EC /* JWT.Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.Token.swift; sourceTree = "<group>"; };
 		9AF42E8020192E4A002655F3 /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		9AF42E91201A7701002655F3 /* String+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Colors.swift"; sourceTree = "<group>"; };
 		9AF42E93201A7767002655F3 /* String+ColorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ColorsTests.swift"; sourceTree = "<group>"; };
@@ -279,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				9A9738C81C83542E00657553 /* Strings */,
+				9AD91D6C20210820007E93EC /* JWT */,
 				9AA51FB0201607D80052AFFB /* Keychain */,
 				9A27FF6B20168D5400A5DF6E /* ASCII */,
 				9A9738C71C81107A00657553 /* API */,
@@ -312,12 +334,20 @@
 			name = Strings;
 			sourceTree = "<group>";
 		};
+		9A9E5C0420210E5E006B0D0D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9A9E5C0020210E5C006B0D0D /* ContainerType.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		9AA51FB0201607D80052AFFB /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
 				9A9738C31C80CC3800657553 /* Certificate.swift */,
 				9AC203ED2014F84800057858 /* Identity.swift */,
-				9A5F7EDE2020A8FF00BFC4F8 /* Key.swift */,
+				9A5F7EDE2020A8FF00BFC4F8 /* PrivateKey.swift */,
 			);
 			name = Keychain;
 			sourceTree = "<group>";
@@ -331,6 +361,19 @@
 				9AC203DC2014E41B00057858 /* Info.plist */,
 			);
 			path = "Spyder Tests";
+			sourceTree = "<group>";
+		};
+		9AD91D6C20210820007E93EC /* JWT */ = {
+			isa = PBXGroup;
+			children = (
+				9A9E5C0420210E5E006B0D0D /* Protocols */,
+				9AD91D6F20210836007E93EC /* JWT.swift */,
+				9A9E5C0920210EBF006B0D0D /* JWT.Key.swift */,
+				9AD91D712021086E007E93EC /* JWT.Token.swift */,
+				9A9E5C0520210E80006B0D0D /* JWT.Header.swift */,
+				9A9E5C0720210E90006B0D0D /* JWT.Payload.swift */,
+			);
+			name = JWT;
 			sourceTree = "<group>";
 		};
 		9AF42E96201A8669002655F3 /* Models */ = {
@@ -466,26 +509,32 @@
 			files = (
 				9AC203EB2014E88600057858 /* Request.swift in Sources */,
 				9A9738C41C80CC3800657553 /* Certificate.swift in Sources */,
+				9A9E5C0820210E90006B0D0D /* JWT.Payload.swift in Sources */,
 				9A88FC2F20176250008789CF /* WrappingType.swift in Sources */,
 				9A27FF72201692F900A5DF6E /* String+Render.swift in Sources */,
+				9AD91D722021086E007E93EC /* JWT.Token.swift in Sources */,
 				9AA51FAF201607B10052AFFB /* Environment.swift in Sources */,
 				9A9738B91C7FBD6A00657553 /* Arguments.swift in Sources */,
 				9AF42E98201A867B002655F3 /* Failure.swift in Sources */,
 				9A27FF6F20168D7200A5DF6E /* ASCII.Renderer.swift in Sources */,
+				9AD91D7020210836007E93EC /* JWT.swift in Sources */,
 				9AF42E9A201A87EA002655F3 /* Failure.Reason.swift in Sources */,
 				9AF42E8120192E4A002655F3 /* ContentType.swift in Sources */,
 				9A9738BB1C7FC31400657553 /* Session.swift in Sources */,
 				9A27FF862016D4F700A5DF6E /* ASCII.Row.swift in Sources */,
 				9AA51FB52016082F0052AFFB /* Response.swift in Sources */,
+				9A9E5C0A20210EBF006B0D0D /* JWT.Key.swift in Sources */,
 				9A27FF8D2016DEF300A5DF6E /* ASCII.Separator.swift in Sources */,
 				9AF42E92201A7701002655F3 /* String+Colors.swift in Sources */,
 				9AC203EE2014F84800057858 /* Identity.swift in Sources */,
 				9AC203CE2013AEA400057858 /* Operation.swift in Sources */,
+				9A9E5C0120210E5C006B0D0D /* ContainerType.swift in Sources */,
 				9A9738C11C80C34200657553 /* Endpoint.swift in Sources */,
 				9A27FF6D20168D6200A5DF6E /* ASCII.swift in Sources */,
 				9A88FC2620175AF1008789CF /* ASCII.RenderContext.swift in Sources */,
+				9A9E5C0620210E80006B0D0D /* JWT.Header.swift in Sources */,
 				9A27FF832016D4D800A5DF6E /* ASCII.Cell.swift in Sources */,
-				9A5F7EDF2020A8FF00BFC4F8 /* Key.swift in Sources */,
+				9A5F7EDF2020A8FF00BFC4F8 /* PrivateKey.swift in Sources */,
 				9A88FC2A20175B42008789CF /* Int+Clamp.swift in Sources */,
 				9A9738C61C810C2100657553 /* Strings.swift in Sources */,
 				9A88FC2420175ACF008789CF /* RenderType.swift in Sources */,
@@ -504,26 +553,35 @@
 				9A27FF77201693E500A5DF6E /* String+Render.swift in Sources */,
 				9A27FF902016E0A900A5DF6E /* ASCII.RendererTests.swift in Sources */,
 				9AF42E872019FC44002655F3 /* ASCII.SeparatorTests.swift in Sources */,
+				9A9E5C1720211076006B0D0D /* Identity.swift in Sources */,
 				9AF42E8420192E7F002655F3 /* ContentType.swift in Sources */,
+				9AD91D7320210C88007E93EC /* JWT.Token.swift in Sources */,
 				9A27FF7C2016946500A5DF6E /* Environment.swift in Sources */,
 				9AA7D095201E0FF500F3E5E1 /* Crypto.swift in Sources */,
 				9A27FF7D2016947700A5DF6E /* Headers.swift in Sources */,
 				9A27FF802016D2C100A5DF6E /* ASCII.swift in Sources */,
 				9AF42E94201A7767002655F3 /* String+ColorsTests.swift in Sources */,
 				9AF42E862019FC44002655F3 /* ASCII.RowTests.swift in Sources */,
+				9A9E5C0C20210EE2006B0D0D /* JWT.Payload.swift in Sources */,
 				9A27FF8E2016DF0200A5DF6E /* ASCII.Separator.swift in Sources */,
 				9A88FC2D20175E61008789CF /* Int+ClampTests.swift in Sources */,
 				9AF42E852019FC44002655F3 /* ASCII.CellTests.swift in Sources */,
 				9A88FC2820175B0A008789CF /* ASCII.RenderContext.swift in Sources */,
+				9A9E5C1620211076006B0D0D /* Certificate.swift in Sources */,
 				9AC203DB2014E41B00057858 /* HeadersTests.swift in Sources */,
+				9A9E5C1820211076006B0D0D /* PrivateKey.swift in Sources */,
+				9A9E5C1220211060006B0D0D /* ContainerType.swift in Sources */,
 				9AF42E95201A779F002655F3 /* String+Colors.swift in Sources */,
+				9A9E5C0D20210EE6006B0D0D /* JWT.Key.swift in Sources */,
 				9A88FC2B20175DC9008789CF /* Int+Clamp.swift in Sources */,
+				9AD91D7420210C90007E93EC /* JWT.swift in Sources */,
 				9A27FF7B2016944300A5DF6E /* Endpoint.swift in Sources */,
 				9A88FC2720175B0A008789CF /* RenderType.swift in Sources */,
 				9AC203E12014E54E00057858 /* Strings.swift in Sources */,
 				9A27FF872016D50900A5DF6E /* ASCII.Row.swift in Sources */,
 				9A88FC302017628C008789CF /* WrappingType.swift in Sources */,
 				9A27FF842016D4E000A5DF6E /* ASCII.Cell.swift in Sources */,
+				9A9E5C0B20210EE0006B0D0D /* JWT.Header.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
