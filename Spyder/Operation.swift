@@ -43,7 +43,9 @@ class Operation {
     private let certificatePass:  String
     private let certificateIndex: Int?
     private let certificatePath:  String?
-    private var certificate:      Certificate!
+    private let authTokenPath:    String?
+    
+    private var credentials:      Session.Credentials!
     
     private let action:           Action
     private let headers:          Headers
@@ -64,6 +66,7 @@ class Operation {
         
         self.certificateIndex = self.args.certificateIndex
         self.certificatePath  = self.args.certificatePath
+        self.authTokenPath    = self.args.authTokenPath
         
         self.action  = Action(args: self.args)
         self.headers = Headers(
@@ -107,9 +110,9 @@ class Operation {
             try self.validateToken()
             try self.validatePayload()
             
-            try self.loadCertificate()
+            try self.loadCredentials()
             
-            let session     = Session(certificate: self.certificate)
+            let session     = Session(credentials: self.credentials)
             let request     = Request(url: self.endpoint.url, method: "POST")
             request.payload = self.payload
             request.headers = self.headers
@@ -121,27 +124,35 @@ class Operation {
     }
     
     // ----------------------------------
-    //  MARK: - Certificate -
+    //  MARK: - Credentials -
     //
-    private func loadCertificate() throws {
+    private func loadCredentials() throws {
         if let index = self.certificateIndex {
             
             let identities = Identity.list()
             guard index > 0 && index < identities.count else {
                 throw Status.error(.invalidCertificateIndex)
             }
-            self.certificate = Certificate(identity: identities[index])
+            self.credentials = .certificate(Certificate(identity: identities[index]))
             
         } else if let path = self.certificatePath {
             
             if let certificate = Certificate(path: path, passphrase: self.certificatePass) {
-                self.certificate = certificate
+                self.credentials = .certificate(certificate)
             } else {
                 throw Status.error(.certificateLoadFailed)
             }
             
+        } else if let path = self.authTokenPath {
+            
+            if let privateKey = PrivateKey(path: path) {
+                self.credentials = .authenticationToken(privateKey)
+            } else {
+                throw Status.error(.authTokenLoadFailed)
+            }
+            
         } else {
-            throw Status.error(.certificateMissing)
+            throw Status.error(.credentialsMissing)
         }
     }
     
@@ -222,8 +233,9 @@ extension Operation {
         case payloadEmpty
         case payloadTooBig(Int)
         case invalidCertificateIndex
-        case certificateMissing
+        case credentialsMissing
         case certificateLoadFailed
+        case authTokenLoadFailed
         
         var code: Int32 {
             switch self {
@@ -231,8 +243,9 @@ extension Operation {
             case .payloadEmpty:            return 101
             case .payloadTooBig:           return 102
             case .invalidCertificateIndex: return 103
-            case .certificateMissing:      return 104
+            case .credentialsMissing:      return 104
             case .certificateLoadFailed:   return 105
+            case .authTokenLoadFailed:     return 106
             }
         }
         
@@ -242,8 +255,9 @@ extension Operation {
             case .payloadEmpty:                  return "Payload is empty."
             case .payloadTooBig(let actualSize): return "Payload size exceeds maximum, expected: \(Request.maximumPayloadSize), actual: \(actualSize)."
             case .invalidCertificateIndex:       return "Invalid certificate index."
-            case .certificateMissing:            return "Certificate not provided."
+            case .credentialsMissing:            return "Certificate or authentication token not provided."
             case .certificateLoadFailed:         return "Failed to load certificate."
+            case .authTokenLoadFailed:           return "Failed to load authentication token."
             }
         }
     }

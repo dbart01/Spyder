@@ -52,6 +52,7 @@
 		9A9E5C1620211076006B0D0D /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738C31C80CC3800657553 /* Certificate.swift */; };
 		9A9E5C1720211076006B0D0D /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203ED2014F84800057858 /* Identity.swift */; };
 		9A9E5C1820211076006B0D0D /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5F7EDE2020A8FF00BFC4F8 /* PrivateKey.swift */; };
+		9A9E5C1A20211F30006B0D0D /* Session.Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */; };
 		9AA51FAF201607B10052AFFB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FAE201607B10052AFFB /* Environment.swift */; };
 		9AA51FB52016082F0052AFFB /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FB42016082F0052AFFB /* Response.swift */; };
 		9AA7D095201E0FF500F3E5E1 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7D094201E0FF500F3E5E1 /* Crypto.swift */; };
@@ -154,6 +155,7 @@
 		9A9E5C0520210E80006B0D0D /* JWT.Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.Header.swift; sourceTree = "<group>"; };
 		9A9E5C0720210E90006B0D0D /* JWT.Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.Payload.swift; sourceTree = "<group>"; };
 		9A9E5C0920210EBF006B0D0D /* JWT.Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.Key.swift; sourceTree = "<group>"; };
+		9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.Credentials.swift; sourceTree = "<group>"; };
 		9AA51FAE201607B10052AFFB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		9AA51FB42016082F0052AFFB /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		9AA7D094201E0FF500F3E5E1 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			children = (
 				9AF42E96201A8669002655F3 /* Models */,
 				9A9738BA1C7FC31400657553 /* Session.swift */,
+				9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */,
 				9A9738B81C7FBD6A00657553 /* Arguments.swift */,
 				9AC203D12014E2DB00057858 /* Headers.swift */,
 				9AC203EA2014E88600057858 /* Request.swift */,
@@ -527,6 +530,7 @@
 				9A27FF8D2016DEF300A5DF6E /* ASCII.Separator.swift in Sources */,
 				9AF42E92201A7701002655F3 /* String+Colors.swift in Sources */,
 				9AC203EE2014F84800057858 /* Identity.swift in Sources */,
+				9A9E5C1A20211F30006B0D0D /* Session.Credentials.swift in Sources */,
 				9AC203CE2013AEA400057858 /* Operation.swift in Sources */,
 				9A9E5C0120210E5C006B0D0D /* ContainerType.swift in Sources */,
 				9A9738C11C80C34200657553 /* Endpoint.swift in Sources */,

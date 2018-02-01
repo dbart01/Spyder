@@ -102,6 +102,13 @@ struct Arguments {
         return nil
     }
     
+    var authTokenPath: String? {
+        if let path = self.args("-a", "--authToken") {
+            return path
+        }
+        return nil
+    }
+    
     var environment: Environment? {
         if let abbreviation = self.args("-e", "--env"),
             let env = Environment(rawValue: abbreviation) {
