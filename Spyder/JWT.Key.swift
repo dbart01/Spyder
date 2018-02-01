@@ -35,15 +35,28 @@ import Foundation
 extension JWT {
     enum Key: String {
         
-        /// To support use cases in which the JWT content is secured by a means
-        /// other than a signature and/or encryption contained within the JWT
-        /// (such as a signature on a data structure containing the JWT), JWTs
-        /// MAY also be created without a signature or encryption.  An Unsecured
-        /// JWT is a JWS using the "alg" Header Parameter value "none" and with
-        /// the empty string for its JWS Signature value, as defined in the JWA
-        /// specification [JWA]; it is an Unsecured JWS with the JWT Claims Set
-        /// as its JWS Payload.
+        /// The "alg" (algorithm) Header Parameter identifies the cryptographic
+        /// algorithm used to secure the JWS.  The JWS Signature value is not
+        /// valid if the "alg" value does not represent a supported algorithm or
+        /// if there is not a key for use with that algorithm associated with the
+        /// party that digitally signed or MACed the content.  "alg" values
+        /// should either be registered in the IANA "JSON Web Signature and
+        /// Encryption Algorithms" registry established by [JWA] or be a value
+        /// that contains a Collision-Resistant Name.  The "alg" value is a case-
+        /// sensitive ASCII string containing a StringOrURI value.  This Header
+        /// Parameter MUST be present and MUST be understood and processed by
+        /// implementations.
         case alg
+        
+        /// The "kid" (key ID) Header Parameter is a hint indicating which key
+        /// was used to secure the JWS.  This parameter allows originators to
+        /// explicitly signal a change of key to recipients.  The structure of
+        /// the "kid" value is unspecified.  Its value MUST be a case-sensitive
+        /// string.  Use of this Header Parameter is OPTIONAL.
+        ///
+        /// When used with a JWK, the "kid" value is used to match a JWK "kid"
+        /// parameter value.
+        case kid
         
         /// The "cty" (content type) Header Parameter defined by [JWS] and [JWE]
         /// is used by this specification to convey structural information about
