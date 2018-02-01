@@ -36,6 +36,7 @@
 		9A88FC2F20176250008789CF /* WrappingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88FC2E20176250008789CF /* WrappingType.swift */; };
 		9A88FC302017628C008789CF /* WrappingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88FC2E20176250008789CF /* WrappingType.swift */; };
 		9A8EFE1B2022700F009844E9 /* SHA256.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C31202237E8006B0D0D /* SHA256.m */; };
+		9A8EFE3B20235225009844E9 /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8EFE3A20235225009844E9 /* openssl.framework */; };
 		9A9738B21C7FBC2D00657553 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B11C7FBC2D00657553 /* main.swift */; };
 		9A9738B91C7FBD6A00657553 /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B81C7FBD6A00657553 /* Arguments.swift */; };
 		9A9738BB1C7FC31400657553 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BA1C7FC31400657553 /* Session.swift */; };
@@ -145,6 +146,7 @@
 		9A88FC2920175B42008789CF /* Int+Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Clamp.swift"; sourceTree = "<group>"; };
 		9A88FC2C20175E61008789CF /* Int+ClampTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+ClampTests.swift"; sourceTree = "<group>"; };
 		9A88FC2E20176250008789CF /* WrappingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingType.swift; sourceTree = "<group>"; };
+		9A8EFE3A20235225009844E9 /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = Dependencies/openssl.framework; sourceTree = "<group>"; };
 		9A9738AE1C7FBC2D00657553 /* spyder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = spyder; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A9738B11C7FBC2D00657553 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9A9738B81C7FBD6A00657553 /* Arguments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A88FC212016E6AD008789CF /* Bloom.framework in Frameworks */,
+				9A8EFE3B20235225009844E9 /* openssl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +206,7 @@
 		9A27FF6720167EB000A5DF6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A8EFE3A20235225009844E9 /* openssl.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -718,6 +722,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies",
+				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = spyder;
@@ -731,6 +739,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies",
+				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = spyder;

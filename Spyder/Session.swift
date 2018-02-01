@@ -31,6 +31,7 @@
 //
 
 import Foundation
+import openssl
 
 class Session {
     
