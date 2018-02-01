@@ -34,25 +34,45 @@ import Foundation
 
 class Session {
     
-    let certificate: Certificate
+    let credentials: Credentials
     
     private let session:  URLSession
-    private let delegate: SessionDelegate
+    private let delegate: SessionDelegate?
     
     // ----------------------------------
     //  MARK: - Init -
     //
-    init(certificate: Certificate) {
-        let delegate    = SessionDelegate(certificate: certificate)
-        let session     = URLSession(
-            configuration: URLSessionConfiguration.ephemeral,
-            delegate:      delegate,
-            delegateQueue: nil
-        )
+    init(credentials: Credentials) {
+        self.credentials  = credentials
+        let configuration = URLSessionConfiguration.ephemeral
         
-        self.certificate = certificate
-        self.session     = session
-        self.delegate    = delegate
+        switch credentials {
+        case .certificate(let certificate):
+            
+            self.delegate = SessionDelegate(certificate: certificate)
+            self.session  = URLSession(
+                configuration: configuration,
+                delegate:      self.delegate,
+                delegateQueue: nil
+            )
+            
+        case .authenticationToken(let privateKey):
+            
+            var token                   = JWT.Token()
+            token.header  [JWT.Key.alg] = "ES256"
+            token.header  [JWT.Key.kid] = ""
+            token.payload [JWT.Key.iss] = ""
+            token.payload [JWT.Key.iat] = Int(Date().timeIntervalSince1970)
+            
+            let tws = try! token.sign(using: privateKey)
+            
+            configuration.httpAdditionalHeaders = [
+                "Authorization": "Bearer (\(tws))"
+            ]
+            
+            self.delegate = nil
+            self.session  = URLSession(configuration: configuration)
+        }
     }
     
     // ----------------------------------
