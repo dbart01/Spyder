@@ -31,6 +31,7 @@
 //
 
 import Foundation
+import Security
 
 class PrivateKey {
     
@@ -87,11 +88,30 @@ class PrivateKey {
     }
     
     func sign(algorithm: SecKeyAlgorithm, message: Data) -> Data? {
-        guard let signature = SecKeyCreateSignature(self.key, algorithm, message as CFData, nil) else {
+        var error: Unmanaged<CFError>? = nil
+        guard let signature = SecKeyCreateSignature(self.key, algorithm, message as CFData, &error) else {
             return nil
         }
-        
+        print("Error: \(error?.takeUnretainedValue().localizedDescription ?? "No error")")
         return signature as Data
+    }
+    
+    func verify(algorithm: SecKeyAlgorithm, message: String, signature: Data) -> Bool {
+        guard let messageData = message.data(using: .utf8) else {
+            return false
+        }
+        return self.verify(algorithm: algorithm, message: messageData, signature: signature)
+    }
+    
+    func verify(algorithm: SecKeyAlgorithm, message: Data, signature: Data) -> Bool {
+        guard let publicKey = SecKeyCopyPublicKey(self.key) else {
+            return false
+        }
+        
+        var error: Unmanaged<CFError>? = nil
+        let result = SecKeyVerifySignature(publicKey, algorithm, message as CFData, signature as CFData, &error)
+        print("Error: \(error?.takeUnretainedValue().localizedDescription ?? "No error")")
+        return result
     }
 }
 

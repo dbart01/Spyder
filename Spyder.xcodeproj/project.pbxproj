@@ -35,6 +35,7 @@
 		9A88FC2D20175E61008789CF /* Int+ClampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88FC2C20175E61008789CF /* Int+ClampTests.swift */; };
 		9A88FC2F20176250008789CF /* WrappingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88FC2E20176250008789CF /* WrappingType.swift */; };
 		9A88FC302017628C008789CF /* WrappingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88FC2E20176250008789CF /* WrappingType.swift */; };
+		9A8EFE1B2022700F009844E9 /* SHA256.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C31202237E8006B0D0D /* SHA256.m */; };
 		9A9738B21C7FBC2D00657553 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B11C7FBC2D00657553 /* main.swift */; };
 		9A9738B91C7FBD6A00657553 /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B81C7FBD6A00657553 /* Arguments.swift */; };
 		9A9738BB1C7FC31400657553 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BA1C7FC31400657553 /* Session.swift */; };
@@ -53,6 +54,7 @@
 		9A9E5C1720211076006B0D0D /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203ED2014F84800057858 /* Identity.swift */; };
 		9A9E5C1820211076006B0D0D /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5F7EDE2020A8FF00BFC4F8 /* PrivateKey.swift */; };
 		9A9E5C1A20211F30006B0D0D /* Session.Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */; };
+		9A9E5C33202237E8006B0D0D /* SHA256.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C31202237E8006B0D0D /* SHA256.m */; };
 		9AA51FAF201607B10052AFFB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FAE201607B10052AFFB /* Environment.swift */; };
 		9AA51FB52016082F0052AFFB /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FB42016082F0052AFFB /* Response.swift */; };
 		9AA7D095201E0FF500F3E5E1 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7D094201E0FF500F3E5E1 /* Crypto.swift */; };
@@ -156,6 +158,9 @@
 		9A9E5C0720210E90006B0D0D /* JWT.Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.Payload.swift; sourceTree = "<group>"; };
 		9A9E5C0920210EBF006B0D0D /* JWT.Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.Key.swift; sourceTree = "<group>"; };
 		9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.Credentials.swift; sourceTree = "<group>"; };
+		9A9E5C30202237E7006B0D0D /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
+		9A9E5C31202237E8006B0D0D /* SHA256.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHA256.m; sourceTree = "<group>"; };
+		9A9E5C32202237E8006B0D0D /* SHA256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHA256.h; sourceTree = "<group>"; };
 		9AA51FAE201607B10052AFFB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		9AA51FB42016082F0052AFFB /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		9AA7D094201E0FF500F3E5E1 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
@@ -301,6 +306,7 @@
 		9A9738B01C7FBC2D00657553 /* Spyder */ = {
 			isa = PBXGroup;
 			children = (
+				9A9E5C2F202237DE006B0D0D /* Crypto */,
 				9A9738C81C83542E00657553 /* Strings */,
 				9AD91D6C20210820007E93EC /* JWT */,
 				9AA51FB0201607D80052AFFB /* Keychain */,
@@ -308,6 +314,7 @@
 				9A9738C71C81107A00657553 /* API */,
 				9AC203CD2013AEA400057858 /* Operation.swift */,
 				9A9738B11C7FBC2D00657553 /* main.swift */,
+				9A9E5C30202237E7006B0D0D /* Bridge.h */,
 			);
 			path = Spyder;
 			sourceTree = "<group>";
@@ -343,6 +350,15 @@
 				9A9E5C0020210E5C006B0D0D /* ContainerType.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		9A9E5C2F202237DE006B0D0D /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				9A9E5C32202237E8006B0D0D /* SHA256.h */,
+				9A9E5C31202237E8006B0D0D /* SHA256.m */,
+			);
+			name = Crypto;
 			sourceTree = "<group>";
 		};
 		9AA51FB0201607D80052AFFB /* Keychain */ = {
@@ -540,6 +556,7 @@
 				9A27FF832016D4D800A5DF6E /* ASCII.Cell.swift in Sources */,
 				9A5F7EDF2020A8FF00BFC4F8 /* PrivateKey.swift in Sources */,
 				9A88FC2A20175B42008789CF /* Int+Clamp.swift in Sources */,
+				9A9E5C33202237E8006B0D0D /* SHA256.m in Sources */,
 				9A9738C61C810C2100657553 /* Strings.swift in Sources */,
 				9A88FC2420175ACF008789CF /* RenderType.swift in Sources */,
 				9AC203D02013B28600057858 /* Payload.swift in Sources */,
@@ -579,6 +596,7 @@
 				9A9E5C0D20210EE6006B0D0D /* JWT.Key.swift in Sources */,
 				9A88FC2B20175DC9008789CF /* Int+Clamp.swift in Sources */,
 				9AD91D7420210C90007E93EC /* JWT.swift in Sources */,
+				9A8EFE1B2022700F009844E9 /* SHA256.m in Sources */,
 				9A27FF7B2016944300A5DF6E /* Endpoint.swift in Sources */,
 				9A88FC2720175B0A008789CF /* RenderType.swift in Sources */,
 				9AC203E12014E54E00057858 /* Strings.swift in Sources */,
@@ -700,8 +718,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = spyder;
+				SWIFT_OBJC_BRIDGING_HEADER = Spyder/Bridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
@@ -711,8 +731,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = spyder;
+				SWIFT_OBJC_BRIDGING_HEADER = Spyder/Bridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 			};
@@ -737,6 +759,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dimabart.Spyder-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = Spyder/Bridge.h;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -759,6 +782,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dimabart.Spyder-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Spyder/Bridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 			};
