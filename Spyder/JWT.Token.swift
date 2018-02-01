@@ -38,8 +38,6 @@ extension JWT {
         var header:  Header
         var payload: Payload
         
-        private(set) var signature: String = ""
-        
         // ----------------------------------
         //  MARK: - Init -
         //
@@ -49,46 +47,32 @@ extension JWT {
         }
         
         // ----------------------------------
-        //  MARK: - Serialize -
-        //
-        func serialize() throws -> String {
-            if self.signature.isEmpty {
-                print("[WARNING] JWT.Token has not been signed.")
-            }
-            
-            let header  = try self.headerBase64()
-            let payload = try self.payloadBase64()
-            
-            return "\(header).\(payload).\(self.signature)"
-        }
-        
-        // ----------------------------------
         //  MARK: - Base64 -
         //
         private func headerBase64() throws -> String {
-            return try JSONSerialization.data(withJSONObject: self.header.values, options: []).base64EncodedString()
+            return try JSONSerialization.data(withJSONObject: self.header.values, options: []).base64URL
         }
         
         private func payloadBase64() throws -> String {
-            return try JSONSerialization.data(withJSONObject: self.payload.values, options: []).base64EncodedString()
+            return try JSONSerialization.data(withJSONObject: self.payload.values, options: []).base64URL
         }
         
         // ----------------------------------
         //  MARK: - Signature -
         //
-        mutating
-        func sign(using key: PrivateKey) throws {
+        func sign(using key: PrivateKey) throws -> String {
             let header  = try self.headerBase64()
             let payload = try self.payloadBase64()
             
             let message   = "\(header).\(payload)"
-            let signature = key.sign(algorithm: .ecdsaSignatureMessageX962SHA256, message: message)?.base64EncodedString()
+//            let digest    = SHA256.hash(message)
+            let signature = key.sign(algorithm: .ecdsaSignatureMessageX962SHA256, message: message)?.base64URL
             
             guard let encodedSignature = signature else {
                 throw Error.signingFailed
             }
             
-            self.signature = encodedSignature
+            return "\(message).\(encodedSignature)"
         }
     }
 }
@@ -96,5 +80,14 @@ extension JWT {
 extension JWT.Token {
     enum Error: Swift.Error {
         case signingFailed
+    }
+}
+
+extension Data {
+    var base64URL: String {
+        return self.base64EncodedString()
+            .replacingOccurrences(of: "+", with: "-")
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: "=", with: "")
     }
 }
