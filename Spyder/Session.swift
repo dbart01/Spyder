@@ -56,18 +56,19 @@ class Session {
                 delegateQueue: nil
             )
             
-        case .authenticationToken(let privateKey):
+//        case .authenticationToken(let privateKey):
+        case .authenticationCredentials(let authCredentials):
             
             var token                   = JWT.Token()
             token.header  [JWT.Key.alg] = "ES256"
-            token.header  [JWT.Key.kid] = ""
-            token.payload [JWT.Key.iss] = ""
+            token.header  [JWT.Key.kid] = authCredentials.keyIdentifier
+            token.payload [JWT.Key.iss] = authCredentials.teamIdentifier
             token.payload [JWT.Key.iat] = Int(Date().timeIntervalSince1970)
             
-            let tws = try! token.sign(using: privateKey)
+            let tws = try! token.sign(using: authCredentials.privateKey)
             
             configuration.httpAdditionalHeaders = [
-                "Authorization": "Bearer (\(tws))"
+                "Authorization": "Bearer \(tws)"
             ]
             
             self.delegate = nil

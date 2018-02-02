@@ -66,12 +66,15 @@ enum Strings {
 
         Options, [x] is required, [-] is alternate, [ ] is optional:
 
-         [ ] -i, --identities  Lists all available identities in the keychain. All other options will be ignored
-         [x] -t, --token       Hex value of a device token
-         [ ] -P, --port        Port to use for the endpoint: 443 or 2197, defaults to 443
-         [ ] -p, --passphrase  Passphrase to use for certificate, if required
+         [ ] -i, --identities  Lists all available identities in the keychain. All other options will be ignored.
+         [x] -t, --token       Hex value of a device token.
+         [ ] -P, --port        Port to use for the endpoint: 443 or 2197, defaults to 443.
+         [ ] -p, --passphrase  Passphrase to use for certificate, if required.
+         [ ] -a, --authKey     Path to a .p8 authentication key. If provided,
+         [ ] -k  --keyID       Required with -a option. The identifier of the authentication key.
+         [ ] -M  --teamID      Required with -a option. Team identifier, also refered to as app ID prefix.
          [x] -c, --cert        Path to certificate, or index from identities listed using '--identities' option
-         [ ] -e, --env         \"dev\" or \"prod\" indicating the endpoint to use. Defaults to \"dev\" if not provided
+         [ ] -e, --env         "dev" or "prod" indicating the endpoint to use. Defaults to "dev" if not provided
          [-] -m, --message     Convenience for creating a payload with a message. Ignored if payload is provided
          [-] -L, --payload     A JSON string representing the payload, or path to file with JSON payload
          [x] -T, --topic       Topic for which to send push. Often a bundle id in the form of 'com.company.app.voip'

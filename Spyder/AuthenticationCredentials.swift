@@ -1,5 +1,5 @@
 //
-//  Session.Credentials.swift
+//  AuthenticationCredentials.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -30,13 +30,20 @@
 //  either expressed or implied, of the FreeBSD Project.
 //
 
-
 import Foundation
 
-extension Session {
-    enum Credentials {
-        case certificate(Certificate)
-        case authenticationCredentials(AuthenticationCredentials)
-//        case authenticationToken(PrivateKey)
+struct AuthenticationCredentials {
+    
+    let privateKey:     URL
+    let keyIdentifier:  String
+    let teamIdentifier: String
+    
+    // ----------------------------------
+    //  MARK: - Init -
+    //
+    init(privateKey: URL, keyIdentifier: String, teamIdentifier: String) {
+        self.privateKey     = privateKey
+        self.keyIdentifier  = keyIdentifier
+        self.teamIdentifier = teamIdentifier
     }
 }
