@@ -74,20 +74,19 @@ extension JWT {
             return "\(message).\(encodedSignature)"
         }
         
-//        func sign(using key: PrivateKey) throws -> String {
-//            let header  = try self.headerBase64()
-//            let payload = try self.payloadBase64()
-//
-//            let message   = "\(header).\(payload)"
-////            let digest    = SHA256.hash(message)
-//            let signature = key.sign(algorithm: .ecdsaSignatureMessageX962SHA256, message: message)?.base64URL
-//
-//            guard let encodedSignature = signature else {
-//                throw Error.signingFailed
-//            }
-//
-//            return "\(message).\(encodedSignature)"
-//        }
+        func sign(using key: PrivateKey) throws -> String {
+            let header  = try self.headerBase64()
+            let payload = try self.payloadBase64()
+
+            let message   = "\(header).\(payload)"
+            let signature = key.sign(algorithm: ., message: message)
+
+            guard let encodedSignature = signature?.base64URL else {
+                throw Error.signingFailed
+            }
+
+            return "\(message).\(encodedSignature)"
+        }
     }
 }
 

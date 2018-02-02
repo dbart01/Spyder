@@ -36,7 +36,7 @@ import Foundation
 extension Session {
     enum Credentials {
         case certificate(Certificate)
-        case authenticationCredentials(AuthenticationCredentials)
-//        case authenticationToken(PrivateKey)
+//        case authenticationCredentials(AuthenticationCredentials)
+        case authentication(key: PrivateKey, id: String, teamID: String)
     }
 }

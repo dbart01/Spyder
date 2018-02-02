@@ -147,22 +147,20 @@ class Operation {
                 throw Status.error(.certificateLoadFailed)
             }
             
-        } else if let path = self.authTokenPath,
-            let keyID = self.keyID,
-            let teamID = self.teamID {
-            
-            let credentials = AuthenticationCredentials(
-                privateKey:     URL(fileURLWithPath: path),
-                keyIdentifier:  keyID,
-                teamIdentifier: teamID
-            )
-            self.credentials = .authenticationCredentials(credentials)
-            
-//            if let privateKey = PrivateKey(path: path) {
-//                self.credentials = .authenticationToken(privateKey)
-//            } else {
-//                throw Status.error(.authTokenLoadFailed)
-//            }
+        } else if let path = self.authTokenPath, let keyID = self.keyID, let teamID = self.teamID {
+//
+//            let credentials = AuthenticationCredentials(
+//                privateKey:     URL(fileURLWithPath: path),
+//                keyIdentifier:  keyID,
+//                teamIdentifier: teamID
+//            )
+//            self.credentials = .authenticationCredentials(credentials)
+        
+            if let privateKey = PrivateKey(path: path) {
+                self.credentials = .authentication(key: privateKey, id: keyID, teamID: teamID)
+            } else {
+                throw Status.error(.authTokenLoadFailed)
+            }
             
         } else {
             throw Status.error(.credentialsMissing)
