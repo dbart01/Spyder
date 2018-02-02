@@ -102,9 +102,23 @@ struct Arguments {
         return nil
     }
     
-    var authTokenPath: String? {
-        if let path = self.args("-a", "--authToken") {
+    var authKeyPath: String? {
+        if let path = self.args("-a", "--authKey") {
             return path
+        }
+        return nil
+    }
+    
+    var keyID: String? {
+        if let id = self.args("-k", "--keyID") {
+            return id
+        }
+        return nil
+    }
+    
+    var teamID: String? {
+        if let id = self.args("-M", "--teamID") {
+            return id
         }
         return nil
     }

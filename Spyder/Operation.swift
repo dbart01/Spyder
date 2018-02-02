@@ -44,6 +44,8 @@ class Operation {
     private let certificateIndex: Int?
     private let certificatePath:  String?
     private let authTokenPath:    String?
+    private let keyID:            String?
+    private let teamID:           String?
     
     private var credentials:      Session.Credentials!
     
@@ -66,7 +68,9 @@ class Operation {
         
         self.certificateIndex = self.args.certificateIndex
         self.certificatePath  = self.args.certificatePath
-        self.authTokenPath    = self.args.authTokenPath
+        self.authTokenPath    = self.args.authKeyPath
+        self.keyID            = self.args.keyID
+        self.teamID           = self.args.teamID
         
         self.action  = Action(args: self.args)
         self.headers = Headers(
@@ -143,13 +147,22 @@ class Operation {
                 throw Status.error(.certificateLoadFailed)
             }
             
-        } else if let path = self.authTokenPath {
+        } else if let path = self.authTokenPath,
+            let keyID = self.keyID,
+            let teamID = self.teamID {
             
-            if let privateKey = PrivateKey(path: path) {
-                self.credentials = .authenticationToken(privateKey)
-            } else {
-                throw Status.error(.authTokenLoadFailed)
-            }
+            let credentials = AuthenticationCredentials(
+                privateKey:     URL(fileURLWithPath: path),
+                keyIdentifier:  keyID,
+                teamIdentifier: teamID
+            )
+            self.credentials = .authenticationCredentials(credentials)
+            
+//            if let privateKey = PrivateKey(path: path) {
+//                self.credentials = .authenticationToken(privateKey)
+//            } else {
+//                throw Status.error(.authTokenLoadFailed)
+//            }
             
         } else {
             throw Status.error(.credentialsMissing)
