@@ -59,7 +59,8 @@ class Report {
             renderer += ASCII.Row([
                 ASCII.Cell(convertible: "✓".greenText.bold),
                 ASCII.Cell(convertible: "Success".greenText.bold, flex: true),
-                ])
+                ASCII.Cell(convertible: self.response.code.greenText.bold),
+            ])
             renderer += ASCII.Separator()
             
             if let notificationID = self.response.value(forHeader: Headers.Key.id) {
@@ -68,6 +69,16 @@ class Report {
                 renderer += ASCII.Separator()
             }
             
+            switch self.credentials {
+            case .certificate(let certificate):
+                renderer += ASCII.Row(ASCII.Cell(convertible: "Certificate".yellowText))
+                renderer += ASCII.Row(ASCII.Cell(convertible: certificate.label))
+            case .authenticationCredentials(let credentials):
+                renderer += ASCII.Row(ASCII.Cell(convertible: "Authentication Token".yellowText))
+                renderer += ASCII.Row(ASCII.Cell(convertible: credentials.privateKey.lastPathComponent))
+            }
+            renderer += ASCII.Separator()
+            
         } else {
             
             renderer += ASCII.Separator()
@@ -75,7 +86,7 @@ class Report {
                 ASCII.Cell(convertible: "✗".redText.bold),
                 ASCII.Cell(convertible: self.response.status.redText.bold, flex: true),
                 ASCII.Cell(convertible: self.response.code.redText.bold),
-                ])
+            ])
             renderer += ASCII.Separator()
             
             if let failure = self.response.failure {

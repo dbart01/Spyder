@@ -55,7 +55,9 @@ struct Identity {
         let result = SecItemCopyMatching(query as CFDictionary, &items)
         if result == errSecSuccess && items != nil {
             let identityAttributes = items as! [Dictionary<String,AnyObject>]
-            let identities         = identityAttributes.map { Identity(attributes: $0) } .sorted { $0.label < $1.label }
+            let identities         = identityAttributes.map {
+                Identity(attributes: $0)
+            }.sorted { $0.label < $1.label }
             
             return identities
         }

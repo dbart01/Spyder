@@ -34,6 +34,8 @@ import Foundation
 
 class Certificate {
     
+    let label: String
+    
     private(set) var certificate: SecCertificate!
     private(set) var identity: SecIdentity!
     
@@ -60,11 +62,12 @@ class Certificate {
             return nil
         }
         
-        guard let identityDictionary = certificates.first as? Dictionary<String, SecIdentity> else {
+        guard let identityDictionary = certificates.first as? Dictionary<CFString, Any> else {
             return nil
         }
         
-        self.identity    = identityDictionary[kSecImportItemIdentity as String]!
+        self.identity    = identityDictionary[kSecImportItemIdentity] as! SecIdentity
+        self.label       = identityDictionary[kSecImportItemLabel]    as! String
         self.certificate = self.certificateFor(self.identity)
         
         guard let _ = self.certificate else {
@@ -74,6 +77,7 @@ class Certificate {
     
     init(identity: Identity) {
         self.identity    = identity.reference
+        self.label       = identity.label
         self.certificate = self.certificateFor(self.identity)
     }
     

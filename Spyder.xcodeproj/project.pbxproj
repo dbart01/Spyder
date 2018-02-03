@@ -319,8 +319,8 @@
 				9A27FF6B20168D5400A5DF6E /* ASCII */,
 				9A9738C71C81107A00657553 /* API */,
 				9AC203CD2013AEA400057858 /* Operation.swift */,
-				9A9738B11C7FBC2D00657553 /* main.swift */,
 				9AE874EB2025ECAF00427AB1 /* Report.swift */,
+				9A9738B11C7FBC2D00657553 /* main.swift */,
 			);
 			path = Spyder;
 			sourceTree = "<group>";
