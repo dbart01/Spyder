@@ -31,7 +31,6 @@
 //
 
 import Foundation
-import Bloom
 
 struct Response {
     

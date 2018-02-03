@@ -108,4 +108,8 @@ extension ASCII.Renderer {
     static func +=(lhs: inout ASCII.Renderer, rhs: RenderType) {
         lhs.renderables.append(rhs)
     }
+    
+    static func +=(lhs: inout ASCII.Renderer, rhs: [RenderType]) {
+        lhs.renderables.append(contentsOf: rhs)
+    }
 }

@@ -31,16 +31,19 @@
 //
 
 import Foundation
+import Bloom
 
 class Report {
     
+    let request:     Request
     let response:    Response
     let credentials: Session.Credentials
     
     // ----------------------------------
     //  MARK: - Init -
     //
-    init(response: Response, credentials: Session.Credentials) {
+    init(request: Request, response: Response, credentials: Session.Credentials) {
+        self.request     = request
         self.response    = response
         self.credentials = credentials
     }
@@ -63,12 +66,21 @@ class Report {
             ])
             renderer += ASCII.Separator()
             
+            /* ----------------------------------------
+             ** Attach the notification identifier of
+             ** the delivered push.
+             */
             if let notificationID = self.response.value(forHeader: Headers.Key.id) {
                 renderer += ASCII.Row(ASCII.Cell(convertible: "Notification Identifier".yellowText))
                 renderer += ASCII.Row(ASCII.Cell(convertible: notificationID))
                 renderer += ASCII.Separator()
             }
             
+            /* ----------------------------------------
+             ** Attach authentication method used for
+             ** this request. Either a certificate or
+             ** an authentication token.
+             */
             switch self.credentials {
             case .certificate(let certificate):
                 renderer += ASCII.Row(ASCII.Cell(convertible: "Certificate".yellowText))
@@ -76,6 +88,17 @@ class Report {
             case .authenticationCredentials(let credentials):
                 renderer += ASCII.Row(ASCII.Cell(convertible: "Authentication Token".yellowText))
                 renderer += ASCII.Row(ASCII.Cell(convertible: credentials.privateKey.lastPathComponent))
+            }
+            renderer += ASCII.Separator()
+            
+            /* ----------------------------------------
+             ** Attach headers used for this request.
+             */
+            let headers = self.request.headers.dictionary
+            
+            renderer += ASCII.Row(ASCII.Cell(convertible: "Request Metadata".yellowText))
+            renderer += headers.map {
+                ASCII.Row(ASCII.Cell(convertible: "\($0.key): ".lightBlueText + $0.value))
             }
             renderer += ASCII.Separator()
             
