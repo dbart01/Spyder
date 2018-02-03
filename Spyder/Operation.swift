@@ -122,7 +122,8 @@ class Operation {
             request.headers = self.headers
             
             if let response = session.execute(request: request) {
-                throw Status.success(response.debugDescription)
+                let report = Report(response: response, credentials: self.credentials)
+                throw Status.success(report.generate())
             }
         }
     }

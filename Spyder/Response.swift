@@ -33,7 +33,7 @@
 import Foundation
 import Bloom
 
-struct Response: CustomDebugStringConvertible {
+struct Response {
     
     typealias DataType = [String : AnyObject]
     
@@ -42,6 +42,13 @@ struct Response: CustomDebugStringConvertible {
     let response: HTTPURLResponse?
     let failure:  Failure?
     let error:    Error?
+    
+    var isSuccessful: Bool {
+        if let response = self.response {
+            return response.statusCode == 200
+        }
+        return false
+    }
     
     // ----------------------------------
     //  MARK: - Init -
@@ -70,69 +77,12 @@ struct Response: CustomDebugStringConvertible {
     // ----------------------------------
     //  MARK: - Conveniences -
     //
-    private var successful: Bool {
-        if let response = self.response {
-            return response.statusCode == 200
-        }
-        return false
-    }
-    
-    private func value(forHeader key: String) -> String? {
+    func value(forHeader key: String) -> String? {
         if let response = self.response,
             let value = response.allHeaderFields[key] as? String {
             return value
         }
         return nil
-    }
-    
-    // ----------------------------------------
-    //  MARK: - CustomDebugStringConvertible -
-    //
-    var debugDescription: String {
-        var renderer          = ASCII.Renderer()
-        renderer.edgePadding  = 1
-        renderer.minRowWidth  = 50
-        renderer.maxCellWidth = 50
-        
-        if self.successful {
-            renderer += ASCII.Separator()
-            renderer += ASCII.Row([
-                ASCII.Cell(convertible: "✓".greenText.bold),
-                ASCII.Cell(convertible: "Success".greenText.bold, flex: true),
-            ])
-            renderer += ASCII.Separator()
-            
-            if let notificationID = self.value(forHeader: Headers.Key.id) {
-                renderer += ASCII.Row(ASCII.Cell(convertible: "Notification Identifier".yellowText))
-                renderer += ASCII.Row(ASCII.Cell(convertible: notificationID))
-                renderer += ASCII.Separator()
-            }
-            
-        } else {
-            
-            renderer += ASCII.Separator()
-            renderer += ASCII.Row([
-                ASCII.Cell(convertible: "✗".redText.bold),
-                ASCII.Cell(convertible: self.status.redText.bold, flex: true),
-                ASCII.Cell(convertible: self.code.redText.bold),
-            ])
-            renderer += ASCII.Separator()
-
-            if let failure = self.failure {
-                let unknowDescription = "Unknow error. This might be a new type of error. We couldn't find a description for it."
-                
-                renderer += ASCII.Row(ASCII.Cell(convertible: failure.reason.error.yellowText))
-                renderer += ASCII.Row(ASCII.Cell(convertible: failure.reason.description ?? unknowDescription))
-                renderer += ASCII.Separator()
-            }
-
-            if let error = self.error {
-                renderer += ASCII.Row(ASCII.Cell(convertible: error.localizedDescription))
-                renderer += ASCII.Separator()
-            }
-        }
-        
-        return "\n" + renderer.render() + "\n"
     }
 }
 
