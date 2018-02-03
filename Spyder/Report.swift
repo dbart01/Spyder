@@ -76,32 +76,6 @@ class Report {
                 renderer += ASCII.Separator()
             }
             
-            /* ----------------------------------------
-             ** Attach authentication method used for
-             ** this request. Either a certificate or
-             ** an authentication token.
-             */
-            switch self.credentials {
-            case .certificate(let certificate):
-                renderer += ASCII.Row(ASCII.Cell(convertible: "Certificate".yellowText))
-                renderer += ASCII.Row(ASCII.Cell(convertible: certificate.label))
-            case .authenticationCredentials(let credentials):
-                renderer += ASCII.Row(ASCII.Cell(convertible: "Authentication Token".yellowText))
-                renderer += ASCII.Row(ASCII.Cell(convertible: credentials.privateKey.lastPathComponent))
-            }
-            renderer += ASCII.Separator()
-            
-            /* ----------------------------------------
-             ** Attach headers used for this request.
-             */
-            let headers = self.request.headers.dictionary
-            
-            renderer += ASCII.Row(ASCII.Cell(convertible: "Request Metadata".yellowText))
-            renderer += headers.map {
-                ASCII.Row(ASCII.Cell(convertible: "\($0.key): ".lightBlueText + $0.value))
-            }
-            renderer += ASCII.Separator()
-            
         } else {
             
             renderer += ASCII.Separator()
@@ -125,6 +99,32 @@ class Report {
                 renderer += ASCII.Separator()
             }
         }
+        
+        /* ----------------------------------------
+         ** Attach authentication method used for
+         ** this request. Either a certificate or
+         ** an authentication token.
+         */
+        switch self.credentials {
+        case .certificate(let certificate):
+            renderer += ASCII.Row(ASCII.Cell(convertible: "Certificate".yellowText))
+            renderer += ASCII.Row(ASCII.Cell(convertible: certificate.label))
+        case .authenticationCredentials(let credentials):
+            renderer += ASCII.Row(ASCII.Cell(convertible: "Authentication Token".yellowText))
+            renderer += ASCII.Row(ASCII.Cell(convertible: credentials.privateKey.lastPathComponent))
+        }
+        renderer += ASCII.Separator()
+        
+        /* ----------------------------------------
+         ** Attach headers used for this request.
+         */
+        let headers = self.request.headers.dictionary
+        
+        renderer += ASCII.Row(ASCII.Cell(convertible: "Request Metadata".yellowText))
+        renderer += headers.map {
+            ASCII.Row(ASCII.Cell(convertible: "\($0.key): ".lightBlueText + $0.value))
+        }
+        renderer += ASCII.Separator()
         
         return "\n" + renderer.render() + "\n"
     }
