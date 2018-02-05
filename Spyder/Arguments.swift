@@ -146,14 +146,9 @@ struct Arguments {
         return nil
     }
     
-    var payload: Data? {
+    var payload: String? {
         if let payload = self.args("-L", "--payload") {
-            
-            if payload.contains("{") {
-                return payload.data(using: String.Encoding.utf8)
-            } else {
-                return (try? Data(contentsOf: URL(fileURLWithPath: (payload as NSString).expandingTildeInPath)))
-            }
+            return payload
         }
         return nil
     }

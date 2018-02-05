@@ -111,7 +111,9 @@ class Report {
             renderer += ASCII.Row(ASCII.Cell(convertible: certificate.label))
         case .authenticationCredentials(let credentials):
             renderer += ASCII.Row(ASCII.Cell(convertible: "Authentication Token".yellowText))
-            renderer += ASCII.Row(ASCII.Cell(convertible: credentials.privateKey.lastPathComponent))
+            renderer += ASCII.Row(ASCII.Cell(convertible: "File:".lightBlueText    + " " + credentials.privateKey.lastPathComponent))
+            renderer += ASCII.Row(ASCII.Cell(convertible: "Team ID:".lightBlueText + " " + credentials.teamIdentifier))
+            renderer += ASCII.Row(ASCII.Cell(convertible: "Key ID:".lightBlueText  + " " + credentials.keyIdentifier))
         }
         renderer += ASCII.Separator()
         
@@ -123,6 +125,18 @@ class Report {
         renderer += ASCII.Row(ASCII.Cell(convertible: "Request Metadata".yellowText))
         renderer += headers.map {
             ASCII.Row(ASCII.Cell(convertible: "\($0.key): ".lightBlueText + $0.value))
+        }
+        renderer += ASCII.Separator()
+        
+        /* ----------------------------------------
+         ** Attach the payload JSON.
+         */
+        renderer += ASCII.Row(ASCII.Cell(convertible: "Payload".yellowText))
+        if let url = self.request.payload.url {
+            renderer += ASCII.Row(ASCII.Cell(convertible: "File:".lightBlueText  + " " + url.lastPathComponent))
+        } else {
+            let contents = String(data: self.request.payload.contents, encoding: .utf8)!
+            renderer += ASCII.Row(ASCII.Cell(convertible: contents))
         }
         renderer += ASCII.Separator()
         

@@ -36,18 +36,18 @@ class Request {
     
     let url:     URL
     let method:  String
+    let payload: Payload
     
-    var payload: Data?
     var headers: Headers
     
     // ----------------------------------
     //  MARK: - Init -
     //
-    init(url: URL, method: String = "GET", headers: Headers = Headers(), payload: Data? = nil) {
+    init(url: URL, method: String = "GET", payload: Payload, headers: Headers = Headers()) {
         self.url     = url
         self.method  = method
-        self.headers = headers
         self.payload = payload
+        self.headers = headers
     }
     
     // ----------------------------------
@@ -56,7 +56,7 @@ class Request {
     func build() -> URLRequest {
         var request        = URLRequest(url: self.url)
         request.httpMethod = self.method
-        request.httpBody   = self.payload
+        request.httpBody   = self.payload.contents
         
         for (header, value) in self.headers.dictionary {
             request.setValue(value, forHTTPHeaderField: header)

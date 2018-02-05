@@ -38,7 +38,7 @@ class Operation {
     private let port:             String
     private let environment:      Environment
     private let message:          String?
-    private var payload:          Data?
+    private var payload:          Payload?
     
     private let certificatePass:  String
     private let certificateIndex: Int?
@@ -64,7 +64,6 @@ class Operation {
         self.port             = self.args.port        ?? "443"
         self.environment      = self.args.environment ?? .development
         self.message          = self.args.message
-        self.payload          = self.args.payload
         
         self.certificateIndex = self.args.certificateIndex
         self.certificatePath  = self.args.certificatePath
@@ -91,8 +90,10 @@ class Operation {
          ** message if no payload was provided and
          ** message is not nil.
          */
-        if let message = self.message, self.payload == nil {
-            self.payload = Payload.default(with: message)
+        if let payload = Payload(self.args.payload) {
+            self.payload = payload
+        } else if let message = self.message {
+            self.payload = Payload(message: message)
         }
     }
     
@@ -117,10 +118,7 @@ class Operation {
             try self.loadCredentials()
             
             let session     = Session(credentials: self.credentials)
-            let request     = Request(url: self.endpoint.url, method: "POST")
-            request.payload = self.payload
-            request.headers = self.headers
-            
+            let request     = Request(url: self.endpoint.url, method: "POST", payload: self.payload!, headers: self.headers)
             if let response = session.execute(request: request) {
                 let report = Report(
                     request:     request,
@@ -188,7 +186,7 @@ class Operation {
             throw Status.error(.payloadEmpty)
         }
         
-        let sizeInKB = payload.count / 1024
+        let sizeInKB = payload.contents.count / 1024
         if sizeInKB > Request.maximumPayloadSize {
             throw Status.error(.payloadTooBig(sizeInKB))
         }

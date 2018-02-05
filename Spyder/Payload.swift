@@ -32,9 +32,42 @@
 
 import Foundation
 
-enum Payload {
+struct Payload {
     
-    static func `default`(with message: String) -> Data? {
+    let url:      URL?
+    let contents: Data
+    
+    // ----------------------------------
+    //  MARK: - Init -
+    //
+    init?(_ value: String?) {
+        guard let value = value else {
+            return nil
+        }
+        
+        if value.contains("{") {
+            self.url      = nil
+            self.contents = value.data(using: .utf8)!
+        } else {
+            let url = URL(fileURLWithPath: (value as NSString).expandingTildeInPath)
+            if let contents = try? Data(contentsOf: url) {
+                self.url      = url
+                self.contents = contents
+            } else {
+                return nil
+            }
+        }
+    }
+    
+    init(message: String) {
+        self.url      = nil
+        self.contents = Payload.default(with: message)
+    }
+    
+    // ----------------------------------
+    //  MARK: - Default -
+    //
+    static private func `default`(with message: String) -> Data {
         let payload = [
             "aps" : [
                 "sound" : "default",
@@ -42,10 +75,10 @@ enum Payload {
             ]
         ]
         
-        return self.serialize(payload)
+        return self.serialize(payload)!
     }
     
-    static func serialize(_ payload: [String: Any]) -> Data? {
+    static private func serialize(_ payload: [String: Any]) -> Data? {
         return try? JSONSerialization.data(withJSONObject: payload, options: [])
     }
 }
