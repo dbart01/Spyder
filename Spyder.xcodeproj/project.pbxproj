@@ -55,11 +55,19 @@
 		9A9E5C1A20211F30006B0D0D /* Session.Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */; };
 		9AA51FAF201607B10052AFFB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FAE201607B10052AFFB /* Environment.swift */; };
 		9AA51FB52016082F0052AFFB /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FB42016082F0052AFFB /* Response.swift */; };
-		9AA7D095201E0FF500F3E5E1 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7D094201E0FF500F3E5E1 /* Crypto.swift */; };
 		9AA7D09A20249C8E00F3E5E1 /* AuthenticationCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7D09920249C8E00F3E5E1 /* AuthenticationCredentials.swift */; };
 		9AA7D09D20249D5E00F3E5E1 /* AuthenticationCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7D09920249C8E00F3E5E1 /* AuthenticationCredentials.swift */; };
 		9ABBBF152023BA8700B5CCB2 /* OpenSSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABBBF142023BA8700B5CCB2 /* OpenSSL.swift */; };
 		9ABBBF192023C0E600B5CCB2 /* OpenSSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABBBF142023BA8700B5CCB2 /* OpenSSL.swift */; };
+		9ABBBF212028F55500B5CCB2 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738BA1C7FC31400657553 /* Session.swift */; };
+		9ABBBF222028F55500B5CCB2 /* Session.Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */; };
+		9ABBBF232028F55500B5CCB2 /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9738B81C7FBD6A00657553 /* Arguments.swift */; };
+		9ABBBF242028F55500B5CCB2 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203EA2014E88600057858 /* Request.swift */; };
+		9ABBBF252028F55500B5CCB2 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FB42016082F0052AFFB /* Response.swift */; };
+		9ABBBF262028F55500B5CCB2 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203CF2013B28600057858 /* Payload.swift */; };
+		9ABBBF272028F56C00B5CCB2 /* Failure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF42E97201A867B002655F3 /* Failure.swift */; };
+		9ABBBF282028F56C00B5CCB2 /* Failure.Reason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF42E99201A87EA002655F3 /* Failure.Reason.swift */; };
+		9ABBBF2D2028F6E900B5CCB2 /* Bloom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A88FC1C2016E691008789CF /* Bloom.framework */; };
 		9AC203CE2013AEA400057858 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203CD2013AEA400057858 /* Operation.swift */; };
 		9AC203D02013B28600057858 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203CF2013B28600057858 /* Payload.swift */; };
 		9AC203D22014E2DB00057858 /* Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203D12014E2DB00057858 /* Headers.swift */; };
@@ -115,6 +123,13 @@
 			remoteGlobalIDString = 9A65F9BB1F5E444E00380FA1;
 			remoteInfo = "Bloom macOS";
 		};
+		9ABBBF2B2028F6E500B5CCB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A88FC132016E691008789CF /* Bloom.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A65F9BB1F5E444E00380FA1;
+			remoteInfo = "Bloom macOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -164,7 +179,6 @@
 		9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.Credentials.swift; sourceTree = "<group>"; };
 		9AA51FAE201607B10052AFFB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		9AA51FB42016082F0052AFFB /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		9AA7D094201E0FF500F3E5E1 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		9AA7D09920249C8E00F3E5E1 /* AuthenticationCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationCredentials.swift; sourceTree = "<group>"; };
 		9ABBBF142023BA8700B5CCB2 /* OpenSSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSSL.swift; sourceTree = "<group>"; };
 		9AC203CD2013AEA400057858 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
@@ -198,6 +212,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ABBBF2D2028F6E900B5CCB2 /* Bloom.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,7 +395,6 @@
 			children = (
 				9A27FF732016937E00A5DF6E /* ASCII */,
 				9AC203DA2014E41B00057858 /* HeadersTests.swift */,
-				9AA7D094201E0FF500F3E5E1 /* Crypto.swift */,
 				9AC203DC2014E41B00057858 /* Info.plist */,
 			);
 			path = "Spyder Tests";
@@ -440,6 +454,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9ABBBF2C2028F6E500B5CCB2 /* PBXTargetDependency */,
 			);
 			name = "Spyder Tests";
 			productName = "Spyder Tests";
@@ -575,16 +590,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ABBBF232028F55500B5CCB2 /* Arguments.swift in Sources */,
 				9A27FF812016D2C100A5DF6E /* ASCII.Renderer.swift in Sources */,
+				9ABBBF262028F55500B5CCB2 /* Payload.swift in Sources */,
 				9A27FF762016939A00A5DF6E /* String+RenderTests.swift in Sources */,
+				9ABBBF272028F56C00B5CCB2 /* Failure.swift in Sources */,
 				9A27FF77201693E500A5DF6E /* String+Render.swift in Sources */,
 				9A27FF902016E0A900A5DF6E /* ASCII.RendererTests.swift in Sources */,
 				9AF42E872019FC44002655F3 /* ASCII.SeparatorTests.swift in Sources */,
 				9A9E5C1720211076006B0D0D /* Identity.swift in Sources */,
 				9AF42E8420192E7F002655F3 /* ContentType.swift in Sources */,
+				9ABBBF242028F55500B5CCB2 /* Request.swift in Sources */,
 				9AD91D7320210C88007E93EC /* JWT.Token.swift in Sources */,
 				9A27FF7C2016946500A5DF6E /* Environment.swift in Sources */,
-				9AA7D095201E0FF500F3E5E1 /* Crypto.swift in Sources */,
 				9A27FF7D2016947700A5DF6E /* Headers.swift in Sources */,
 				9A27FF802016D2C100A5DF6E /* ASCII.swift in Sources */,
 				9AF42E94201A7767002655F3 /* String+ColorsTests.swift in Sources */,
@@ -598,6 +616,7 @@
 				9AA7D09D20249D5E00F3E5E1 /* AuthenticationCredentials.swift in Sources */,
 				9AC203DB2014E41B00057858 /* HeadersTests.swift in Sources */,
 				9AE874EF2025ECC900427AB1 /* Report.swift in Sources */,
+				9ABBBF282028F56C00B5CCB2 /* Failure.Reason.swift in Sources */,
 				9A9E5C1820211076006B0D0D /* PrivateKey.swift in Sources */,
 				9A9E5C1220211060006B0D0D /* ContainerType.swift in Sources */,
 				9ABBBF192023C0E600B5CCB2 /* OpenSSL.swift in Sources */,
@@ -605,6 +624,9 @@
 				9A9E5C0D20210EE6006B0D0D /* JWT.Key.swift in Sources */,
 				9A88FC2B20175DC9008789CF /* Int+Clamp.swift in Sources */,
 				9AD91D7420210C90007E93EC /* JWT.swift in Sources */,
+				9ABBBF212028F55500B5CCB2 /* Session.swift in Sources */,
+				9ABBBF222028F55500B5CCB2 /* Session.Credentials.swift in Sources */,
+				9ABBBF252028F55500B5CCB2 /* Response.swift in Sources */,
 				9A27FF7B2016944300A5DF6E /* Endpoint.swift in Sources */,
 				9A88FC2720175B0A008789CF /* RenderType.swift in Sources */,
 				9AC203E12014E54E00057858 /* Strings.swift in Sources */,
@@ -622,6 +644,11 @@
 			isa = PBXTargetDependency;
 			name = "Bloom macOS";
 			targetProxy = 9A88FC1F2016E6AA008789CF /* PBXContainerItemProxy */;
+		};
+		9ABBBF2C2028F6E500B5CCB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Bloom macOS";
+			targetProxy = 9ABBBF2B2028F6E500B5CCB2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
