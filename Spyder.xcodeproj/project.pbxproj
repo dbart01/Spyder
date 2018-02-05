@@ -167,7 +167,6 @@
 		9AA7D094201E0FF500F3E5E1 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		9AA7D09920249C8E00F3E5E1 /* AuthenticationCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationCredentials.swift; sourceTree = "<group>"; };
 		9ABBBF142023BA8700B5CCB2 /* OpenSSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSSL.swift; sourceTree = "<group>"; };
-		9ABBBF172023BC7900B5CCB2 /* sign */ = {isa = PBXFileReference; lastKnownFileType = text; path = sign; sourceTree = "<group>"; };
 		9AC203CD2013AEA400057858 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		9AC203CF2013B28600057858 /* Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
 		9AC203D12014E2DB00057858 /* Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headers.swift; sourceTree = "<group>"; };
@@ -291,7 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				9A9738C21C80CB4E00657553 /* LICENSE */,
-				9ABBBF162023BC6600B5CCB2 /* Scripts */,
 				9A88FBC72016E689008789CF /* Dependencies */,
 				9A9738B01C7FBC2D00657553 /* Spyder */,
 				9AC203D92014E41B00057858 /* Spyder Tests */,
@@ -375,14 +373,6 @@
 				9ABBBF142023BA8700B5CCB2 /* OpenSSL.swift */,
 			);
 			name = OpenSSL;
-			sourceTree = "<group>";
-		};
-		9ABBBF162023BC6600B5CCB2 /* Scripts */ = {
-			isa = PBXGroup;
-			children = (
-				9ABBBF172023BC7900B5CCB2 /* sign */,
-			);
-			path = Scripts;
 			sourceTree = "<group>";
 		};
 		9AC203D92014E41B00057858 /* Spyder Tests */ = {
