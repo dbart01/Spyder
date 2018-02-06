@@ -184,7 +184,7 @@
 		9AC203CD2013AEA400057858 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		9AC203CF2013B28600057858 /* Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
 		9AC203D12014E2DB00057858 /* Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headers.swift; sourceTree = "<group>"; };
-		9AC203D82014E41B00057858 /* Spyder Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Spyder Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AC203D82014E41B00057858 /* spyder-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "spyder-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AC203DA2014E41B00057858 /* HeadersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersTests.swift; sourceTree = "<group>"; };
 		9AC203DC2014E41B00057858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AC203EA2014E88600057858 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -317,7 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				9A9738AE1C7FBC2D00657553 /* spyder */,
-				9AC203D82014E41B00057858 /* Spyder Tests.xctest */,
+				9AC203D82014E41B00057858 /* spyder-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -458,7 +458,7 @@
 			);
 			name = "Spyder Tests";
 			productName = "Spyder Tests";
-			productReference = 9AC203D82014E41B00057858 /* Spyder Tests.xctest */;
+			productReference = 9AC203D82014E41B00057858 /* spyder-tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -788,7 +788,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dimabart.Spyder-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "spyder-tests";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
 			};
@@ -811,7 +811,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dimabart.Spyder-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "spyder-tests";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 			};
