@@ -55,6 +55,7 @@
 		9A9E5C1A20211F30006B0D0D /* Session.Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */; };
 		9AA400E42029DF4500BDF268 /* OpenSSLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA400E32029DF4500BDF268 /* OpenSSLTests.swift */; };
 		9AA400E92029DFCA00BDF268 /* private-test-key.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 9AA400E82029DFCA00BDF268 /* private-test-key.p8 */; };
+		9AA400ED2029E19D00BDF268 /* JWT.KeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA400EC2029E19D00BDF268 /* JWT.KeyTests.swift */; };
 		9AA51FAF201607B10052AFFB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FAE201607B10052AFFB /* Environment.swift */; };
 		9AA51FB52016082F0052AFFB /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FB42016082F0052AFFB /* Response.swift */; };
 		9AA7D09A20249C8E00F3E5E1 /* AuthenticationCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7D09920249C8E00F3E5E1 /* AuthenticationCredentials.swift */; };
@@ -181,6 +182,7 @@
 		9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.Credentials.swift; sourceTree = "<group>"; };
 		9AA400E32029DF4500BDF268 /* OpenSSLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSSLTests.swift; sourceTree = "<group>"; };
 		9AA400E82029DFCA00BDF268 /* private-test-key.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "private-test-key.p8"; sourceTree = "<group>"; };
+		9AA400EC2029E19D00BDF268 /* JWT.KeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.KeyTests.swift; sourceTree = "<group>"; };
 		9AA51FAE201607B10052AFFB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		9AA51FB42016082F0052AFFB /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		9AA7D09920249C8E00F3E5E1 /* AuthenticationCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationCredentials.swift; sourceTree = "<group>"; };
@@ -392,6 +394,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9AA400EB2029E17A00BDF268 /* JWT */ = {
+			isa = PBXGroup;
+			children = (
+				9AA400EC2029E19D00BDF268 /* JWT.KeyTests.swift */,
+			);
+			path = JWT;
+			sourceTree = "<group>";
+		};
 		9AA51FB0201607D80052AFFB /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,6 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				9AA400E72029DF4900BDF268 /* OpenSSL */,
+				9AA400EB2029E17A00BDF268 /* JWT */,
 				9A27FF732016937E00A5DF6E /* ASCII */,
 				9AC203DA2014E41B00057858 /* HeadersTests.swift */,
 				9AA400EA2029DFDF00BDF268 /* Supporting Files */,
@@ -647,6 +658,7 @@
 				9A9E5C0D20210EE6006B0D0D /* JWT.Key.swift in Sources */,
 				9A88FC2B20175DC9008789CF /* Int+Clamp.swift in Sources */,
 				9AD91D7420210C90007E93EC /* JWT.swift in Sources */,
+				9AA400ED2029E19D00BDF268 /* JWT.KeyTests.swift in Sources */,
 				9AA400E42029DF4500BDF268 /* OpenSSLTests.swift in Sources */,
 				9ABBBF212028F55500B5CCB2 /* Session.swift in Sources */,
 				9ABBBF222028F55500B5CCB2 /* Session.Credentials.swift in Sources */,
