@@ -40,10 +40,6 @@ enum OpenSSL {
         
         process.waitUntilExit()
 
-        let signature = outPipe.fileHandleForReading.readDataToEndOfFile()
-        guard signature.count > 0 else {
-            return nil
-        }
-        return signature
+        return outPipe.fileHandleForReading.readDataToEndOfFile()
     }
 }

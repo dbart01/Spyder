@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9AC203D72014E41B00057858"
-               BuildableName = "Spyder Tests.xctest"
+               BuildableName = "spyder-tests.xctest"
                BlueprintName = "Spyder Tests"
                ReferencedContainer = "container:Spyder.xcodeproj">
             </BuildableReference>
@@ -35,7 +35,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9AC203D72014E41B00057858"
-               BuildableName = "Spyder Tests.xctest"
+               BuildableName = "spyder-tests.xctest"
                BlueprintName = "Spyder Tests"
                ReferencedContainer = "container:Spyder.xcodeproj">
             </BuildableReference>
@@ -59,7 +59,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9AC203D72014E41B00057858"
-            BuildableName = "Spyder Tests.xctest"
+            BuildableName = "spyder-tests.xctest"
             BlueprintName = "Spyder Tests"
             ReferencedContainer = "container:Spyder.xcodeproj">
          </BuildableReference>
@@ -77,7 +77,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9AC203D72014E41B00057858"
-            BuildableName = "Spyder Tests.xctest"
+            BuildableName = "spyder-tests.xctest"
             BlueprintName = "Spyder Tests"
             ReferencedContainer = "container:Spyder.xcodeproj">
          </BuildableReference>

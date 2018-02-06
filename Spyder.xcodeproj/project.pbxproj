@@ -53,6 +53,8 @@
 		9A9E5C1720211076006B0D0D /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC203ED2014F84800057858 /* Identity.swift */; };
 		9A9E5C1820211076006B0D0D /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5F7EDE2020A8FF00BFC4F8 /* PrivateKey.swift */; };
 		9A9E5C1A20211F30006B0D0D /* Session.Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */; };
+		9AA400E42029DF4500BDF268 /* OpenSSLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA400E32029DF4500BDF268 /* OpenSSLTests.swift */; };
+		9AA400E92029DFCA00BDF268 /* private-test-key.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 9AA400E82029DFCA00BDF268 /* private-test-key.p8 */; };
 		9AA51FAF201607B10052AFFB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FAE201607B10052AFFB /* Environment.swift */; };
 		9AA51FB52016082F0052AFFB /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA51FB42016082F0052AFFB /* Response.swift */; };
 		9AA7D09A20249C8E00F3E5E1 /* AuthenticationCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA7D09920249C8E00F3E5E1 /* AuthenticationCredentials.swift */; };
@@ -177,6 +179,8 @@
 		9A9E5C0720210E90006B0D0D /* JWT.Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.Payload.swift; sourceTree = "<group>"; };
 		9A9E5C0920210EBF006B0D0D /* JWT.Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.Key.swift; sourceTree = "<group>"; };
 		9A9E5C1920211F30006B0D0D /* Session.Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.Credentials.swift; sourceTree = "<group>"; };
+		9AA400E32029DF4500BDF268 /* OpenSSLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSSLTests.swift; sourceTree = "<group>"; };
+		9AA400E82029DFCA00BDF268 /* private-test-key.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "private-test-key.p8"; sourceTree = "<group>"; };
 		9AA51FAE201607B10052AFFB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		9AA51FB42016082F0052AFFB /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		9AA7D09920249C8E00F3E5E1 /* AuthenticationCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationCredentials.swift; sourceTree = "<group>"; };
@@ -371,6 +375,23 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
+		9AA400E72029DF4900BDF268 /* OpenSSL */ = {
+			isa = PBXGroup;
+			children = (
+				9AA400E32029DF4500BDF268 /* OpenSSLTests.swift */,
+			);
+			path = OpenSSL;
+			sourceTree = "<group>";
+		};
+		9AA400EA2029DFDF00BDF268 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9AA400E82029DFCA00BDF268 /* private-test-key.p8 */,
+				9AC203DC2014E41B00057858 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		9AA51FB0201607D80052AFFB /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,9 +414,10 @@
 		9AC203D92014E41B00057858 /* Spyder Tests */ = {
 			isa = PBXGroup;
 			children = (
+				9AA400E72029DF4900BDF268 /* OpenSSL */,
 				9A27FF732016937E00A5DF6E /* ASCII */,
 				9AC203DA2014E41B00057858 /* HeadersTests.swift */,
-				9AC203DC2014E41B00057858 /* Info.plist */,
+				9AA400EA2029DFDF00BDF268 /* Supporting Files */,
 			);
 			path = "Spyder Tests";
 			sourceTree = "<group>";
@@ -535,6 +557,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AA400E92029DFCA00BDF268 /* private-test-key.p8 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,6 +647,7 @@
 				9A9E5C0D20210EE6006B0D0D /* JWT.Key.swift in Sources */,
 				9A88FC2B20175DC9008789CF /* Int+Clamp.swift in Sources */,
 				9AD91D7420210C90007E93EC /* JWT.swift in Sources */,
+				9AA400E42029DF4500BDF268 /* OpenSSLTests.swift in Sources */,
 				9ABBBF212028F55500B5CCB2 /* Session.swift in Sources */,
 				9ABBBF222028F55500B5CCB2 /* Session.Credentials.swift in Sources */,
 				9ABBBF252028F55500B5CCB2 /* Response.swift in Sources */,
@@ -784,7 +808,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MK88G5Q6ZN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "Spyder Tests/Info.plist";
+				INFOPLIST_FILE = "Spyder Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dimabart.Spyder-Tests";
@@ -807,7 +831,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MK88G5Q6ZN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "Spyder Tests/Info.plist";
+				INFOPLIST_FILE = "Spyder Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dimabart.Spyder-Tests";
