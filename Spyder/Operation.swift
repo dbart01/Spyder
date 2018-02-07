@@ -140,7 +140,13 @@ class Operation {
             guard index > 0 && index < identities.count else {
                 throw Status.error(.invalidCertificateIndex)
             }
-            self.credentials = .certificate(Certificate(identity: identities[index]))
+            
+            let identity = identities[index]
+            guard let certificate = Certificate(label: identity.label, identity: identity.reference) else {
+                throw Status.error(.certificateLoadFailed)
+            }
+            
+            self.credentials = .certificate(certificate)
             
         } else if let path = self.certificatePath {
             

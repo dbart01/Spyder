@@ -42,7 +42,7 @@ class Certificate {
     // ----------------------------------
     //  MARK: - Init -
     //
-    init?(path: String, passphrase: String) {
+    convenience init?(path: String, passphrase: String) {
         let url = URL(fileURLWithPath: (path as NSString).expandingTildeInPath)
         guard let certificateData = try? Data(contentsOf: url) else {
             return nil
@@ -66,19 +66,21 @@ class Certificate {
             return nil
         }
         
-        self.identity    = identityDictionary[kSecImportItemIdentity] as! SecIdentity
-        self.label       = identityDictionary[kSecImportItemLabel]    as! String
-        self.certificate = self.certificateFor(self.identity)
+        let identity = identityDictionary[kSecImportItemIdentity] as! SecIdentity
+        let label    = identityDictionary[kSecImportItemLabel]    as! String
         
-        guard let _ = self.certificate else {
-            return nil
-        }
+        self.init(label: label, identity: identity)
     }
     
-    init(identity: Identity) {
-        self.identity    = identity.reference
-        self.label       = identity.label
-        self.certificate = self.certificateFor(self.identity)
+    init?(label: String, identity: SecIdentity) {
+        self.label    = label
+        self.identity = identity
+        
+        guard let certificate = self.certificateFor(identity) else {
+            return nil
+        }
+        
+        self.certificate = certificate
     }
     
     // ----------------------------------
