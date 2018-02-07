@@ -13,9 +13,14 @@ class ASCIICellTests: XCTestCase {
     // ----------------------------------
     //  MARK: - String Literal -
     //
-    func testStringLiteral() {
+    func testInitLiteral() {
         let cell: ASCII.Cell = "Something"
         XCTAssertEqual(cell.content, "Something")
+    }
+    
+    func testInitConvertible() {
+        let cell = ASCII.Cell(convertible: Convertible("cool"))
+        XCTAssertEqual(cell.content, "##cool##")
     }
     
     // ----------------------------------
@@ -104,5 +109,24 @@ class ASCIICellTests: XCTestCase {
         let result = cell.render(in: context)
         
         XCTAssertEqual(result, " Success           ")
+    }
+}
+
+// ----------------------------------
+//  MARK: - Convertible -
+//
+private class Convertible: CustomStringConvertible {
+    
+    let content: String
+    
+    // ----------------------------------
+    //  MARK: - Init -
+    //
+    init(_ content: String) {
+        self.content = content
+    }
+    
+    var description: String {
+        return "##\(self.content)##"
     }
 }

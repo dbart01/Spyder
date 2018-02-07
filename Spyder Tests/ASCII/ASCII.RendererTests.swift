@@ -118,6 +118,27 @@ class ASCIIRendererTests: XCTestCase {
     }
     
     // ----------------------------------
+    //  MARK: - Appending -
+    //
+    func testAppendSingle() {
+        var renderer = ASCII.Renderer()
+        renderer    += ASCII.Row(ASCII.Cell(content: "cell"))
+        
+        XCTAssertEqual(renderer.renderables.count, 1)
+    }
+    
+    func testAppendMultiple() {
+        var renderer = ASCII.Renderer()
+        renderer    += [
+            ASCII.Row(ASCII.Cell(content: "cell1")),
+            ASCII.Row(ASCII.Cell(content: "cell2")),
+            ASCII.Row(ASCII.Cell(content: "cell3")),
+        ]
+        
+        XCTAssertEqual(renderer.renderables.count, 3)
+    }
+    
+    // ----------------------------------
     //  MARK: - Build -
     //
     func renderer(includeDescription: Bool = false, includeSpacers: Bool = false) -> ASCII.Renderer {
