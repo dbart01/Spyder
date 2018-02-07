@@ -1,5 +1,5 @@
 //
-//  ContainerType.swift
+//  CryptorType.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,37 +32,12 @@
 
 import Foundation
 
-protocol ContainerType {
-    var values: [String : Any] { get set }
+protocol CryptorType {
+    func sign(message: Data) -> Data?
 }
 
-extension ContainerType {
-    
-    // ----------------------------------
-    //  MARK: - Count -
-    //
-    var count: Int {
-        return self.values.count
-    }
-    
-    // ----------------------------------
-    //  MARK: - Subscript -
-    //
-    subscript(key: String) -> Any? {
-        get {
-            return self.values[key]
-        }
-        set {
-            self.values[key] = newValue
-        }
-    }
-    
-    subscript(key: JWT.Key) -> Any? {
-        get {
-            return self[key.rawValue]
-        }
-        set {
-            self[key.rawValue] = newValue
-        }
+extension CryptorType {
+    func sign(message: String) -> Data? {
+        return self.sign(message: message.data(using: .utf8)!)
     }
 }

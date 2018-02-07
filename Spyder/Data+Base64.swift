@@ -1,5 +1,5 @@
 //
-//  ContainerType.swift
+//  Data+Base64.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,37 +32,11 @@
 
 import Foundation
 
-protocol ContainerType {
-    var values: [String : Any] { get set }
-}
-
-extension ContainerType {
-    
-    // ----------------------------------
-    //  MARK: - Count -
-    //
-    var count: Int {
-        return self.values.count
-    }
-    
-    // ----------------------------------
-    //  MARK: - Subscript -
-    //
-    subscript(key: String) -> Any? {
-        get {
-            return self.values[key]
-        }
-        set {
-            self.values[key] = newValue
-        }
-    }
-    
-    subscript(key: JWT.Key) -> Any? {
-        get {
-            return self[key.rawValue]
-        }
-        set {
-            self[key.rawValue] = newValue
-        }
+extension Data {
+    var base64URL: String {
+        return self.base64EncodedString()
+            .replacingOccurrences(of: "+", with: "-")
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: "=", with: "")
     }
 }

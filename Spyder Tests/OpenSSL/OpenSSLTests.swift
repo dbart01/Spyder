@@ -18,13 +18,15 @@ class OpenSSLTests: XCTestCase {
     //  MARK: - Sign -
     //
     func testSignString() {
-        let signature = OpenSSL.sign(using: OpenSSLTests.privateKeyURL, message: OpenSSLTests.message)
+        let cryptor   = OpenSSL(privateKey: OpenSSLTests.privateKeyURL)
+        let signature = cryptor.sign(message: OpenSSLTests.message)
         XCTAssertNotNil(signature)
         XCTAssertTrue(signature!.count > 0)
     }
     
     func testSignData() {
-        let signature = OpenSSL.sign(using: OpenSSLTests.privateKeyURL, message: OpenSSLTests.messageData)
+        let cryptor   = OpenSSL(privateKey: OpenSSLTests.privateKeyURL)
+        let signature = cryptor.sign(message: OpenSSLTests.messageData)
         XCTAssertNotNil(signature)
         XCTAssertTrue(signature!.count > 0)
     }

@@ -9,13 +9,21 @@
 import Foundation
 import Cocoa
 
-enum OpenSSL {
+struct OpenSSL: CryptorType {
     
-    static func sign(using privateKeyURL: URL, message: String) -> Data? {
-        return self.sign(using: privateKeyURL, message: message.data(using: .utf8)!)
+    let privateKeyURL: URL
+    
+    // ----------------------------------
+    //  MARK: - Init -
+    //
+    init(privateKey: URL) {
+        self.privateKeyURL = privateKey
     }
     
-    static func sign(using privateKeyURL: URL, message: Data) -> Data? {
+    // ----------------------------------
+    //  MARK: - CryptorType -
+    //
+    func sign(message: Data) -> Data? {
         
         let inPipe = Pipe()
         let handle = inPipe.fileHandleForWriting
@@ -30,7 +38,7 @@ enum OpenSSL {
             "-binary",
             "-sha256",
             "-sign",
-            privateKeyURL.path,
+            self.privateKeyURL.path,
         ]
         
         process.launch()

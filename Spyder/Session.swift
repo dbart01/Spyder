@@ -65,7 +65,8 @@ class Session {
             token.payload [JWT.Key.iss] = authCredentials.teamIdentifier
             token.payload [JWT.Key.iat] = Int(Date().timeIntervalSince1970)
             
-            let tws = try! token.sign(using: authCredentials.privateKey)
+            let openssl = OpenSSL(privateKey: authCredentials.privateKey)
+            let tws     = try! token.sign(using: openssl)
             
             configuration.httpAdditionalHeaders = [
                 "Authorization": "Bearer \(tws)"

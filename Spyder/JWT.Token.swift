@@ -57,21 +57,24 @@ extension JWT {
             return try JSONSerialization.data(withJSONObject: self.payload.values, options: []).base64URL
         }
         
+        private func contents() throws -> String {
+            let header  = try self.headerBase64()
+            let payload = try self.payloadBase64()
+            return "\(header).\(payload)"
+        }
+        
         // ----------------------------------
         //  MARK: - Signature -
         //
-        func sign(using privateKey: URL) throws -> String {
-            let header  = try self.headerBase64()
-            let payload = try self.payloadBase64()
-            
-            let message   = "\(header).\(payload)"
-            let signature = OpenSSL.sign(using: privateKey, message: message)
+        func sign(using cryptor: CryptorType) throws -> String {
+            let contents  = try self.contents()
+            let signature = cryptor.sign(message: contents)
             
             guard let encodedSignature = signature?.base64URL else {
                 throw Error.signingFailed
             }
             
-            return "\(message).\(encodedSignature)"
+            return "\(contents).\(encodedSignature)"
         }
         
 //        func sign(using key: PrivateKey) throws -> String {
@@ -94,14 +97,5 @@ extension JWT {
 extension JWT.Token {
     enum Error: Swift.Error {
         case signingFailed
-    }
-}
-
-extension Data {
-    var base64URL: String {
-        return self.base64EncodedString()
-            .replacingOccurrences(of: "+", with: "-")
-            .replacingOccurrences(of: "/", with: "_")
-            .replacingOccurrences(of: "=", with: "")
     }
 }
