@@ -28,138 +28,85 @@
 //  The views and conclusions contained in the software and documentation are those
 //  of the authors and should not be interpreted as representing official policies,
 //  either expressed or implied, of the FreeBSD Project.
+//
 
 import Foundation
 
-// ----------------------------------
-//  MARK: - ResponseType -
-//
-protocol ResponseType {
-    associatedtype DataType
+struct Response {
     
-    var response:   HTTPURLResponse? { get }
-    var data:       DataType?        { get }
-    var error:      Error?           { get }
-    var successful: Bool             { get }
+    typealias DataType = [String : AnyObject]
     
-    init?(response: HTTPURLResponse?, data: Data?, error: Error?)
+    let code:     String
+    let status:   String
+    let response: HTTPURLResponse?
+    let failure:  Failure?
+    let error:    Error?
     
-    func stringForHeader(_ key: String) -> String?
-}
-
-extension ResponseType {
-    
-    var successful: Bool {
+    var isSuccessful: Bool {
         if let response = self.response {
             return response.statusCode == 200
         }
         return false
     }
     
-    func stringForHeader(_ key: String) -> String? {
+    // ----------------------------------
+    //  MARK: - Init -
+    //
+    init?(response: HTTPURLResponse?, data: Data?, error: Error?) {
+        if response == nil && data == nil && error == nil {
+            return nil
+        }
+        
+        self.code     = "\(response?.statusCode ?? -1)"
+        self.status   = Response.status(for: response?.statusCode)
+        self.response = response
+        self.error    = error
+        
+        if let data = data {
+            do {
+                self.failure = try JSONDecoder().decode(Failure.self, from: data)
+            } catch {
+                self.failure = nil
+            }
+        } else {
+            self.failure = nil
+        }
+    }
+    
+    // ----------------------------------
+    //  MARK: - Conveniences -
+    //
+    func value(forHeader key: String) -> String? {
         if let response = self.response,
             let value = response.allHeaderFields[key] as? String {
-                return value
+            return value
         }
         return nil
     }
 }
 
 // ----------------------------------
-//  MARK: - Response -
+//  MARK: - Response Codes -
 //
-struct Response: ResponseType {
+extension Response {
     
-    typealias DataType = Data
-    
-    let response: HTTPURLResponse?
-    let data:     DataType?
-    let error:    Error?
-    
-    // ----------------------------------
-    //  MARK: - Init -
-    //
-    init?(response: HTTPURLResponse?, data: Data?, error: Error?) {
-        if response == nil && data == nil && error == nil {
-            return nil
+    private static func status(for code: Int?) -> String {
+        if let code = code,
+            let status = self.statusCodes[code] {
+            return status
         }
-        
-        self.response = response
-        self.error    = error
-        self.data     = data
-    }
-}
-
-// ----------------------------------
-//  MARK: - JsonResponse -
-//
-struct JsonResponse: ResponseType, CustomDebugStringConvertible {
-    
-    typealias DataType = [String : AnyObject]
-    
-    let response: HTTPURLResponse?
-    let data:     DataType?
-    let error:    Error?
-    
-    // ----------------------------------
-    //  MARK: - Init -
-    //
-    init?(response: HTTPURLResponse?, data: Data?, error: Error?) {
-        if response == nil && data == nil && error == nil {
-            return nil
-        }
-        
-        self.response = response
-        self.error    = error
-        
-        if let data = data {
-            self.data = try? JSONSerialization.jsonObject(with: data, options: []) as! [String : AnyObject]
-        } else {
-            self.data = nil
-        }
+        return "Unknown Error"
     }
     
-    // ----------------------------------------
-    //  MARK: - CustomDebugStringConvertible -
-    //
-    var debugDescription: String {
-        var description = ""
-        
-        if self.successful {
-            description += "Success"
-            
-            if let notificationID = self.stringForHeader("apns-id") {
-                description += "\n - Notification ID: \(notificationID)"
-                description += ""
-            }
-            
-        } else {
-            description += "Error"
-            
-            if let res = self.response {
-                if let status = StatusDescriptions[res.statusCode] {
-                    description += "\n - Status: \(status)"
-                }
-                description += "\n - Code:   \(res.statusCode)"
-            }
-            
-            if let data = self.data, data.count > 0 {
-                
-                if let reason = data["reason"] as? String,
-                    let summary = ReasonDescriptions[reason] {
-                    description += "\n - Short:  \(reason)"
-                    description += "\n - Reason: \(summary)"
-                } else {
-                    description += "\n - Data:   \(data)"
-                }
-            }
-            
-            if let error = self.error {
-                description += "\n - Error:  \(error.localizedDescription)"
-            }
-        }
-        
-        description += "\n"
-        return description
-    }
+    private static let statusCodes: [Int : String] = [
+        200 : "Success",
+        400 : "Bad request",
+        403 : "There was an error with the certificate.",
+        405 : "The request used a bad :method value. Only POST requests are supported.",
+        410 : "The device token is no longer active for the topic.",
+        413 : "The notification payload was too large.",
+        429 : "The server received too many requests for the same device token.",
+        500 : "Internal server error",
+        503 : "The server is shutting down and unavailable.",
+    ]
 }

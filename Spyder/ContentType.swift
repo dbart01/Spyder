@@ -1,5 +1,5 @@
 //
-//  Endpoint.swift
+//  ContentType.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,51 +32,23 @@
 
 import Foundation
 
-struct Endpoint {
+protocol ContentType: RenderType {
+    var flex:    Bool   { get }
+    var content: String { get }
     
-    let url: URL
-    
-    // ----------------------------------
-    //  MARK: - Init -
-    //
-    init(token: String, environment: Environment, port: String) {
-        let host     = Endpoint.Host(environment)
-        let endpoint = "\(host):\(port)\(Endpoint.path)\(token)"
-        self.url     = URL(string: endpoint)!
+    init(content: String, flex: Bool)
+}
+
+// ----------------------------------
+//  MARK: - Copy -
+//
+extension ContentType {
+    func copy() -> Self {
+        return Self(content: self.content, flex: self.flex)
     }
-}
-
-// ----------------------------------
-//  MARK: - Path -
-//
-extension Endpoint {
-    private static let path = "/3/device/"
-}
-
-// ----------------------------------
-//  MARK: - Host -
-//
-extension Endpoint {
-    private enum Host: String, CustomStringConvertible {
-        
-        case development = "https://api.development.push.apple.com"
-        case production  = "https://api.push.apple.com"
-        
-        // ----------------------------------
-        //  MARK: - Init -
-        //
-        init(_ environment: Environment) {
-            switch environment {
-            case .development: self = .development
-            case .production:  self = .production
-            }
-        }
-        
-        // ----------------------------------
-        //  MARK: - CustomStringConvertible -
-        //
-        var description: String {
-            return self.rawValue
-        }
+    
+    func blankCopy() -> Self {
+        let content = " ".multiply(by: self.content.count)
+        return Self(content: content, flex: self.flex)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Endpoint.swift
+//  ASCII.RenderContext.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,51 +32,38 @@
 
 import Foundation
 
-struct Endpoint {
-    
-    let url: URL
-    
-    // ----------------------------------
-    //  MARK: - Init -
-    //
-    init(token: String, environment: Environment, port: String) {
-        let host     = Endpoint.Host(environment)
-        let endpoint = "\(host):\(port)\(Endpoint.path)\(token)"
-        self.url     = URL(string: endpoint)!
-    }
-}
-
-// ----------------------------------
-//  MARK: - Path -
-//
-extension Endpoint {
-    private static let path = "/3/device/"
-}
-
-// ----------------------------------
-//  MARK: - Host -
-//
-extension Endpoint {
-    private enum Host: String, CustomStringConvertible {
+extension ASCII {
+    struct RenderContext {
+        let paddingString        = " "
+        let rowEdgeString        = "|"
+        let cellSeparatorString  = "|"
+        let separatorEdgeString  = "+"
+        let separatorString      = "-"
+        let lineSeparator        = "\n"
         
-        case development = "https://api.development.push.apple.com"
-        case production  = "https://api.push.apple.com"
+        var edgePadding:   Int
+        var maxCellWidth:  Int
+        var minRowWidth:   Int
+        var fillingLength: Int
+        var spaceToFill:   Int
         
         // ----------------------------------
         //  MARK: - Init -
         //
-        init(_ environment: Environment) {
-            switch environment {
-            case .development: self = .development
-            case .production:  self = .production
-            }
+        init(edgePadding: Int = 2, maxCellWidth: Int = 80, minRowWidth: Int = 60, fillingLength: Int = 0, spaceToFill: Int = 0) {
+            self.edgePadding   = edgePadding
+            self.maxCellWidth  = maxCellWidth
+            self.minRowWidth   = minRowWidth
+            self.fillingLength = fillingLength
+            self.spaceToFill   = spaceToFill
         }
         
         // ----------------------------------
-        //  MARK: - CustomStringConvertible -
+        //  MARK: - Padding -
         //
-        var description: String {
-            return self.rawValue
+        func applyPadding(to input: String) -> String {
+            let padding = self.paddingString.multiply(by: self.edgePadding)
+            return "\(padding)\(input)\(padding)"
         }
     }
 }

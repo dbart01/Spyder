@@ -1,5 +1,5 @@
 //
-//  Certificate.swift
+//  Headers.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,64 +32,46 @@
 
 import Foundation
 
-class Certificate {
+struct Headers {
     
-    let label: String
-    
-    private(set) var certificate: SecCertificate!
-    private(set) var identity: SecIdentity!
+    let id:       String?
+    let topic:    String?
+    let priority: Int?
+    let expiry:   Int?
     
     // ----------------------------------
     //  MARK: - Init -
     //
-    convenience init?(path: String, passphrase: String) {
-        let url = URL(fileURLWithPath: (path as NSString).expandingTildeInPath)
-        guard let certificateData = try? Data(contentsOf: url) else {
-            return nil
-        }
-            
-        let options = [
-            kSecImportExportPassphrase as String : passphrase,
-        ]
-        
-        var items: CFArray?
-        let result = SecPKCS12Import(certificateData as CFData, options as CFDictionary, &items)
-        guard result == errSecSuccess else {
-            return nil
-        }
-        
-        guard let certificates = items as Array<AnyObject>?, certificates.count > 0 else {
-            return nil
-        }
-        
-        guard let identityDictionary = certificates.first as? Dictionary<CFString, Any> else {
-            return nil
-        }
-        
-        let identity = identityDictionary[kSecImportItemIdentity] as! SecIdentity
-        let label    = identityDictionary[kSecImportItemLabel]    as! String
-        
-        self.init(label: label, identity: identity)
-    }
-    
-    init?(label: String, identity: SecIdentity) {
-        self.label    = label
-        self.identity = identity
-        
-        guard let certificate = self.certificateFor(identity) else {
-            return nil
-        }
-        
-        self.certificate = certificate
+    init(id: String? = nil, topic: String? = nil, priority: Int? = nil, expiry: Int? = nil) {
+        self.id       = id
+        self.topic    = topic
+        self.priority = priority
+        self.expiry   = expiry
     }
     
     // ----------------------------------
-    //  MARK: - Private -
+    //  MARK: - Dictionary -
     //
-    private func certificateFor(_ identity: SecIdentity) -> SecCertificate? {
-        var certificate: SecCertificate?
-        SecIdentityCopyCertificate(identity, &certificate)
+    var dictionary: [String : String] {
+        var container: [String : String] = [:]
         
-        return certificate
+        if let value = self.id       { container[Key.id]       = value }
+        if let value = self.topic    { container[Key.topic]    = value }
+        if let value = self.priority { container[Key.priority] = String(describing: value) }
+        if let value = self.expiry   { container[Key.expiry]   = String(describing: value) }
+        
+        return container
+    }
+}
+
+// ----------------------------------
+//  MARK: - Keys -
+//
+extension Headers {
+    enum Key {
+        static let id       = "apns-id"
+        static let topic    = "apns-topic"
+        static let priority = "apns-priority"
+        static let expiry   = "apns-expiry"
     }
 }

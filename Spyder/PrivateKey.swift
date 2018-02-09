@@ -1,5 +1,5 @@
 //
-//  Certificate.swift
+//  PrivateKey.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,64 +32,73 @@
 
 import Foundation
 
-class Certificate {
+class PrivateKey {
     
-    let label: String
-    
-    private(set) var certificate: SecCertificate!
-    private(set) var identity: SecIdentity!
+    let key: SecKey
     
     // ----------------------------------
     //  MARK: - Init -
     //
-    convenience init?(path: String, passphrase: String) {
+    convenience init?(path: String) {
         let url = URL(fileURLWithPath: (path as NSString).expandingTildeInPath)
-        guard let certificateData = try? Data(contentsOf: url) else {
-            return nil
-        }
-            
-        let options = [
-            kSecImportExportPassphrase as String : passphrase,
-        ]
-        
-        var items: CFArray?
-        let result = SecPKCS12Import(certificateData as CFData, options as CFDictionary, &items)
-        guard result == errSecSuccess else {
+        guard let fileData = try? Data(contentsOf: url) else {
             return nil
         }
         
-        guard let certificates = items as Array<AnyObject>?, certificates.count > 0 else {
+        guard let content = String(data: fileData, encoding: .utf8) else {
             return nil
         }
         
-        guard let identityDictionary = certificates.first as? Dictionary<CFString, Any> else {
-            return nil
-        }
-        
-        let identity = identityDictionary[kSecImportItemIdentity] as! SecIdentity
-        let label    = identityDictionary[kSecImportItemLabel]    as! String
-        
-        self.init(label: label, identity: identity)
+        self.init(PEM: content)
     }
     
-    init?(label: String, identity: SecIdentity) {
-        self.label    = label
-        self.identity = identity
+    init?(PEM: String) {
+        let base64 = PEM.stripCertificateDelimiters()
         
-        guard let certificate = self.certificateFor(identity) else {
+        guard let keyData = Data(base64Encoded: base64, options: [.ignoreUnknownCharacters]) else {
             return nil
         }
         
-        self.certificate = certificate
+        let headerSize = 26 // Fixed ASN.1 header size is 26 bytes
+        let length     = keyData.count - headerSize - Int(SecPadding.PKCS1.rawValue)
+        let range      = Range(headerSize..<length)
+        let rawKeyData = keyData.subdata(in: range)
+        
+        let attributes: [CFString: CFTypeRef] = [
+            kSecAttrKeyType:  kSecAttrKeyTypeEC,
+            kSecAttrKeyClass: kSecAttrKeyClassPrivate,
+            ]
+        
+        guard let privateKey = SecKeyCreateWithData(rawKeyData as NSData, attributes as NSDictionary, nil) else {
+            return nil
+        }
+        
+        self.key = privateKey
     }
     
     // ----------------------------------
-    //  MARK: - Private -
+    //  MARK: - Signing -
     //
-    private func certificateFor(_ identity: SecIdentity) -> SecCertificate? {
-        var certificate: SecCertificate?
-        SecIdentityCopyCertificate(identity, &certificate)
+    func sign(algorithm: SecKeyAlgorithm, message: String) -> Data? {
+        guard let messageData = message.data(using: .utf8) else {
+            return nil
+        }
+        return self.sign(algorithm: algorithm, message: messageData)
+    }
+    
+    func sign(algorithm: SecKeyAlgorithm, message: Data) -> Data? {
+        guard let signature = SecKeyCreateSignature(self.key, algorithm, message as CFData, nil) else {
+            return nil
+        }
         
-        return certificate
+        return signature as Data
+    }
+}
+
+private extension String {
+    func stripCertificateDelimiters() -> String {
+        return self.components(separatedBy: .newlines).filter {
+            !$0.hasPrefix("---")
+        }.joined()
     }
 }

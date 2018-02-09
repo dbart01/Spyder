@@ -1,0 +1,11 @@
+ #!/usr/bin/env bash
+
+set -ex
+set -eo pipefail
+
+xcodebuild test \
+-project "Spyder.xcodeproj" \
+-scheme "Spyder" \
+-sdk macosx \
+-destination 'platform=OS X,arch=x86_64' \
+ | xcpretty -c

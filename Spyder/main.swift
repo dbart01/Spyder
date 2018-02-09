@@ -28,103 +28,20 @@
 //  The views and conclusions contained in the software and documentation are those
 //  of the authors and should not be interpreted as representing official policies,
 //  either expressed or implied, of the FreeBSD Project.
+//
 
 import Foundation
 
-let args = Arguments()
-
-/* -----------------------------------------
-** Present the help ignoring everything else
-*/
-guard args.help == false && args.count > 0 else {
-    success(HelpContents)
-}
-
-guard args.listIdentities == false else {
-    success(Certificate.identityCollection)
-}
-
-/* ----------------------------------------
-** Required / options arguments
-*/
-let passphrase  = args.passphrase  ?? ""
-let port        = args.port        ?? "443"
-let environment = args.environment ?? .Development
-let topic       = args.topic
-let message     = args.message
-let priority    = args.priority
-let expiry      = args.expiryTimestamp
-let id          = args.id
-var payload     = args.payload
-
-/* ----------------------------------------
-** Setup the convenience payload if the
-** message was provided and payload wasn't.
-*/
-if let message = message, payload == nil {
-    let dictionary = [
-        "aps" : [
-            "sound" : "default",
-            "alert" : message,
-        ]
-    ]
-    payload = try? JSONSerialization.data(withJSONObject: dictionary, options: [])
-}
-
-/* ----------------------------------------
-** Validate payload size
-*/
-if let payload = payload {
-    let sizeInKB = payload.count / 1024
-    if sizeInKB > PayloadMaxSize {
-        error("Failed to send push. Payload size exceeds maximum. Expected: \(PayloadMaxSize) Actual: \(sizeInKB)")
+do {
+    try Operation().execute()
+    
+} catch let status as Operation.Status {
+    switch status {
+    case .success(let message):
+        print(message)
+    case .error(let reason):
+        print("Failed to send push notification: \(reason.description)")
     }
+    Darwin.exit(status.code)
 }
 
-/* ----------------------------------------
-** Load the certificate for authentication
-*/
-let certificate: Certificate
-
-if let certIndex = args.certificateIndex {
-    certificate = Certificate(identityIndex: certIndex)
-} else if let certPath = args.certificatePath {
-    if let cert = Certificate(path: certPath, passphrase: passphrase) {
-        certificate = cert
-    } else {
-        error("Failed to send push. Could not load the certificate at path: \(certPath)")
-    }
-} else {
-    error("Failed to send push. No certificate provided.")
-}
-
-/* ----------------------------------------
-** Ensure that we have all the prerequisite
-** parameters to execute the push.
-*/
-guard let token = args.token else {
-    error("Failed to send push. No device token provided.")
-}
-
-/* ----------------------------------------
-** Set all provided headers for the request
-*/
-var headers  = [String : String]()
-
-if topic    != nil { headers["apns-topic"]      = topic            }
-if priority != nil { headers["apns-priority"]   = String(describing: priority) }
-if expiry   != nil { headers["apns-expiration"] = String(describing: expiry)   }
-if id       != nil { headers["apns-id"]         = id               }
-
-/* ----------------------------------------
-** Build and execute the request via HTTP/2
-*/
-let endpoint    = Endpoint(token: token, environment: environment, port: port)
-let session     = Session(certificate: certificate)
-let request     = RequestDescription(url: endpoint.url, method: "POST")
-request.payload = payload
-request.headers = headers
-
-if let response = session.execute(jsonRequest: request) {
-    success(response)
-}

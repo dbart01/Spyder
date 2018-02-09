@@ -1,5 +1,5 @@
 //
-//  Endpoint.swift
+//  ContainerType.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,51 +32,37 @@
 
 import Foundation
 
-struct Endpoint {
-    
-    let url: URL
+protocol ContainerType {
+    var values: [String : Any] { get set }
+}
+
+extension ContainerType {
     
     // ----------------------------------
-    //  MARK: - Init -
+    //  MARK: - Count -
     //
-    init(token: String, environment: Environment, port: String) {
-        let host     = Endpoint.Host(environment)
-        let endpoint = "\(host):\(port)\(Endpoint.path)\(token)"
-        self.url     = URL(string: endpoint)!
+    var count: Int {
+        return self.values.count
     }
-}
-
-// ----------------------------------
-//  MARK: - Path -
-//
-extension Endpoint {
-    private static let path = "/3/device/"
-}
-
-// ----------------------------------
-//  MARK: - Host -
-//
-extension Endpoint {
-    private enum Host: String, CustomStringConvertible {
-        
-        case development = "https://api.development.push.apple.com"
-        case production  = "https://api.push.apple.com"
-        
-        // ----------------------------------
-        //  MARK: - Init -
-        //
-        init(_ environment: Environment) {
-            switch environment {
-            case .development: self = .development
-            case .production:  self = .production
-            }
+    
+    // ----------------------------------
+    //  MARK: - Subscript -
+    //
+    subscript(key: String) -> Any? {
+        get {
+            return self.values[key]
         }
-        
-        // ----------------------------------
-        //  MARK: - CustomStringConvertible -
-        //
-        var description: String {
-            return self.rawValue
+        set {
+            self.values[key] = newValue
+        }
+    }
+    
+    subscript(key: JWT.Key) -> Any? {
+        get {
+            return self[key.rawValue]
+        }
+        set {
+            self[key.rawValue] = newValue
         }
     }
 }

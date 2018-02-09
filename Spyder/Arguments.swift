@@ -28,6 +28,7 @@
 //  The views and conclusions contained in the software and documentation are those
 //  of the authors and should not be interpreted as representing official policies,
 //  either expressed or implied, of the FreeBSD Project.
+//
 
 import Foundation
 
@@ -101,6 +102,27 @@ struct Arguments {
         return nil
     }
     
+    var authKeyPath: String? {
+        if let path = self.args("-a", "--authKey") {
+            return path
+        }
+        return nil
+    }
+    
+    var keyID: String? {
+        if let id = self.args("-k", "--keyID") {
+            return id
+        }
+        return nil
+    }
+    
+    var teamID: String? {
+        if let id = self.args("-M", "--teamID") {
+            return id
+        }
+        return nil
+    }
+    
     var environment: Environment? {
         if let abbreviation = self.args("-e", "--env"),
             let env = Environment(rawValue: abbreviation) {
@@ -124,14 +146,9 @@ struct Arguments {
         return nil
     }
     
-    var payload: Data? {
+    var payload: String? {
         if let payload = self.args("-L", "--payload") {
-            
-            if payload.contains("{") {
-                return payload.data(using: String.Encoding.utf8)
-            } else {
-                return (try? Data(contentsOf: URL(fileURLWithPath: (payload as NSString).expandingTildeInPath)))
-            }
+            return payload
         }
         return nil
     }
@@ -155,6 +172,13 @@ struct Arguments {
             return id
         }
         return nil
+    }
+    
+    var version: Bool {
+        if let _ = self.args("-v", "--version") {
+            return true
+        }
+        return false
     }
     
     // ----------------------------------

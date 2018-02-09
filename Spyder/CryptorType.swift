@@ -1,5 +1,5 @@
 //
-//  Out.swift
+//  CryptorType.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -28,15 +28,16 @@
 //  The views and conclusions contained in the software and documentation are those
 //  of the authors and should not be interpreted as representing official policies,
 //  either expressed or implied, of the FreeBSD Project.
+//
 
 import Foundation
 
-func error(_ message: Any) -> Never  {
-    print(message)
-    exit(1)
+protocol CryptorType {
+    func sign(message: Data) -> Data?
 }
 
-func success(_ message: Any) -> Never  {
-    print(message)
-    exit(0)
+extension CryptorType {
+    func sign(message: String) -> Data? {
+        return self.sign(message: message.data(using: .utf8)!)
+    }
 }

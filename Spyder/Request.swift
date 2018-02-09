@@ -1,5 +1,5 @@
 //
-//  Certificate.swift
+//  Request.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,64 +32,40 @@
 
 import Foundation
 
-class Certificate {
+class Request {
     
-    let label: String
+    let url:     URL
+    let method:  String
+    let payload: Payload
     
-    private(set) var certificate: SecCertificate!
-    private(set) var identity: SecIdentity!
+    var headers: Headers
     
     // ----------------------------------
     //  MARK: - Init -
     //
-    convenience init?(path: String, passphrase: String) {
-        let url = URL(fileURLWithPath: (path as NSString).expandingTildeInPath)
-        guard let certificateData = try? Data(contentsOf: url) else {
-            return nil
-        }
-            
-        let options = [
-            kSecImportExportPassphrase as String : passphrase,
-        ]
-        
-        var items: CFArray?
-        let result = SecPKCS12Import(certificateData as CFData, options as CFDictionary, &items)
-        guard result == errSecSuccess else {
-            return nil
-        }
-        
-        guard let certificates = items as Array<AnyObject>?, certificates.count > 0 else {
-            return nil
-        }
-        
-        guard let identityDictionary = certificates.first as? Dictionary<CFString, Any> else {
-            return nil
-        }
-        
-        let identity = identityDictionary[kSecImportItemIdentity] as! SecIdentity
-        let label    = identityDictionary[kSecImportItemLabel]    as! String
-        
-        self.init(label: label, identity: identity)
-    }
-    
-    init?(label: String, identity: SecIdentity) {
-        self.label    = label
-        self.identity = identity
-        
-        guard let certificate = self.certificateFor(identity) else {
-            return nil
-        }
-        
-        self.certificate = certificate
+    init(url: URL, method: String = "GET", payload: Payload, headers: Headers = Headers()) {
+        self.url     = url
+        self.method  = method
+        self.payload = payload
+        self.headers = headers
     }
     
     // ----------------------------------
-    //  MARK: - Private -
+    //  MARK: - Build -
     //
-    private func certificateFor(_ identity: SecIdentity) -> SecCertificate? {
-        var certificate: SecCertificate?
-        SecIdentityCopyCertificate(identity, &certificate)
+    func build() -> URLRequest {
+        var request        = URLRequest(url: self.url)
+        request.httpMethod = self.method
+        request.httpBody   = self.payload.contents
         
-        return certificate
+        for (header, value) in self.headers.dictionary {
+            request.setValue(value, forHTTPHeaderField: header)
+        }
+        
+        return request
     }
+}
+
+extension Request {
+    static let maximumPayloadSize: Int = 4096
 }

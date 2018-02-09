@@ -1,5 +1,5 @@
 //
-//  Endpoint.swift
+//  Failure.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,51 +32,29 @@
 
 import Foundation
 
-struct Endpoint {
+struct Failure: Decodable {
     
-    let url: URL
+    let reason:    Reason
+    let timestamp: Int?
     
     // ----------------------------------
-    //  MARK: - Init -
+    //  MARK: - Decodable -
     //
-    init(token: String, environment: Environment, port: String) {
-        let host     = Endpoint.Host(environment)
-        let endpoint = "\(host):\(port)\(Endpoint.path)\(token)"
-        self.url     = URL(string: endpoint)!
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let error      = try container.decode(String.self, forKey: .reason)
+        self.timestamp = try container.decodeIfPresent(Int.self, forKey: .timestamp)
+        self.reason    = Reason(error: error)
     }
 }
 
 // ----------------------------------
-//  MARK: - Path -
+//  MARK: - CodingKeys -
 //
-extension Endpoint {
-    private static let path = "/3/device/"
-}
-
-// ----------------------------------
-//  MARK: - Host -
-//
-extension Endpoint {
-    private enum Host: String, CustomStringConvertible {
-        
-        case development = "https://api.development.push.apple.com"
-        case production  = "https://api.push.apple.com"
-        
-        // ----------------------------------
-        //  MARK: - Init -
-        //
-        init(_ environment: Environment) {
-            switch environment {
-            case .development: self = .development
-            case .production:  self = .production
-            }
-        }
-        
-        // ----------------------------------
-        //  MARK: - CustomStringConvertible -
-        //
-        var description: String {
-            return self.rawValue
-        }
+extension Failure {
+    enum CodingKeys: CodingKey {
+        case reason
+        case timestamp
     }
 }

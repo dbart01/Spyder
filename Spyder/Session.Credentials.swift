@@ -1,5 +1,5 @@
 //
-//  Endpoint.swift
+//  Session.Credentials.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -30,53 +30,13 @@
 //  either expressed or implied, of the FreeBSD Project.
 //
 
+
 import Foundation
 
-struct Endpoint {
-    
-    let url: URL
-    
-    // ----------------------------------
-    //  MARK: - Init -
-    //
-    init(token: String, environment: Environment, port: String) {
-        let host     = Endpoint.Host(environment)
-        let endpoint = "\(host):\(port)\(Endpoint.path)\(token)"
-        self.url     = URL(string: endpoint)!
-    }
-}
-
-// ----------------------------------
-//  MARK: - Path -
-//
-extension Endpoint {
-    private static let path = "/3/device/"
-}
-
-// ----------------------------------
-//  MARK: - Host -
-//
-extension Endpoint {
-    private enum Host: String, CustomStringConvertible {
-        
-        case development = "https://api.development.push.apple.com"
-        case production  = "https://api.push.apple.com"
-        
-        // ----------------------------------
-        //  MARK: - Init -
-        //
-        init(_ environment: Environment) {
-            switch environment {
-            case .development: self = .development
-            case .production:  self = .production
-            }
-        }
-        
-        // ----------------------------------
-        //  MARK: - CustomStringConvertible -
-        //
-        var description: String {
-            return self.rawValue
-        }
+extension Session {
+    enum Credentials {
+        case certificate(Certificate)
+        case authenticationCredentials(AuthenticationCredentials)
+//        case authenticationToken(PrivateKey)
     }
 }

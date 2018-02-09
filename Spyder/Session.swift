@@ -28,94 +28,75 @@
 //  The views and conclusions contained in the software and documentation are those
 //  of the authors and should not be interpreted as representing official policies,
 //  either expressed or implied, of the FreeBSD Project.
+//
 
 import Foundation
 
-// ----------------------------------
-//  MARK: - Request -
-//
-class RequestDescription {
-    
-    let url:     URL
-    let method:  String
-    
-    var payload: Data?
-    var headers: [String : String] = [:]
-    
-    // ----------------------------------
-    //  MARK: - Init -
-    //
-    init(url: URL, method: String = "GET", headers: [String : String] = [:], payload: Data? = nil) {
-        self.url     = url
-        self.method  = method
-        self.headers = headers
-        self.payload = payload
-    }
-    
-    // ----------------------------------
-    //  MARK: - Build -
-    //
-    func build() -> URLRequest {
-        var request        = URLRequest(url: self.url)
-        request.httpMethod = self.method
-        request.httpBody   = self.payload
-        
-        for (header, value) in self.headers {
-            request.setValue(value, forHTTPHeaderField: header)
-        }
-        
-        return request
-    }
-}
-
-// ----------------------------------
-//  MARK: - Session -
-//
 class Session {
     
-    let certificate: Certificate
+    let credentials: Credentials
     
     private let session:  URLSession
-    private let delegate: SessionDelegate
+    private let delegate: SessionDelegate?
     
     // ----------------------------------
     //  MARK: - Init -
     //
-    init(certificate: Certificate) {
-        let delegate    = SessionDelegate(certificate: certificate)
-        let session     = URLSession(
-            configuration: URLSessionConfiguration.ephemeral,
-            delegate:      delegate,
-            delegateQueue: nil
-        )
+    init(credentials: Credentials) {
+        self.credentials  = credentials
+        let configuration = URLSessionConfiguration.ephemeral
         
-        self.certificate = certificate
-        self.session     = session
-        self.delegate    = delegate
+        switch credentials {
+        case .certificate(let certificate):
+            
+            self.delegate = SessionDelegate(certificate: certificate)
+            self.session  = URLSession(
+                configuration: configuration,
+                delegate:      self.delegate,
+                delegateQueue: nil
+            )
+            
+//        case .authenticationToken(let privateKey):
+        case .authenticationCredentials(let authCredentials):
+            
+            var token                   = JWT.Token()
+            token.header  [JWT.Key.alg] = "ES256"
+            token.header  [JWT.Key.kid] = authCredentials.keyIdentifier
+            token.payload [JWT.Key.iss] = authCredentials.teamIdentifier
+            token.payload [JWT.Key.iat] = Int(Date().timeIntervalSince1970)
+            
+            let openssl = OpenSSL(privateKey: authCredentials.privateKey)
+            let tws     = try! token.sign(using: openssl)
+            
+            configuration.httpAdditionalHeaders = [
+                "Authorization": "Bearer \(tws)"
+            ]
+            
+            self.delegate = nil
+            self.session  = URLSession(configuration: configuration)
+        }
     }
     
     // ----------------------------------
     //  MARK: - Request Execution -
     //
-    func execute(dataRequest: RequestDescription) -> Response? {
+    func execute(request: Request) -> Response? {
         var response: Response?
         
         let semaphore = DispatchSemaphore(value: 0)
-        let dataTask = self.session.dataTask(with: dataRequest.build()) { data, urlResponse, error in
-            response = Response(response: urlResponse as? HTTPURLResponse, data: data, error: error)
+        let dataTask = self.session.dataTask(with: request.build()) { data, urlResponse, error in
+            response = Response(
+                response: urlResponse as? HTTPURLResponse,
+                data:     data,
+                error:    error
+            )
             semaphore.signal()
         }
+        
         dataTask.resume()
         semaphore.wait()
         
         return response
-    }
-    
-    func execute(jsonRequest: RequestDescription) -> JsonResponse? {
-        if let response = self.execute(dataRequest: jsonRequest) {
-            return JsonResponse(response: response.response, data: response.data, error: response.error)
-        }
-        return nil
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  Endpoint.swift
+//  Int+Clamp.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -30,53 +30,20 @@
 //  either expressed or implied, of the FreeBSD Project.
 //
 
+
 import Foundation
 
-struct Endpoint {
+extension Int {
     
-    let url: URL
-    
-    // ----------------------------------
-    //  MARK: - Init -
-    //
-    init(token: String, environment: Environment, port: String) {
-        let host     = Endpoint.Host(environment)
-        let endpoint = "\(host):\(port)\(Endpoint.path)\(token)"
-        self.url     = URL(string: endpoint)!
+    func clamp(min: Int, max: Int) -> Int {
+        return minimum(maximum(self, min), max)
     }
 }
 
-// ----------------------------------
-//  MARK: - Path -
-//
-extension Endpoint {
-    private static let path = "/3/device/"
+private func maximum(_ value1: Int, _ value2: Int) -> Int {
+    return max(value1, value2)
 }
 
-// ----------------------------------
-//  MARK: - Host -
-//
-extension Endpoint {
-    private enum Host: String, CustomStringConvertible {
-        
-        case development = "https://api.development.push.apple.com"
-        case production  = "https://api.push.apple.com"
-        
-        // ----------------------------------
-        //  MARK: - Init -
-        //
-        init(_ environment: Environment) {
-            switch environment {
-            case .development: self = .development
-            case .production:  self = .production
-            }
-        }
-        
-        // ----------------------------------
-        //  MARK: - CustomStringConvertible -
-        //
-        var description: String {
-            return self.rawValue
-        }
-    }
+private func minimum(_ value1: Int, _ value2: Int) -> Int {
+    return min(value1, value2)
 }

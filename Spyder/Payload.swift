@@ -1,5 +1,5 @@
 //
-//  Certificate.swift
+//  Payload.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,64 +32,53 @@
 
 import Foundation
 
-class Certificate {
+struct Payload {
     
-    let label: String
-    
-    private(set) var certificate: SecCertificate!
-    private(set) var identity: SecIdentity!
+    let url:      URL?
+    let contents: Data
     
     // ----------------------------------
     //  MARK: - Init -
     //
-    convenience init?(path: String, passphrase: String) {
-        let url = URL(fileURLWithPath: (path as NSString).expandingTildeInPath)
-        guard let certificateData = try? Data(contentsOf: url) else {
-            return nil
-        }
-            
-        let options = [
-            kSecImportExportPassphrase as String : passphrase,
-        ]
-        
-        var items: CFArray?
-        let result = SecPKCS12Import(certificateData as CFData, options as CFDictionary, &items)
-        guard result == errSecSuccess else {
+    init?(_ value: String?) {
+        guard let value = value else {
             return nil
         }
         
-        guard let certificates = items as Array<AnyObject>?, certificates.count > 0 else {
-            return nil
+        if value.contains("{") {
+            self.url      = nil
+            self.contents = value.data(using: .utf8)!
+        } else {
+            let url = URL(fileURLWithPath: (value as NSString).expandingTildeInPath)
+            if let contents = try? Data(contentsOf: url) {
+                self.url      = url
+                self.contents = contents
+            } else {
+                return nil
+            }
         }
-        
-        guard let identityDictionary = certificates.first as? Dictionary<CFString, Any> else {
-            return nil
-        }
-        
-        let identity = identityDictionary[kSecImportItemIdentity] as! SecIdentity
-        let label    = identityDictionary[kSecImportItemLabel]    as! String
-        
-        self.init(label: label, identity: identity)
     }
     
-    init?(label: String, identity: SecIdentity) {
-        self.label    = label
-        self.identity = identity
-        
-        guard let certificate = self.certificateFor(identity) else {
-            return nil
-        }
-        
-        self.certificate = certificate
+    init(message: String) {
+        self.url      = nil
+        self.contents = Payload.default(with: message)
     }
     
     // ----------------------------------
-    //  MARK: - Private -
+    //  MARK: - Default -
     //
-    private func certificateFor(_ identity: SecIdentity) -> SecCertificate? {
-        var certificate: SecCertificate?
-        SecIdentityCopyCertificate(identity, &certificate)
+    static private func `default`(with message: String) -> Data {
+        let payload = [
+            "aps" : [
+                "sound" : "default",
+                "alert" : message,
+            ]
+        ]
         
-        return certificate
+        return self.serialize(payload)!
+    }
+    
+    static private func serialize(_ payload: [String: Any]) -> Data? {
+        return try? JSONSerialization.data(withJSONObject: payload, options: [])
     }
 }

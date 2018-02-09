@@ -1,5 +1,5 @@
 //
-//  Endpoint.swift
+//  AuthenticationCredentials.swift
 //  Spyder
 //
 //  Copyright (c) 2016 Dima Bart
@@ -32,51 +32,18 @@
 
 import Foundation
 
-struct Endpoint {
+struct AuthenticationCredentials {
     
-    let url: URL
+    let privateKey:     URL
+    let keyIdentifier:  String
+    let teamIdentifier: String
     
     // ----------------------------------
     //  MARK: - Init -
     //
-    init(token: String, environment: Environment, port: String) {
-        let host     = Endpoint.Host(environment)
-        let endpoint = "\(host):\(port)\(Endpoint.path)\(token)"
-        self.url     = URL(string: endpoint)!
-    }
-}
-
-// ----------------------------------
-//  MARK: - Path -
-//
-extension Endpoint {
-    private static let path = "/3/device/"
-}
-
-// ----------------------------------
-//  MARK: - Host -
-//
-extension Endpoint {
-    private enum Host: String, CustomStringConvertible {
-        
-        case development = "https://api.development.push.apple.com"
-        case production  = "https://api.push.apple.com"
-        
-        // ----------------------------------
-        //  MARK: - Init -
-        //
-        init(_ environment: Environment) {
-            switch environment {
-            case .development: self = .development
-            case .production:  self = .production
-            }
-        }
-        
-        // ----------------------------------
-        //  MARK: - CustomStringConvertible -
-        //
-        var description: String {
-            return self.rawValue
-        }
+    init(privateKey: URL, keyIdentifier: String, teamIdentifier: String) {
+        self.privateKey     = privateKey
+        self.keyIdentifier  = keyIdentifier
+        self.teamIdentifier = teamIdentifier
     }
 }
