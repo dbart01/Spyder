@@ -34,7 +34,7 @@ import Foundation
 
 enum Strings {
     
-    static let version = "Spyder v0.7.1"
+    static let version = "Spyder v0.8.0"
     
 /*
                           _
